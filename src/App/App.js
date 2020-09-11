@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
+import Auth from '../components/pages/Auth/Auth';
+
 import './App.scss';
 
-const App = () => (
-  <div className="App">
-    <h2>INSIDE APP COMPONENT</h2>
-    <button className="btn btn-info">I am a button</button>
-  </div>
-);
+const App = () => {
+  const [authed, setAuthed] = useState(false);
+
+  return (
+    <div className="App">
+      <MyNavBar setAuthed={setAuthed} />
+      <Auth setAuthed={setAuthed} />
+    </div>
+  );
+};
 
 export default App;
