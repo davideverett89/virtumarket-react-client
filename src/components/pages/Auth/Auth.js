@@ -10,12 +10,11 @@ const Auth = ({ setAuthed }) => {
 
   return (
     <div className="Auth">
-        <h1>Auth</h1>
         <button type="button" className="btn btn-primary" onClick={() => setLoadAuth(!loadAuth)}>Change Form</button>
         {
             loadAuth
               ? (<UserAuthenticationForm setAuthed={setAuthed} />)
-              : (<UserRegistrationForm />)
+              : (<UserRegistrationForm setAuthed={setAuthed} />)
         }
     </div>
   );

@@ -9,7 +9,7 @@ const useSimpleAuth = () => {
 
   const isAuthenticated = () => loggedIn || localStorage.getItem('virtumarket_token') !== null;
 
-  const register = (userInfo) => fetch(`${baseUrl}/register/merchant`, {
+  const register = (userInfo, userRole) => fetch(`${baseUrl}/register/${userRole}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,8 +19,9 @@ const useSimpleAuth = () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      if ('token' in res) {
+      if ('token' in res && 'user_role' in res) {
         localStorage.setItem('virtumarket_token', res.token);
+        localStorage.setItem('userRole', res.user_role);
         setIsLoggedIn(true);
       }
     })
@@ -36,8 +37,9 @@ const useSimpleAuth = () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      if ('valid' in res && res.valid && 'token' in res) {
+      if ('valid' in res && res.valid && 'token' in res && 'user_role' in res) {
         localStorage.setItem('virtumarket_token', res.token);
+        localStorage.setItem('userRole', res.user_role);
         setIsLoggedIn(true);
       } else {
         alert('Login credintials not valid!');
@@ -48,6 +50,7 @@ const useSimpleAuth = () => {
   const logout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('virtumarket_token');
+    localStorage.removeItem('userRole');
   };
 
   return {
