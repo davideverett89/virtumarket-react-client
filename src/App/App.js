@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
@@ -17,18 +23,39 @@ import './App.scss';
 const App = () => {
   const [authed, setAuthed] = useState(false);
 
+  const PublicRoute = ({ component: Component, isAuthed, ...rest }) => {
+    const routeChecker = (props) => (isAuthed === false
+      ? (<Component {...props} setAuthed={setAuthed} />)
+      : (<Redirect to={{ pathname: '/home', state: { from: props.location } }} />));
+    return <Route {...rest} render={(props) => routeChecker(props)} />;
+  };
+
+  const PrivateRoute = ({ component: Component, isAuthed, ...rest }) => {
+    const routeChecker = (props) => (isAuthed === true
+      ? (<Component {...props} />)
+      : (<Redirect to={{ pathname: '/auth', state: { from: props.location } }} />));
+    return <Route {...rest} render={(props) => routeChecker(props)} />;
+  };
+
   return (
     <div className="App">
-      <MyNavBar setAuthed={setAuthed} />
-      <Auth setAuthed={setAuthed} />
-      <Home />
-      <AddGood />
-      <GoodDetail />
-      <EditGood />
-      <ProfileDetail />
-      <EditProfile />
-      <OrderHistory />
-      <OrderDetail />
+      <BrowserRouter>
+        <React.Fragment>
+        <MyNavBar setAuthed={setAuthed} />
+            <Switch>
+              <PrivateRoute path='/home' component={Home} isAuthed={authed} />
+              <PrivateRoute path='/goods/add/' component={AddGood} isAuthed={authed} />
+              <PrivateRoute path='/goods/edit/:goodId' component={EditGood} isAuthed={authed} />
+              <PrivateRoute path='/goods/:goodId' component={GoodDetail} isAuthed={authed} />
+              <PrivateRoute path='/merchants/:merchantId' component={ProfileDetail} isAuthed={authed} />
+              <PrivateRoute path='/merchants/edit/:merchantId' component={EditProfile} isAuthed={authed} />
+              <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
+              <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
+              <PublicRoute path='/auth' component={Auth} isAuthed={authed} setAuthed={setAuthed} />
+              <Redirect from="*" to="/home"/>
+            </Switch>
+        </React.Fragment>
+      </BrowserRouter>
     </div>
   );
 };

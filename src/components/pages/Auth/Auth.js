@@ -6,13 +6,13 @@ import UserAuthenticationForm from '../../shared/UserAuthenticationForm/UserAuth
 import './Auth.scss';
 
 const Auth = ({ setAuthed }) => {
-  const [loadAuth, setLoadAuth] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   return (
     <div className="Auth">
-        <button type="button" className="btn btn-primary" onClick={() => setLoadAuth(!loadAuth)}>Change Form</button>
+        <button type="button" className="btn btn-primary" onClick={() => setToggle(!toggle)}>Change Form</button>
         {
-            loadAuth
+            toggle
               ? (<UserAuthenticationForm setAuthed={setAuthed} />)
               : (<UserRegistrationForm setAuthed={setAuthed} />)
         }
