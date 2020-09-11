@@ -67,7 +67,7 @@ const UserRegistrationForm = ({ setAuthed }) => {
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input ref={password} type="text" className="form-control" id="password" placeholder="Enter New Password" required/>
+                <input ref={password} type="password" className="form-control" id="password" placeholder="Enter New Password" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="first_name">First Name</label>
