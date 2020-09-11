@@ -16,23 +16,24 @@ const UserAuthenticationForm = ({ setAuthed }) => {
       password: password.current.value,
     };
     login(loginCredentials)
-      .then(() => {
-        setAuthed(true);
+      .then((res) => {
+        if (res) {
+          setAuthed(true);
+        }
       })
       .catch((err) => console.error('There was an issue logging in:', err));
   };
 
   return (
         <div className="UserAuthenticationForm">
-            <h1>Login</h1>
-            <form className="col-6 m-auto">
+            <form className="col-6 m-auto text-left">
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
-                    <input ref={username} type="text" className="form-control" id="username" placeholder="Username" />
+                    <input ref={username} type="text" className="form-control" id="username" placeholder="Username" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input ref={password} type="text" className="form-control" id="password" placeholder="Password" />
+                    <input ref={password} type="text" className="form-control" id="password" placeholder="Password" required/>
                 </div>
                 <button type="button" className="btn btn-success" onClick={handleLogin}>Login</button>
             </form>

@@ -41,9 +41,10 @@ const useSimpleAuth = () => {
         localStorage.setItem('virtumarket_token', res.token);
         localStorage.setItem('userRole', res.user_role);
         setIsLoggedIn(true);
-      } else {
-        alert('Login credintials not valid!');
+        return true;
       }
+      alert('Login credintials not valid!');
+      return false;
     })
     .catch((err) => console.error('There was an issue logging this user in:', err));
 

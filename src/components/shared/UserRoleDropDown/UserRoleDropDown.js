@@ -11,7 +11,7 @@ const UserRoleDropDown = ({ selectedRole, setSelectedRole }) => (
     >
         {
             selectedRole === ''
-              ? (<option>Select Role</option>)
+              ? (<option>Please Choose One</option>)
               : ('')
         }
         <option

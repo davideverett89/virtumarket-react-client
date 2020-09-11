@@ -26,16 +26,15 @@ const UserRegistrationForm = ({ setAuthed }) => {
       password: password.current.value,
       first_name: firstName.current.value,
       last_name: lastName.current.value,
-      company_name: companyName.current.value,
       image: image.current.value,
       phone_number: phoneNumber.current.value,
     };
     if (selectedRole === 'merchant') {
       newUser.market_id = 1;
+      newUser.company_name = companyName.current.value;
     }
     register(newUser, selectedRole)
       .then(() => {
-        console.log('New user was registered!');
         setAuthed(true);
       })
       .catch((err) => console.error('There was an issue with registering a new user:', err));
@@ -43,10 +42,9 @@ const UserRegistrationForm = ({ setAuthed }) => {
 
   return (
     <div className="UserRegistrationForm">
-        <h1>Register</h1>
-        <form className="col-6 m-auto">
+        <form className="col-6 mx-auto mb-3 text-left">
             <div className="form-group">
-                <label htmlFor="phone_number">Select Your Role</label>
+                <label className="mr-2" htmlFor="phone_number">Select Account Type:</label>
                 <UserRoleDropDown selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
             </div>
             {
@@ -54,38 +52,38 @@ const UserRegistrationForm = ({ setAuthed }) => {
                   ? (
                 <div className="form-group">
                     <label htmlFor="company_name">Company Name</label>
-                    <input ref={companyName} type="text" className="form-control" id="company_name" placeholder="Enter Company Name" />
+                    <input ref={companyName} type="text" className="form-control" id="company_name" placeholder="Enter Company Name" required/>
                 </div>
                   )
                   : ('')
             }
             <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input ref={username} type="text" className="form-control" id="username" placeholder="Enter New Username" />
+                <input ref={username} type="text" className="form-control" id="username" placeholder="Enter New Username" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input ref={email} type="text" className="form-control" id="email" placeholder="Enter New Email" />
+                <input ref={email} type="text" className="form-control" id="email" placeholder="Enter New Email" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input ref={password} type="text" className="form-control" id="password" placeholder="Enter New Password" />
+                <input ref={password} type="password" className="form-control" id="password" placeholder="Enter New Password" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="first_name">First Name</label>
-                <input ref={firstName} type="text" className="form-control" id="first_name" placeholder="Enter First Name" />
+                <input ref={firstName} type="text" className="form-control" id="first_name" placeholder="Enter First Name" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="last_name">Last Name</label>
-                <input ref={lastName} type="text" className="form-control" id="last_name" placeholder="Enter Last Name" />
+                <input ref={lastName} type="text" className="form-control" id="last_name" placeholder="Enter Last Name" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="image">Image</label>
-                <input ref={image} type="text" className="form-control" id="image" placeholder="Paste Image URL" />
+                <input ref={image} type="text" className="form-control" id="image" placeholder="Paste Image URL" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="phone_number">Phone Number</label>
-                <input ref={phoneNumber} type="text" className="form-control" id="phone_number" placeholder="Password" />
+                <input ref={phoneNumber} type="text" className="form-control" id="phone_number" placeholder="Enter Phone Number" required/>
             </div>
             <button type="button" className="btn btn-success" disabled={selectedRole === ''} onClick={handleRegister}>Register</button>
         </form>
