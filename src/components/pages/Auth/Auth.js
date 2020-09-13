@@ -11,13 +11,13 @@ const Auth = ({ setAuthed }) => {
   return (
     <div className="Auth mt-5">
       <h1 className="display-4">Welcome to VirtuMarket!</h1>
-        <div class="bs-example m-5">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class={`btn btn-success ${toggle ? 'active' : ''}`}>
-                  <input type="radio" name="options" autocomplete="off" onClick={() => setToggle(true)} /> Login
+        <div className="bs-example m-5">
+          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <label className={`btn btn-success ${toggle ? 'active' : ''}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(true)} /> Login
               </label>
-              <label class={`btn btn-success ${!toggle ? 'active' : ''}`}>
-                  <input type="radio" name="options" autocomplete="off" onClick={() => setToggle(false)} /> Sign Up
+              <label className={`btn btn-success ${!toggle ? 'active' : ''}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(false)} /> Sign Up
               </label>
           </div>
         </div>

@@ -28,12 +28,12 @@ const UserAuthenticationForm = ({ setAuthed }) => {
         <div className="UserAuthenticationForm">
             <form className="col-6 m-auto text-left">
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Username:</label>
                     <input ref={username} type="text" className="form-control" id="username" placeholder="Username" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input ref={password} type="text" className="form-control" id="password" placeholder="Password" required/>
+                    <label htmlFor="password">Password:</label>
+                    <input ref={password} type="password" className="form-control" id="password" placeholder="Password" required/>
                 </div>
                 <button type="button" className="btn btn-success" onClick={handleLogin}>Login</button>
             </form>
