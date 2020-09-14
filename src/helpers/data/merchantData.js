@@ -7,6 +7,7 @@ const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 const token = localStorage.getItem('virtumarket_token');
 
 const getMerchantRelatedToCurrentUser = () => new Promise((resolve, reject) => {
+  console.log('Token:', token);
   axios({
     method: 'GET',
     url: `${baseUrl}/merchants/current_user`,
