@@ -7,7 +7,7 @@ import useSimpleAuth from '../../../helpers/data/authData';
 
 import './UserRegistrationForm.scss';
 
-const UserRegistrationForm = ({ setAuthed }) => {
+const UserRegistrationForm = ({ setAuthed, route }) => {
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -36,8 +36,11 @@ const UserRegistrationForm = ({ setAuthed }) => {
       newUser.company_name = companyName.current.value;
     }
     register(newUser, selectedRole)
-      .then(() => {
-        setAuthed(true);
+      .then((res) => {
+        if (res[0] === true) {
+          setAuthed(true);
+          route(res[1], res[2]);
+        }
       })
       .catch((err) => console.error('There was an issue with registering a new user:', err));
   };

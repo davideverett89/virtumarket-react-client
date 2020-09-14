@@ -6,22 +6,23 @@ import merchantData from '../../../helpers/data/merchantData';
 
 import './MerchantDashboard.scss';
 
-const MerchantDashboard = () => {
+const MerchantDashboard = ({ match }) => {
   const [merchant, setMerchant] = useState({});
   const [goods, setGoods] = useState([]);
 
-  const getMerchant = () => {
-    merchantData.getMerchantRelatedToCurrentUser()
-      .then((currentMerchant) => {
-        setMerchant(currentMerchant);
-        setGoods(currentMerchant.goods);
-      })
-      .catch((err) => console.error('There was an issue getting this merchant:', err));
-  };
-
   useEffect(() => {
+    const getMerchant = () => {
+      const { merchantId } = match.params;
+      merchantData.getMerchantById(merchantId)
+        .then((response) => {
+          const currentMerchant = response.data;
+          setMerchant(currentMerchant);
+          setGoods(currentMerchant.goods);
+        })
+        .catch((err) => console.error('There was an issue getting this merchant:', err));
+    };
     getMerchant();
-  }, []);
+  }, [match.params]);
 
   return (
 <div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center">
