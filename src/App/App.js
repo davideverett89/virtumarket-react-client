@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Auth from '../components/pages/Auth/Auth';
-// import Home from '../components/pages/Home/Home';
+import Home from '../components/pages/Home/Home';
 import AddGood from '../components/pages/AddGood/AddGood';
 import GoodDetail from '../components/pages/GoodDetail/GoodDetail';
 import EditGood from '../components/pages/EditGood/EditGood';
@@ -15,9 +15,6 @@ import ProfileDetail from '../components/pages/ProfileDetail/ProfileDetail';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
 import OrderHistory from '../components/pages/OrderHistory/OrderHistory';
 import OrderDetail from '../components/pages/OrderDetail/OrderDetail';
-
-import MerchantDashboard from '../components/shared/MerchantDashboard/MerchantDashboard';
-import ConsumerDashboard from '../components/shared/ConsumerDashboard/ConsumerDashboard';
 
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
@@ -36,7 +33,6 @@ const App = () => {
 
   useEffect(() => {
     setUserRole(localStorage.getItem('userRole'));
-    console.log(userRole);
   }, [authed, userRole]);
 
   const PublicRoute = ({ component: Component, isAuthed, ...rest }) => {
@@ -59,15 +55,7 @@ const App = () => {
         <React.Fragment>
           <MyNavBar authed={authed} setAuthed={setAuthed} />
           <Switch>
-            <PrivateRoute
-              path='/home'
-              component={
-                userRole === 'merchant'
-                  ? () => <MerchantDashboard authed={authed} />
-                  : () => <ConsumerDashboard />
-              }
-              isAuthed={authed}
-            />
+            <PrivateRoute path='/home' component={Home} isAuthed={authed} />
             <PrivateRoute path='/goods/add/' component={AddGood} isAuthed={authed} />
             <PrivateRoute path='/goods/edit/:goodId' component={EditGood} isAuthed={authed} />
             <PrivateRoute path='/goods/:goodId' component={GoodDetail} isAuthed={authed} />

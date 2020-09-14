@@ -6,13 +6,15 @@ import merchantData from '../../../helpers/data/merchantData';
 
 import './MerchantDashboard.scss';
 
-const MerchantDashboard = () => {
+const MerchantDashboard = ({ match }) => {
   const [merchant, setMerchant] = useState({});
   const [goods, setGoods] = useState([]);
 
   const getMerchant = () => {
-    merchantData.getMerchantRelatedToCurrentUser()
-      .then((currentMerchant) => {
+    const { merchantId } = match.params;
+    merchantData.getMerchantById(merchantId)
+      .then((response) => {
+        const currentMerchant = response.data;
         setMerchant(currentMerchant);
         setGoods(currentMerchant.goods);
       })

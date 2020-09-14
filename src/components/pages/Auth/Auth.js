@@ -5,8 +5,13 @@ import UserAuthenticationForm from '../../shared/UserAuthenticationForm/UserAuth
 
 import './Auth.scss';
 
-const Auth = ({ setAuthed }) => {
+const Auth = ({ setAuthed, history }) => {
   const [toggle, setToggle] = useState(false);
+
+  const route = (role, id) => {
+    const path = `/home/${role}s/${id}`;
+    history.push(`${path}`);
+  };
 
   return (
     <div className="Auth mt-5">
@@ -23,8 +28,8 @@ const Auth = ({ setAuthed }) => {
         </div>
         {
             toggle
-              ? (<UserAuthenticationForm setAuthed={setAuthed} />)
-              : (<UserRegistrationForm setAuthed={setAuthed} />)
+              ? (<UserAuthenticationForm setAuthed={setAuthed} route={route} />)
+              : (<UserRegistrationForm setAuthed={setAuthed} route={route} />)
         }
     </div>
   );

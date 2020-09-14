@@ -25,7 +25,9 @@ const useSimpleAuth = () => {
         localStorage.setItem('virtumarket_token', res.token);
         localStorage.setItem('userRole', res.user_role);
         setIsLoggedIn(true);
+        return [isAuthenticated(), res.user_role, res.id];
       }
+      return isAuthenticated();
     })
     .catch((err) => console.error('There was an issue with registering this user:', err));
 
@@ -43,7 +45,7 @@ const useSimpleAuth = () => {
         localStorage.setItem('virtumarket_token', res.token);
         localStorage.setItem('userRole', res.user_role);
         setIsLoggedIn(true);
-        return isAuthenticated();
+        return [isAuthenticated(), res.user_role, res.id];
       }
       alert('Login credintials not valid!');
       return isAuthenticated();

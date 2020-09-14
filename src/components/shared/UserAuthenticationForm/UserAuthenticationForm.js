@@ -4,7 +4,7 @@ import useSimpleAuth from '../../../helpers/data/authData';
 
 import './UserAuthenticationForm.scss';
 
-const UserAuthenticationForm = ({ setAuthed }) => {
+const UserAuthenticationForm = ({ setAuthed, route }) => {
   const username = useRef();
   const password = useRef();
   const { login } = useSimpleAuth();
@@ -17,8 +17,10 @@ const UserAuthenticationForm = ({ setAuthed }) => {
     };
     login(loginCredentials)
       .then((res) => {
-        if (res) {
+        if (res[0] === true) {
+          console.log('Response:', res);
           setAuthed(true);
+          route(res[1], res[2]);
         }
       })
       .catch((err) => console.error('There was an issue logging in:', err));

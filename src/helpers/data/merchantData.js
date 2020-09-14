@@ -23,4 +23,12 @@ const getMerchantRelatedToCurrentUser = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getMerchantRelatedToCurrentUser };
+const getMerchantById = (merchantId) => axios({
+  method: 'GET',
+  url: `${baseUrl}/merchants/${merchantId}`,
+  headers: {
+    Accept: 'application/json',
+    Authorization: `Token ${token}`,
+  },
+});
+export default { getMerchantRelatedToCurrentUser, getMerchantById };
