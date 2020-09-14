@@ -25,4 +25,6 @@ const postGood = (newGood) => axios({
   data: newGood,
 });
 
-export default { getGoodById, postGood };
+const deleteGood = (goodId) => axios.delete(`${baseUrl}/goods/${goodId}`);
+
+export default { getGoodById, postGood, deleteGood };

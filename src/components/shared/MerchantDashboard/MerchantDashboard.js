@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import GoodCard from '../GoodCard/GoodCard';
 
 import merchantData from '../../../helpers/data/merchantData';
+import goodData from '../../../helpers/data/goodData';
 
 import './MerchantDashboard.scss';
 
@@ -11,18 +12,31 @@ const MerchantDashboard = ({ match }) => {
   const [goods, setGoods] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
     const getMerchant = () => {
       const { merchantId } = match.params;
       merchantData.getMerchantById(merchantId)
         .then((response) => {
-          const currentMerchant = response.data;
-          setMerchant(currentMerchant);
-          setGoods(currentMerchant.goods);
+          if (isMounted) {
+            const currentMerchant = response.data;
+            setMerchant(currentMerchant);
+            setGoods(currentMerchant.goods);
+          }
         })
         .catch((err) => console.error('There was an issue getting this merchant:', err));
     };
     getMerchant();
-  }, [match.params]);
+    return () => {
+      isMounted = false;
+    };
+  }, [match.params, goods]);
+
+  const handleDelete = (goodId) => {
+    goodData.deleteGood(goodId)
+      .then(() => {
+      })
+      .catch((err) => console.error('There was an issue deleting this good:', err));
+  };
 
   return (
 <div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center">
@@ -32,7 +46,7 @@ const MerchantDashboard = ({ match }) => {
     <div className="col-12 good-container d-flex flex-column justify-content-center align-items-center">
         {
             goods.map((good) => (
-                <GoodCard key={good.id} good={good} />
+                <GoodCard key={good.id} good={good} handleDelete={handleDelete} />
             ))
         }
     </div>
