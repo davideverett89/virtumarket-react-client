@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import goodData from '../../../helpers/data/goodData';
 
 import './GoodDetail.scss';
@@ -27,6 +29,8 @@ const GoodDetail = ({ match, history }) => {
       .catch((err) => console.error('There was an issue deleting this good:', err));
   };
 
+  const editLink = `/goods/edit/${good.id}`;
+
   return (
     <div className="GoodDetail d-flex flex-column justify-content-center align-items-center mb-5">
         <h1 className="display-4">{good.name}</h1>
@@ -34,7 +38,10 @@ const GoodDetail = ({ match, history }) => {
         <h2>Product Details:</h2>
         <p className="lead">${good.price}</p>
         <p className="lead">{good.description}</p>
-        <button className="btn btn-danger" onClick={handleDelete}>Remove</button>
+        <div className="mb-3">
+          <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
+          <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
+        </div>
     </div>
   );
 };

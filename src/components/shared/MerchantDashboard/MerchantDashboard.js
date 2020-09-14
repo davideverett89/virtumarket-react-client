@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import GoodCard from '../GoodCard/GoodCard';
 
@@ -10,30 +10,31 @@ import './MerchantDashboard.scss';
 const MerchantDashboard = ({ match }) => {
   const [merchant, setMerchant] = useState({});
   const [goods, setGoods] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const getMerchant = useCallback(() => {
+    const { merchantId } = match.params;
+    merchantData.getMerchantById(merchantId)
+      .then((response) => {
+        if (isMounted) {
+          const currentMerchant = response.data;
+          setMerchant(currentMerchant);
+          setGoods(currentMerchant.goods);
+        }
+      })
+      .catch((err) => console.error('There was an issue getting this merchant:', err));
+  }, [isMounted, match.params]);
 
   useEffect(() => {
-    let isMounted = true;
-    const getMerchant = () => {
-      const { merchantId } = match.params;
-      merchantData.getMerchantById(merchantId)
-        .then((response) => {
-          if (isMounted) {
-            const currentMerchant = response.data;
-            setMerchant(currentMerchant);
-            setGoods(currentMerchant.goods);
-          }
-        })
-        .catch((err) => console.error('There was an issue getting this merchant:', err));
-    };
+    setIsMounted(true);
     getMerchant();
-    return () => {
-      isMounted = false;
-    };
-  }, [match.params, goods]);
+    return () => setIsMounted(false);
+  }, [isMounted, getMerchant]);
 
   const handleDelete = (goodId) => {
     goodData.deleteGood(goodId)
       .then(() => {
+        getMerchant();
       })
       .catch((err) => console.error('There was an issue deleting this good:', err));
   };

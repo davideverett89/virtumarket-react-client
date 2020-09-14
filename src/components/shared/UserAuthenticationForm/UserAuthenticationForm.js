@@ -18,7 +18,6 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
     login(loginCredentials)
       .then((res) => {
         if (res[0] === true) {
-          console.log('Response:', res);
           setAuthed(true);
           route(res[1], res[2]);
         }

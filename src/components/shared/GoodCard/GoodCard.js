@@ -15,6 +15,7 @@ import './GoodCard.scss';
 
 const GoodCard = ({ good, handleDelete }) => {
   const detailLink = `/goods/${good.id}`;
+  const editLink = `/goods/edit/${good.id}`;
   return (
         <Card className="GoodCard col-6 my-3 d-flex flex-row">
             <CardBody className="text-left col-6">
@@ -23,7 +24,8 @@ const GoodCard = ({ good, handleDelete }) => {
                 <CardText>{good.description}</CardText>
                 <CardText>Quantity in Stock: {good.quantity}</CardText>
                 <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
-                <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Remove</Button>
+                <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+                <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
             </CardBody>
             <CardImg className="m-auto img-fluid col-2" top width="100%" src={good.image} alt="Card image cap" />
         </Card>
