@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 
+import goodData from '../../../helpers/data/goodData';
+
 import './AddGood.scss';
 
-const AddGood = () => {
+const AddGood = ({ history }) => {
   const name = useRef();
   const image = useRef();
   const price = useRef();
@@ -21,7 +23,11 @@ const AddGood = () => {
       merchant_id: parseInt(localStorage.getItem('roleId'), 10),
       unit_size_id: 1,
     };
-    console.log(newGood);
+    goodData.postGood(newGood)
+      .then(() => {
+        history.push(`/home/${localStorage.getItem('userRole')}/localStorage.getItem('roleId')`);
+      })
+      .catch((err) => console.error('There was an issue with adding a good:', err));
   };
 
   return (

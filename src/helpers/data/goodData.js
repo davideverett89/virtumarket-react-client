@@ -15,4 +15,14 @@ const getGoodById = (goodId) => axios({
   },
 });
 
-export default { getGoodById };
+const postGood = (newGood) => axios({
+  method: 'POST',
+  url: `${baseUrl}/goods`,
+  headers: {
+    Accept: 'application/json',
+    Authorization: `Token ${token}`,
+  },
+  newGood,
+});
+
+export default { getGoodById, postGood };
