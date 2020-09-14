@@ -7,6 +7,8 @@ const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 const useSimpleAuth = () => {
   const [loggedIn, setIsLoggedIn] = useState(false);
 
+  const getCurrentToken = () => localStorage.getItem('virtumarket_token');
+
   const isAuthenticated = () => loggedIn || localStorage.getItem('virtumarket_token') !== null;
 
   const register = (userInfo, userRole) => fetch(`${baseUrl}/register/${userRole}`, {
@@ -55,7 +57,11 @@ const useSimpleAuth = () => {
   };
 
   return {
-    isAuthenticated, logout, login, register,
+    isAuthenticated,
+    logout,
+    login,
+    register,
+    getCurrentToken,
   };
 };
 
