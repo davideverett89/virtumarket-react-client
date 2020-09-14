@@ -32,7 +32,7 @@ const AddGood = ({ history }) => {
 
   return (
         <div className="AddGood">
-            <h1>Add Good</h1>
+            <h1 className="mt-3">Add Good</h1>
             <form className="col-6 m-auto text-left">
                 <div className="form-group">
                     <label htmlFor="good-name">Name:</label>

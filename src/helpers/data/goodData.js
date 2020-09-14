@@ -22,7 +22,7 @@ const postGood = (newGood) => axios({
     Accept: 'application/json',
     Authorization: `Token ${token}`,
   },
-  newGood,
+  data: newGood,
 });
 
 export default { getGoodById, postGood };
