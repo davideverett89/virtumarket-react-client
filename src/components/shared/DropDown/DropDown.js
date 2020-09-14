@@ -6,7 +6,8 @@ const DropDown = ({ resources, selectedId, setSelectedId }) => (
       <select
         name="dropDown"
         className="DropDown"
-        onChange={(e) => setSelectedId(e.target.value)}
+        onChange={(e) => setSelectedId(parseInt(e.target.value, 10))}
+        value={selectedId}
         required
     >
         {

@@ -27,4 +27,26 @@ const postGood = (newGood) => axios({
 
 const deleteGood = (goodId) => axios.delete(`${baseUrl}/goods/${goodId}`);
 
-export default { getGoodById, postGood, deleteGood };
+const patchGood = (goodId, updatedName, updatedImage, updatedPrice, updatedQuantity, updatedDescription, updatedUnitSizeId) => axios({
+  method: 'PATCH',
+  url: `${baseUrl}/goods/${goodId}`,
+  headers: {
+    Accept: 'application/json',
+    Authorization: `Token ${token}`,
+  },
+  data: {
+    name: updatedName,
+    image: updatedImage,
+    price: updatedPrice,
+    quantity: updatedQuantity,
+    description: updatedDescription,
+    unit_size_id: updatedUnitSizeId,
+  },
+});
+
+export default {
+  getGoodById,
+  postGood,
+  deleteGood,
+  patchGood,
+};

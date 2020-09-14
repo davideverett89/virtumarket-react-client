@@ -48,9 +48,9 @@ const AddGood = ({ history }) => {
       price: price.current.value,
       quantity: quantity.current.value,
       description: description.current.value,
-      good_type_id: parseInt(selectedGoodTypeId, 10),
+      good_type_id: selectedGoodTypeId,
       merchant_id: parseInt(localStorage.getItem('roleId'), 10),
-      unit_size_id: parseInt(selectedUnitSizeId, 10),
+      unit_size_id: selectedUnitSizeId,
     };
     goodData.postGood(newGood)
       .then(() => {
