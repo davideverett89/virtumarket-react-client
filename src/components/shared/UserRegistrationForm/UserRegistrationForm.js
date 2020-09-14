@@ -1,13 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import UserRoleDropDown from '../UserRoleDropDown/UserRoleDropDown';
-import MarketDropDown from '../MarketDropDown/MarketDropDown';
+import DropDown from '../DropDown/DropDown';
 
 import useSimpleAuth from '../../../helpers/data/authData';
+import marketData from '../../../helpers/data/marketData';
 
 import './UserRegistrationForm.scss';
 
 const UserRegistrationForm = ({ setAuthed, route }) => {
+  const [markets, setMarkets] = useState([]);
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -17,8 +19,16 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
   const image = useRef();
   const phoneNumber = useRef();
   const [selectedRole, setSelectedRole] = useState('');
-  const [selectedMarketId, setSelectedMarketId] = useState(0);
+  const [selectedId, setSelectedId] = useState(0);
   const { register } = useSimpleAuth();
+
+  useEffect(() => {
+    marketData.getMarkets()
+      .then((allMarkets) => {
+        setMarkets(allMarkets);
+      })
+      .catch((err) => console.error('There was an issue getting all markets:', err));
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -32,7 +42,7 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
       phone_number: phoneNumber.current.value,
     };
     if (selectedRole === 'merchant') {
-      newUser.market_id = parseInt(selectedMarketId, 10);
+      newUser.market_id = parseInt(selectedId, 10);
       newUser.company_name = companyName.current.value;
     }
     register(newUser, selectedRole)
@@ -62,7 +72,7 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                   </div>
                   <div className="form-group">
                     <label className="mr-2" htmlFor="market_type">Select Market:</label>
-                    <MarketDropDown selectedMarketId={selectedMarketId} setSelectedMarketId={setSelectedMarketId} />
+                    <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
                   </div>
                 </React.Fragment>
                   )
@@ -96,7 +106,7 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                 <label htmlFor="phone_number">Phone Number:</label>
                 <input ref={phoneNumber} type="text" className="form-control" id="phone_number" placeholder="Enter Phone Number" required/>
             </div>
-            <button type="button" className="btn btn-success" disabled={selectedRole === '' || (selectedRole === 'merchant' && selectedMarketId === 0)} onClick={handleRegister}>Register</button>
+            <button type="button" className="btn btn-success" disabled={selectedRole === '' || (selectedRole === 'merchant' && selectedId === 0)} onClick={handleRegister}>Register</button>
         </form>
     </div>
   );
