@@ -11,7 +11,6 @@ import './Home.scss';
 
 const Home = ({ authed, match }) => (
         <div className="Home">
-          <h1>Home</h1>
             <Switch>
               <Route path={`${match.path}/merchants/:merchantId`} component={MerchantDashboard} isAuthed={authed} />
               <Route path={`${match.path}/consumers/:consumerId`} component={ConsumerDashboard} isAuthed={authed} />

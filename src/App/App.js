@@ -34,12 +34,13 @@ const App = () => {
 
   useEffect(() => {
     setUserRole(localStorage.getItem('userRole'));
+    setRoleId(localStorage.getItem('roleId'));
   }, [authed, userRole]);
 
   const PublicRoute = ({ component: Component, isAuthed, ...rest }) => {
     const routeChecker = (props) => (isAuthed === false
       ? (<Component {...props} setAuthed={setAuthed} setRoleId={setRoleId} />)
-      : (<Redirect to={{ pathname: '/home', state: { from: props.location } }} />));
+      : (<Redirect to={{ pathname: `/home/${userRole}s/${roleId}`, state: { from: props.location } }} />));
     return <Route {...rest} render={(props) => routeChecker(props)} />;
   };
 
@@ -65,7 +66,7 @@ const App = () => {
             <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
             <PublicRoute path='/auth' component={Auth} isAuthed={authed} setAuthed={setAuthed} setRoleId={setRoleId} />
-            <Redirect from="*" to="/home"/>
+            <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>
         </React.Fragment>
       </BrowserRouter>

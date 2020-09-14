@@ -24,6 +24,7 @@ const useSimpleAuth = () => {
       if ('token' in res && 'user_role' in res) {
         localStorage.setItem('virtumarket_token', res.token);
         localStorage.setItem('userRole', res.user_role);
+        localStorage.setItem('roleId', res.id);
         setIsLoggedIn(true);
         return [isAuthenticated(), res.user_role, res.id];
       }
@@ -44,6 +45,7 @@ const useSimpleAuth = () => {
       if ('valid' in res && res.valid && 'token' in res && 'user_role' in res) {
         localStorage.setItem('virtumarket_token', res.token);
         localStorage.setItem('userRole', res.user_role);
+        localStorage.setItem('roleId', res.id);
         setIsLoggedIn(true);
         return [isAuthenticated(), res.user_role, res.id];
       }
@@ -56,6 +58,7 @@ const useSimpleAuth = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('virtumarket_token');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('roleId');
   };
 
   return {
