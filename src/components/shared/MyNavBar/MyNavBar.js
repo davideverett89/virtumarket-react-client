@@ -15,7 +15,7 @@ import useSimepleAuth from '../../../helpers/data/authData';
 
 import './MyNavBar.scss';
 
-const MyNavBar = ({ authed, setAuthed }) => {
+const MyNavBar = ({ authed, setAuthed, roleId }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -39,7 +39,7 @@ const MyNavBar = ({ authed, setAuthed }) => {
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to='/home'>Merchant Home</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/merchants/${roleId}`}>Merchant Home</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn" tag={RRNavLink} to='/goods/add'>Add Good</NavLink>
@@ -61,7 +61,7 @@ const MyNavBar = ({ authed, setAuthed }) => {
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to='/home'>Consumer Home</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/consumers/${roleId}`}>Consumer Home</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn" tag={RRNavLink} to='/basket'>Basket</NavLink>

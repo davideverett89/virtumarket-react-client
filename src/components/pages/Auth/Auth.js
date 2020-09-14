@@ -5,11 +5,12 @@ import UserAuthenticationForm from '../../shared/UserAuthenticationForm/UserAuth
 
 import './Auth.scss';
 
-const Auth = ({ setAuthed, history }) => {
+const Auth = ({ setRoleId, setAuthed, history }) => {
   const [toggle, setToggle] = useState(false);
 
   const route = (role, id) => {
     const path = `/home/${role}s/${id}`;
+    setRoleId(id);
     history.push(`${path}`);
   };
 
