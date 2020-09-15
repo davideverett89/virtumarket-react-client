@@ -6,6 +6,7 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
+  CardFooter,
   Button,
 } from 'reactstrap';
 
@@ -17,18 +18,22 @@ const GoodCard = ({ good, handleDelete }) => {
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
-        <Card className="GoodCard col-6 my-3 d-flex flex-row">
-            <CardBody className="text-left col-6">
-                <CardTitle>{good.name}</CardTitle>
-                <CardSubtitle>${good.price}</CardSubtitle>
-                <CardText>{good.description}</CardText>
-                <CardText>Quantity in Stock: {good.quantity}</CardText>
-                <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
-                <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-                <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
-            </CardBody>
-            <CardImg className="m-auto img-fluid col-2" top width="100%" src={good.image} alt="Card image cap" />
-        </Card>
+    <div className="col-3">
+      <Card className="GoodCard">
+        <CardImg className="m-auto img-fluid col-6 mt-3" height="auto" width="100%" src={good.image} alt="Card image cap" />
+        <CardBody className="text-left col-6">
+            <CardTitle>{good.name}</CardTitle>
+            <CardSubtitle>${good.price}</CardSubtitle>
+            <CardText>{good.description}</CardText>
+            <CardText>Quantity in Stock: {good.quantity}</CardText>
+        </CardBody>
+        <CardFooter>
+          <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
+          <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+          <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 

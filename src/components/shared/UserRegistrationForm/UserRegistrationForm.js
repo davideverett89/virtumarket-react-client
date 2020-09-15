@@ -16,16 +16,18 @@ import './UserRegistrationForm.scss';
 const UserRegistrationForm = ({ setAuthed, route }) => {
   const [markets, setMarkets] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [selectedRole, setSelectedRole] = useState('');
+  const [selectedId, setSelectedId] = useState(0);
   const username = useRef();
   const email = useRef();
   const password = useRef();
   const firstName = useRef();
   const lastName = useRef();
   const companyName = useRef();
-  const image = useRef();
+  const profileImage = useRef();
+  const boothImage = useRef();
   const phoneNumber = useRef();
-  const [selectedRole, setSelectedRole] = useState('');
-  const [selectedId, setSelectedId] = useState(0);
+  const bio = useRef();
   const { register } = useSimpleAuth();
 
   const getAllMarkets = useCallback(() => {
@@ -48,16 +50,18 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
     e.preventDefault();
     const newUser = {
       username: username.current.value,
+      bio: bio.current.value,
       email: email.current.value,
       password: password.current.value,
       first_name: firstName.current.value,
       last_name: lastName.current.value,
-      image: image.current.value,
+      profile_image: profileImage.current.value,
       phone_number: phoneNumber.current.value,
     };
     if (selectedRole === 'merchant') {
       newUser.market_id = parseInt(selectedId, 10);
       newUser.company_name = companyName.current.value;
+      newUser.booth_image = boothImage.current.value;
     }
     register(newUser, selectedRole)
       .then((res) => {
@@ -88,6 +92,10 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                     <label className="mr-2" htmlFor="market_type">Select Market:</label>
                     <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="booth-image">Booth Image:</label>
+                    <input ref={boothImage} type="text" className="form-control" id="booth-image" placeholder="Paste Image URL" required/>
+                  </div>
                 </React.Fragment>
                   )
                   : ('')
@@ -113,12 +121,16 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                 <input ref={lastName} type="text" className="form-control" id="last_name" placeholder="Enter Last Name" required/>
             </div>
             <div className="form-group">
-                <label htmlFor="image">Image:</label>
-                <input ref={image} type="text" className="form-control" id="image" placeholder="Paste Image URL" required/>
+                <label htmlFor="profile-image">Profile Image:</label>
+                <input ref={profileImage} type="text" className="form-control" id="profile-image" placeholder="Paste Image URL" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="phone_number">Phone Number:</label>
                 <input ref={phoneNumber} type="text" className="form-control" id="phone_number" placeholder="Enter Phone Number" required/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="bio">Phone Number:</label>
+                <textarea ref={bio} name="bio" className="form-control" id="bio" placeholder="Tell Us About Yourself..." required/>
             </div>
             <button type="button" className="btn btn-success" disabled={selectedRole === '' || (selectedRole === 'merchant' && selectedId === 0)} onClick={handleRegister}>Register</button>
         </form>
