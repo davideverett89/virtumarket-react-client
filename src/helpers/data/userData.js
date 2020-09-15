@@ -6,12 +6,13 @@ const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 
 const token = sessionStorage.getItem('virtumarket_token');
 
-const getMerchantById = (merchantId) => axios({
+const getUserById = (userId) => axios({
   method: 'GET',
-  url: `${baseUrl}/merchants/${merchantId}`,
+  url: `${baseUrl}/users/${userId}`,
   headers: {
     Accept: 'application/json',
     Authorization: `Token ${token}`,
   },
 });
-export default { getMerchantById };
+
+export default { getUserById };

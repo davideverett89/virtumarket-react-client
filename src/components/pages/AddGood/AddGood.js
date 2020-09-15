@@ -49,12 +49,12 @@ const AddGood = ({ history }) => {
       quantity: quantity.current.value,
       description: description.current.value,
       good_type_id: selectedGoodTypeId,
-      merchant_id: parseInt(localStorage.getItem('roleId'), 10),
+      merchant_id: parseInt(sessionStorage.getItem('roleId'), 10),
       unit_size_id: selectedUnitSizeId,
     };
     goodData.postGood(newGood)
       .then(() => {
-        history.push(`/home/${localStorage.getItem('userRole')}s/${localStorage.getItem('roleId')}`);
+        history.push(`/home/${sessionStorage.getItem('userRole')}s/${sessionStorage.getItem('roleId')}`);
       })
       .catch((err) => console.error('There was an issue with adding a good:', err));
   };
