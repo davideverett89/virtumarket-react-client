@@ -40,16 +40,25 @@ const MerchantDashboard = ({ match }) => {
   };
 
   return (
-<div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center">
-    <h1 className="mt-3 display-4">{merchant.company_name}</h1>
-    <img className="img-fluid col-4 my-3" src={merchant.image} alt={merchant.company_name} />
-    <div className="col-12 good-container d-flex flex-column justify-content-center align-items-center">
+<div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center" >
+  <div className="bg-light border my-3 d-flex flex-row align-items-center justify-content-around">
+    <img className="float-left profile-image img-fluid img-thumbnail col-4 my-3" src={merchant.profile_image} alt={merchant.company_name} />
+    <h1 className="mt-3 display-1">{merchant.company_name}</h1>
+  </div>
+  <div className="col-12 booth container-fluid mb-3 p-0">
+    <img className="col-12 img-fluid booth-image p-0 border border-dark" src={merchant.booth_image} alt={merchant.company_name} />
+    <div className="p-5 col-12 good-container d-flex flex-wrap justify-content-center align-items-start">
         {
-            goods.map((good) => (
-                <GoodCard key={good.id} good={good} handleDelete={handleDelete} />
+          goods.length === 0
+            ? (
+            <h3 className="middle align-middle display-4">This Booth Is Empty!</h3>
+            )
+            : goods.map((good) => (
+            <GoodCard key={good.id} good={good} handleDelete={handleDelete} />
             ))
         }
     </div>
+  </div>
 </div>
   );
 };

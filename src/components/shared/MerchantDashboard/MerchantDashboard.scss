@@ -1,3 +1,23 @@
 .MerchantDashboard {
     display: block;
+    .profile-image {
+        vertical-align: middle;
+        border-radius: 100%;
+    }
+    .booth {
+        display: block;
+        min-height: 500px;
+        .booth-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .good-container {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background: rgba(255, 255, 255, 0.671);
+        }
+    }
 }
