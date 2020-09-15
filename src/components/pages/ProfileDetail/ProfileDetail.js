@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
+import MarketCard from '../../shared/MarketCard/MarketCard';
 
 import userData from '../../../helpers/data/userData';
 
@@ -38,32 +39,32 @@ const ProfileDetail = ({ match }) => {
         <div className="px-0 col-10 m-auto container card">
             <div className="row card-body">
                 <div className="col-2">
-                    <img className="my-3 card-img-top" src={merchant.image} alt={merchant.name} />
+                    <img className="my-3 card-img-top" src={merchant.profile_image} alt={user.username} />
                     <p className="lead m-0">Reputation: 4,567</p>
                 </div>
                 <div className="text-left col-6">
                     <div>
                         <h3>{user.first_name} {user.last_name}</h3>
                         <h4>{user.username}</h4>
-                        <p className="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
+                        <p className="lead">{merchant.bio}</p>
                     </div>
                 </div>
                 <div className="text-left col-4">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Email: {user.email}</li>
-                        <li class="list-group-item">Date Joined: {user.date_joined}</li>
-                        <li class="list-group-item">Organization: {merchant.company_name}</li>
-                        <li class="list-group-item">Phone Number: {merchant.phone_number}</li>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">Email: {user.email}</li>
+                        <li className="list-group-item">Date Joined: {user.date_joined}</li>
+                        <li className="list-group-item">Organization: {merchant.company_name}</li>
+                        <li className="list-group-item">Phone Number: {merchant.phone_number}</li>
                     </ul>
                 </div>
             </div>
             <div className="p-3 card-footer d-flex align-items-center justify-content-start">
-                <Link className="mx-2 btn btn-warning">Update</Link>
+                <Link to="/" className="mx-2 btn btn-warning">Update</Link>
                 <button className="mx-2 btn btn-danger">Delete</button>
             </div>
+        </div>
+        <div className="container">
+          <MarketCard />
         </div>
     </div>
   );

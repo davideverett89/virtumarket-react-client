@@ -66,8 +66,7 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
     register(newUser, selectedRole)
       .then((res) => {
         if (res[0] === true) {
-          setAuthed(true);
-          route(res[1], res[2], res[3]);
+          route(res[1].user_role, res[1].id, res[1].uid);
         }
       })
       .catch((err) => console.error('There was an issue with registering a new user:', err));

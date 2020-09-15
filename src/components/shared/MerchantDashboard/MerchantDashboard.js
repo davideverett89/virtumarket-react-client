@@ -7,7 +7,7 @@ import goodData from '../../../helpers/data/goodData';
 
 import './MerchantDashboard.scss';
 
-const MerchantDashboard = ({ match }) => {
+const MerchantDashboard = ({ match, authed }) => {
   const [merchant, setMerchant] = useState({});
   const [goods, setGoods] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
@@ -29,7 +29,7 @@ const MerchantDashboard = ({ match }) => {
     setIsMounted(true);
     getMerchant();
     return () => setIsMounted(false);
-  }, [isMounted, getMerchant]);
+  }, [authed, isMounted, getMerchant]);
 
   const handleDelete = (goodId) => {
     goodData.deleteGood(goodId)
