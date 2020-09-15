@@ -15,7 +15,12 @@ import useSimepleAuth from '../../../helpers/data/authData';
 
 import './MyNavBar.scss';
 
-const MyNavBar = ({ authed, setAuthed, roleId }) => {
+const MyNavBar = ({
+  authed,
+  setAuthed,
+  roleId,
+  uid,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -35,7 +40,7 @@ const MyNavBar = ({ authed, setAuthed, roleId }) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto navbar-links" navbar>
           {
-            authed && localStorage.getItem('userRole') === 'merchant'
+            authed && sessionStorage.getItem('userRole') === 'merchant'
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">
@@ -45,7 +50,7 @@ const MyNavBar = ({ authed, setAuthed, roleId }) => {
                     <NavLink className="btn nav-btn" tag={RRNavLink} to='/goods/add'>Add Good</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to='/accounts'>Profile</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${uid}`}>Profile</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn logout-btn" onClick={logMeOut}>Logout</NavLink>
@@ -57,7 +62,7 @@ const MyNavBar = ({ authed, setAuthed, roleId }) => {
               )
           }
           {
-            authed && localStorage.getItem('userRole') === 'consumer'
+            authed && sessionStorage.getItem('userRole') === 'consumer'
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">

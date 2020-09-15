@@ -73,7 +73,7 @@ const EditGood = ({ history, match }) => {
     const updatedUnitSizeId = selectedUnitSizeId;
     goodData.patchGood(goodId, updatedName, updateImage, updatedPrice, updatedQuantity, updatedDescription, updatedUnitSizeId)
       .then(() => {
-        history.push(`/home/${localStorage.getItem('userRole')}s/${localStorage.getItem('roleId')}`);
+        history.push(`/home/${sessionStorage.getItem('userRole')}s/${sessionStorage.getItem('roleId')}`);
       })
       .catch((err) => console.error('There was an issue updating this good:', err));
   };

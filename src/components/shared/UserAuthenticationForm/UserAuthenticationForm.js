@@ -17,9 +17,10 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
     };
     login(loginCredentials)
       .then((res) => {
+        console.log('Response:', res);
         if (res[0] === true) {
           setAuthed(true);
-          route(res[1], res[2]);
+          route(res[1], res[2], res[3]);
         }
       })
       .catch((err) => console.error('There was an issue logging in:', err));

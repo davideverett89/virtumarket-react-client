@@ -41,9 +41,8 @@ const MerchantDashboard = ({ match }) => {
 
   return (
 <div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center">
-    <h1 className="mt-3">{merchant.company_name}</h1>
-    <h3>{merchant.phone_number}</h3>
-    <img className="img-fluid col-4" src={merchant.image} alt={merchant.company_name} />
+    <h1 className="mt-3 display-4">{merchant.company_name}</h1>
+    <img className="img-fluid col-4 my-3" src={merchant.image} alt={merchant.company_name} />
     <div className="col-12 good-container d-flex flex-column justify-content-center align-items-center">
         {
             goods.map((good) => (

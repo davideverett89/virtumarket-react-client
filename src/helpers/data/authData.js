@@ -7,9 +7,9 @@ const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 const useSimpleAuth = () => {
   const [loggedIn, setIsLoggedIn] = useState(false);
 
-  const getCurrentToken = () => localStorage.getItem('virtumarket_token');
+  const getCurrentToken = () => sessionStorage.getItem('virtumarket_token');
 
-  const isAuthenticated = () => loggedIn || localStorage.getItem('virtumarket_token') !== null;
+  const isAuthenticated = () => loggedIn || sessionStorage.getItem('virtumarket_token') !== null;
 
   const register = (userInfo, userRole) => fetch(`${baseUrl}/register/${userRole}`, {
     method: 'POST',
@@ -22,11 +22,12 @@ const useSimpleAuth = () => {
     .then((res) => res.json())
     .then((res) => {
       if ('token' in res && 'user_role' in res) {
-        localStorage.setItem('virtumarket_token', res.token);
-        localStorage.setItem('userRole', res.user_role);
-        localStorage.setItem('roleId', res.id);
+        sessionStorage.setItem('virtumarket_token', res.token);
+        sessionStorage.setItem('userRole', res.user_role);
+        sessionStorage.setItem('roleId', res.id);
+        sessionStorage.setItem('userId', res.uid);
         setIsLoggedIn(true);
-        return [isAuthenticated(), res.user_role, res.id];
+        return [isAuthenticated(), res.user_role, res.id, res.uid];
       }
       return isAuthenticated();
     })
@@ -43,11 +44,12 @@ const useSimpleAuth = () => {
     .then((res) => res.json())
     .then((res) => {
       if ('valid' in res && res.valid && 'token' in res && 'user_role' in res) {
-        localStorage.setItem('virtumarket_token', res.token);
-        localStorage.setItem('userRole', res.user_role);
-        localStorage.setItem('roleId', res.id);
+        sessionStorage.setItem('virtumarket_token', res.token);
+        sessionStorage.setItem('userRole', res.user_role);
+        sessionStorage.setItem('roleId', res.id);
+        sessionStorage.setItem('userId', res.uid);
         setIsLoggedIn(true);
-        return [isAuthenticated(), res.user_role, res.id];
+        return [isAuthenticated(), res.user_role, res.id, res.uid];
       }
       alert('Login credintials not valid!');
       return isAuthenticated();
@@ -56,9 +58,7 @@ const useSimpleAuth = () => {
 
   const logout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('virtumarket_token');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('roleId');
+    sessionStorage.clear();
   };
 
   return {

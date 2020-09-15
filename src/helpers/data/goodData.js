@@ -4,7 +4,7 @@ import apiKeys from '../apiKeys.json';
 
 const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 
-const token = localStorage.getItem('virtumarket_token');
+const token = sessionStorage.getItem('virtumarket_token');
 
 const getGoodById = (goodId) => axios({
   method: 'GET',

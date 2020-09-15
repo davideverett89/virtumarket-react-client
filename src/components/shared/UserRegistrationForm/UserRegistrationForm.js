@@ -1,4 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 
 import UserRoleDropDown from '../UserRoleDropDown/UserRoleDropDown';
 import DropDown from '../DropDown/DropDown';
@@ -10,6 +15,7 @@ import './UserRegistrationForm.scss';
 
 const UserRegistrationForm = ({ setAuthed, route }) => {
   const [markets, setMarkets] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -22,13 +28,21 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
   const [selectedId, setSelectedId] = useState(0);
   const { register } = useSimpleAuth();
 
-  useEffect(() => {
+  const getAllMarkets = useCallback(() => {
     marketData.getMarkets()
       .then((allMarkets) => {
-        setMarkets(allMarkets);
+        if (isMounted) {
+          setMarkets(allMarkets);
+        }
       })
       .catch((err) => console.error('There was an issue getting all markets:', err));
-  }, []);
+  }, [isMounted]);
+
+  useEffect(() => {
+    setIsMounted(true);
+    getAllMarkets();
+    return () => setIsMounted(false);
+  }, [isMounted, getAllMarkets]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -49,7 +63,7 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
       .then((res) => {
         if (res[0] === true) {
           setAuthed(true);
-          route(res[1], res[2]);
+          route(res[1], res[2], res[3]);
         }
       })
       .catch((err) => console.error('There was an issue with registering a new user:', err));

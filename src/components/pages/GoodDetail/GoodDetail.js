@@ -24,7 +24,7 @@ const GoodDetail = ({ match, history }) => {
     e.preventDefault();
     goodData.deleteGood(goodId)
       .then(() => {
-        history.push(`/home/${localStorage.getItem('userRole')}s/${localStorage.getItem('roleId')}`);
+        history.push(`/home/${sessionStorage.getItem('userRole')}s/${sessionStorage.getItem('roleId')}`);
       })
       .catch((err) => console.error('There was an issue deleting this good:', err));
   };
