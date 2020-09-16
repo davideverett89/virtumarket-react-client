@@ -85,7 +85,14 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                 <React.Fragment>
                   <div className="form-group">
                       <label htmlFor="company_name">Company Name:</label>
-                      <input ref={companyName} type="text" className="form-control" id="company_name" placeholder="Enter Company Name" required/>
+                      <input
+                        ref={companyName}
+                        type="text"
+                        className="form-control"
+                        id="company_name"
+                        placeholder="Enter Company Name"
+                        required
+                      />
                   </div>
                   <div className="form-group">
                     <label className="mr-2" htmlFor="market_type">Select Market:</label>
@@ -93,7 +100,14 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="booth-image">Booth Image:</label>
-                    <input ref={boothImage} type="text" className="form-control" id="booth-image" placeholder="Paste Image URL" required/>
+                    <input
+                      ref={boothImage}
+                      type="text"
+                      className="form-control"
+                      id="booth-image"
+                      placeholder="Paste Image URL"
+                      required
+                    />
                   </div>
                 </React.Fragment>
                   )
@@ -101,37 +115,100 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
             }
             <div className="form-group">
                 <label htmlFor="username">Username:</label>
-                <input ref={username} type="text" className="form-control" id="username" placeholder="Enter New Username" required/>
+                <input
+                  ref={username}
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter New Username"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="email">Email:</label>
-                <input ref={email} type="text" className="form-control" id="email" placeholder="Enter New Email" required/>
+                <input
+                  ref={email}
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter New Email"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password:</label>
-                <input ref={password} type="password" className="form-control" id="password" placeholder="Enter New Password" required/>
+                <input
+                  ref={password}
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter New Password"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="first_name">First Name:</label>
-                <input ref={firstName} type="text" className="form-control" id="first_name" placeholder="Enter First Name" required/>
+                <input
+                  ref={firstName}
+                  type="text"
+                  className="form-control"
+                  id="first_name"
+                  placeholder="Enter First Name"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="last_name">Last Name:</label>
-                <input ref={lastName} type="text" className="form-control" id="last_name" placeholder="Enter Last Name" required/>
+                <input
+                  ref={lastName}
+                  type="text"
+                  className="form-control"
+                  id="last_name"
+                  placeholder="Enter Last Name"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="profile-image">Profile Image:</label>
-                <input ref={profileImage} type="text" className="form-control" id="profile-image" placeholder="Paste Image URL" required/>
+                <input
+                  ref={profileImage}
+                  type="text"
+                  className="form-control"
+                  id="profile-image"
+                  placeholder="Paste Image URL"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="phone_number">Phone Number:</label>
-                <input ref={phoneNumber} type="text" className="form-control" id="phone_number" placeholder="Enter Phone Number" required/>
+                <input
+                  ref={phoneNumber}
+                  type="text"
+                  className="form-control"
+                  id="phone_number"
+                  placeholder="Enter Phone Number"
+                  required
+                />
             </div>
             <div className="form-group">
-                <label htmlFor="bio">Phone Number:</label>
-                <textarea ref={bio} name="bio" className="form-control" id="bio" placeholder="Tell Us About Yourself..." required/>
+                <label htmlFor="bio">Bio:</label>
+                <textarea
+                  ref={bio}
+                  name="bio"
+                  className="form-control"
+                  id="bio"
+                  placeholder="Tell Us About Yourself..."
+                  required
+                />
             </div>
-            <button type="button" className="btn btn-success" disabled={selectedRole === '' || (selectedRole === 'merchant' && selectedId === 0)} onClick={handleRegister}>Register</button>
+            <button
+              type="button"
+              className="btn btn-success"
+              disabled={selectedRole === '' || (selectedRole === 'merchant' && selectedId === 0)}
+              onClick={handleRegister}
+            >
+              Register
+            </button>
         </form>
     </div>
   );

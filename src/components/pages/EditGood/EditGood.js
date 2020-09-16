@@ -84,23 +84,61 @@ const EditGood = ({ history, match }) => {
             <form className="col-6 m-auto text-left">
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
-                    <input ref={name} type="text" className="form-control" id="name" placeholder="Name" value={good.name || ''} onChange={handleFieldChange}/>
+                    <input ref={name}
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      placeholder="Name"
+                      value={good.name || ''}
+                      onChange={handleFieldChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image:</label>
-                    <input ref={image} type="text" className="form-control" id="image" placeholder="Image Url" value={good.image || ''} onChange={handleFieldChange} />
+                    <input
+                      ref={image}
+                      type="text"
+                      className="form-control"
+                      id="image"
+                      placeholder="Image Url"
+                      value={good.image || ''}
+                      onChange={handleFieldChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="price">Price:</label>
-                    <input ref={price} type="number" step="any" min="1" max="100" className="form-control" id="price" value={good.price || ''} onChange={handleFieldChange} />
+                    <input
+                      ref={price}
+                      type="number"
+                      step="any"
+                      min="1"
+                      max="100"
+                      className="form-control"
+                      id="price"
+                      value={good.price || ''}
+                      onChange={handleFieldChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="unit-size">Unit Size:</label>
-                    <DropDown resources={unitSizes} selectedId={selectedUnitSizeId} setSelectedId={setSelectedUnitSizeId}/>
+                    <DropDown
+                      resources={unitSizes}
+                      selectedId={selectedUnitSizeId}
+                      setSelectedId={setSelectedUnitSizeId}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="quantity">Quantity:</label>
-                    <input ref={quantity} type="number" min="1" max="100" className="form-control" id="quantity" value={good.quantity || ''} onChange={handleFieldChange} />
+                    <input
+                      ref={quantity}
+                      type="number"
+                      min="1"
+                      max="100"
+                      className="form-control"
+                      id="quantity"
+                      value={good.quantity || ''}
+                      onChange={handleFieldChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description:</label>

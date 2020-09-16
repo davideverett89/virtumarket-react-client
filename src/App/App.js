@@ -63,8 +63,8 @@ const App = () => {
             <PrivateRoute path='/goods/add/' component={AddGood} isAuthed={authed} />
             <PrivateRoute path='/goods/edit/:goodId' component={EditGood} isAuthed={authed} />
             <PrivateRoute path='/goods/:goodId' component={GoodDetail} isAuthed={authed} />
-            <PrivateRoute path='/accounts/:userId' component={ProfileDetail} isAuthed={authed} />
             <PrivateRoute path='/accounts/edit/:userId' component={EditProfile} isAuthed={authed} />
+            <PrivateRoute path='/accounts/:userId' component={ProfileDetail} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
             <PublicRoute path='/auth' component={Auth} isAuthed={authed} setRoleId={setRoleId} setUid={setUid} />

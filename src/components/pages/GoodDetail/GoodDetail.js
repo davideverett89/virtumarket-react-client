@@ -39,8 +39,8 @@ const GoodDetail = ({ match, history }) => {
         <p className="lead">${good.price}</p>
         <p className="lead">{good.description}</p>
         <div className="mb-3">
-          <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
           <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
+          <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
         </div>
     </div>
   );
