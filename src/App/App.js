@@ -57,7 +57,7 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <React.Fragment>
-          <MyNavBar authed={authed} setAuthed={setAuthed} roleId={roleId} uid={uid}/>
+          <MyNavBar authed={authed} setAuthed={setAuthed} roleId={roleId} uid={uid} />
           <Switch>
             <PrivateRoute path='/home' component={Home} isAuthed={authed} />
             <PrivateRoute path='/goods/add/' component={AddGood} isAuthed={authed} />
@@ -65,8 +65,8 @@ const App = () => {
             <PrivateRoute path='/goods/:goodId' component={GoodDetail} isAuthed={authed} />
             <PrivateRoute path='/accounts/edit/:userId' component={EditProfile} isAuthed={authed} />
             <PrivateRoute path='/accounts/:userId' component={ProfileDetail} isAuthed={authed} />
-            <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
+            <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PublicRoute path='/auth' component={Auth} isAuthed={authed} setRoleId={setRoleId} setUid={setUid} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>

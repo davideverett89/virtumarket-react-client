@@ -8,7 +8,7 @@ const MarketCard = ({ market }) => (
             <div className="row">
                 <div className="col-md-4 offset-md-1 mx-3 my-3">
                     <div className="view overlay">
-                        <img src={market.image} className="img-fluid" alt={market.name} />
+                        <img src={market.image} className="col-6 img-fluid market-image" alt={market.name} />
                     </div>
                 </div>
                 <div className="col-md-7 text-md-left ml-3 mt-3">
