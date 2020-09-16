@@ -34,9 +34,9 @@ const ProfileDetail = ({ match }) => {
   }, [getCurrentUser]);
 
   return (
-    <div className="ProfileDetail">
-        <h1 className="mt-3 display-4">Profile Details</h1>
-        <div className="px-0 col-10 m-auto container card">
+    <div className="ProfileDetail ">
+        <h1 className="mt-3 display-2">Profile Details</h1>
+        <div className="px-0 col-12 m-auto container card">
             <div className="row card-body">
                 <div className="col-2">
                     <img className="my-3 card-img-top" src={merchant.profile_image} alt={user.username} />
@@ -63,8 +63,9 @@ const ProfileDetail = ({ match }) => {
                 <button className="mx-2 btn btn-danger">Delete</button>
             </div>
         </div>
-        <div className="container">
-          <MarketCard />
+        <div className="my-3 container card col-12">
+          <h2 className="display-4">Active Market</h2>
+          <MarketCard market={market} />
         </div>
     </div>
   );

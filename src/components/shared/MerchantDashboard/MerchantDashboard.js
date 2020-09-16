@@ -47,7 +47,7 @@ const MerchantDashboard = ({ match, authed }) => {
   </div>
   <div className="col-12 booth container-fluid mb-3 p-0">
     <img className="col-12 img-fluid booth-image p-0 border border-dark" src={merchant.booth_image} alt={merchant.company_name} />
-    <div className="p-5 col-12 good-container d-flex flex-wrap justify-content-center align-items-start">
+    <div className="p-5 mb-3 col-12 good-container d-flex flex-column justify-content-center align-items-center">
         {
           goods.length === 0
             ? (
