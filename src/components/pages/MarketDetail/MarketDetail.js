@@ -31,17 +31,21 @@ const MarketDetail = ({ match }) => {
   }, [getMarket]);
 
   return (
-        <div className="MarketDetail d-flex flex-column align-items-center">
+        <div className="MarketDetail d-flex flex-column align-items-center mb-5">
             <img className="col-6 my-3" src={market.image} alt={market.name} />
-            <h1 className="display-4 mt-3">{market.name}</h1>
+            <h1 className="display-1 mt-3">{market.name}</h1>
             <div className="bio col-9">
                 <p className="lead">{market.description}</p>
             </div>
             <div className="merchant-container d-flex-flex-column justify-content-center align-items-center">
                 {
-                    merchants.map((merchant) => (
+                  merchants.length > 0
+                    ? merchants.map((merchant) => (
                         <MerchantCard key={merchant.id} merchant={merchant} />
                     ))
+                    : (
+                    <h2 className="display-4">No Merchants Available.</h2>
+                    )
                 }
             </div>
         </div>

@@ -11,6 +11,7 @@ const MerchantDashboard = ({ match, authed }) => {
   const [merchant, setMerchant] = useState({});
   const [goods, setGoods] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [userIsMerchant, setUserIsMerchant] = useState(false);
 
   const getMerchant = useCallback(() => {
     const { merchantId } = match.params;
@@ -20,10 +21,15 @@ const MerchantDashboard = ({ match, authed }) => {
           const currentMerchant = response.data;
           setMerchant(currentMerchant);
           setGoods(currentMerchant.goods);
+          const { path } = match;
+          const subPath = '/home';
+          if (path.includes(subPath)) {
+            setUserIsMerchant(true);
+          }
         }
       })
       .catch((err) => console.error('There was an issue getting this merchant:', err));
-  }, [isMounted, match.params]);
+  }, [isMounted, match]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -54,7 +60,7 @@ const MerchantDashboard = ({ match, authed }) => {
             <h3 className="middle align-middle display-4">This Booth Is Empty!</h3>
             )
             : goods.map((good) => (
-            <GoodCard key={good.id} good={good} handleDelete={handleDelete} />
+            <GoodCard key={good.id} good={good} handleDelete={handleDelete} userIsMerchant={userIsMerchant} />
             ))
         }
     </div>
