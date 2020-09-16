@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 import './GoodCard.scss';
 
-const GoodCard = ({ good, handleDelete }) => {
+const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
@@ -41,8 +41,17 @@ const GoodCard = ({ good, handleDelete }) => {
       </CardBody>
       <CardFooter className="col-12">
         <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
-        <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-        <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
+        {
+          userIsMerchant
+            ? (
+            <React.Fragment>
+              <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+              <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
+            </React.Fragment>
+            ) : (
+              ''
+            )
+        }
       </CardFooter>
     </Card>
   );

@@ -8,6 +8,7 @@ import './GoodDetail.scss';
 
 const GoodDetail = ({ match, history }) => {
   const [good, setGood] = useState({});
+  const [userIsMerchant, setUserIsMerchant] = useState(false);
 
   useEffect(() => {
     const { goodId } = match.params;
@@ -15,6 +16,10 @@ const GoodDetail = ({ match, history }) => {
       .then((response) => {
         const singleGood = response.data;
         setGood(singleGood);
+        const role = sessionStorage.getItem('userRole');
+        if (role === 'merchant') {
+          setUserIsMerchant(true);
+        }
       })
       .catch((err) => console.error('There was an issue getting this good:', err));
   }, [match.params]);
@@ -39,8 +44,18 @@ const GoodDetail = ({ match, history }) => {
         <p className="lead">${good.price}</p>
         <p className="lead">{good.description}</p>
         <div className="mb-3">
-          <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
-          <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
+          {
+            userIsMerchant
+              ? (
+              <React.Fragment>
+                <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
+                <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
+              </React.Fragment>
+              )
+              : (
+                ''
+              )
+          }
         </div>
     </div>
   );
