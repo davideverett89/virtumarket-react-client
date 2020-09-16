@@ -7,7 +7,6 @@ import './Auth.scss';
 
 const Auth = ({
   setRoleId,
-  setAuthed,
   history,
   setUid,
 }) => {
@@ -35,8 +34,8 @@ const Auth = ({
         </div>
         {
             toggle
-              ? (<UserAuthenticationForm setAuthed={setAuthed} route={route} />)
-              : (<UserRegistrationForm setAuthed={setAuthed} route={route} />)
+              ? (<UserAuthenticationForm route={route} />)
+              : (<UserRegistrationForm route={route} />)
         }
     </div>
   );

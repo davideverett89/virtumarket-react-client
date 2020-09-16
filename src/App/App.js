@@ -41,7 +41,7 @@ const App = () => {
 
   const PublicRoute = ({ component: Component, isAuthed, ...rest }) => {
     const routeChecker = (props) => (isAuthed === false
-      ? (<Component {...props} setAuthed={setAuthed} setRoleId={setRoleId} setUid={setUid} />)
+      ? (<Component {...props} setRoleId={setRoleId} setUid={setUid} />)
       : (<Redirect to={{ pathname: `/home/${userRole}s/${roleId}`, state: { from: props.location } }} />));
     return <Route {...rest} render={(props) => routeChecker(props)} />;
   };
@@ -67,7 +67,7 @@ const App = () => {
             <PrivateRoute path='/accounts/edit/:userId' component={EditProfile} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
-            <PublicRoute path='/auth' component={Auth} isAuthed={authed} setAuthed={setAuthed} setRoleId={setRoleId} setUid={setUid} />
+            <PublicRoute path='/auth' component={Auth} isAuthed={authed} setRoleId={setRoleId} setUid={setUid} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>
         </React.Fragment>

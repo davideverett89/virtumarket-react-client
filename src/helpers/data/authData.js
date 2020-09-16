@@ -49,7 +49,7 @@ const useSimpleAuth = () => {
         sessionStorage.setItem('roleId', res.id);
         sessionStorage.setItem('userId', res.uid);
         setIsLoggedIn(true);
-        return [isAuthenticated(), res.user_role, res.id, res.uid];
+        return [isAuthenticated(), res];
       }
       alert('Login credintials not valid!');
       return isAuthenticated();
