@@ -21,7 +21,6 @@ const GoodCard = ({ good, handleDelete }) => {
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
-  // <div className="col-3">
     <Card className="GoodCard col-9 my-2 p-0">
       <CardHeader>
         <CardTitle className="mb-0">
@@ -46,7 +45,6 @@ const GoodCard = ({ good, handleDelete }) => {
         <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
       </CardFooter>
     </Card>
-  // </div>
   );
 };
 

@@ -33,6 +33,8 @@ const ProfileDetail = ({ match }) => {
     return () => setIsMounted(false);
   }, [getCurrentUser]);
 
+  const editLink = `/accounts/edit/${user.id}`;
+
   return (
     <div className="ProfileDetail ">
         <h1 className="mt-3 display-2">Profile Details</h1>
@@ -59,7 +61,7 @@ const ProfileDetail = ({ match }) => {
                 </div>
             </div>
             <div className="p-3 card-footer d-flex align-items-center justify-content-start">
-                <Link to="/" className="mx-2 btn btn-warning">Update</Link>
+                <Link to={editLink} className="mx-2 btn btn-warning">Update</Link>
                 <button className="mx-2 btn btn-danger">Delete</button>
             </div>
         </div>
