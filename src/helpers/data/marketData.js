@@ -13,4 +13,16 @@ const getMarkets = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getMarkets };
+const getMarketById = (marketId) => {
+  const token = sessionStorage.getItem('virtumarket_token');
+  return axios({
+    method: 'GET',
+    url: `${baseUrl}/markets/${marketId}`,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  });
+};
+
+export default { getMarkets, getMarketById };
