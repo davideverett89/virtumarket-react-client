@@ -5,7 +5,7 @@ import './SearchBar.scss';
 const SearchBar = ({ handleSearch, search }) => (
     <div className="SearchBar my-5">
         <form className="form-inline d-flex flex-row justify-content-center align-items-center">
-            <label className="mx-3" htmlFor="search">Search Markets By: </label>
+            <label className="mx-3" htmlFor="search">Search Markets By Zip Code: </label>
             <input
                 id="search"
                 className="form-control col-6"

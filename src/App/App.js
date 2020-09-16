@@ -15,12 +15,14 @@ import ProfileDetail from '../components/pages/ProfileDetail/ProfileDetail';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
 import OrderHistory from '../components/pages/OrderHistory/OrderHistory';
 import OrderDetail from '../components/pages/OrderDetail/OrderDetail';
+import MarketDetail from '../components/pages/MarketDetail/MarketDetail';
 
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
 import useSimpleAuth from '../helpers/data/authData';
 
 import './App.scss';
+import MerchantDashboard from '../components/shared/MerchantDashboard/MerchantDashboard';
 
 const App = () => {
   const [authed, setAuthed] = useState(false);
@@ -65,8 +67,10 @@ const App = () => {
             <PrivateRoute path='/goods/:goodId' component={GoodDetail} isAuthed={authed} />
             <PrivateRoute path='/accounts/edit/:userId' component={EditProfile} isAuthed={authed} />
             <PrivateRoute path='/accounts/:userId' component={ProfileDetail} isAuthed={authed} />
+            <PrivateRoute path='/markets/:marketId' component={MarketDetail} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
+            <PrivateRoute path='/merchants/:merchantId' component={MerchantDashboard} isAuthed={authed} />
             <PublicRoute path='/auth' component={Auth} isAuthed={authed} setRoleId={setRoleId} setUid={setUid} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>

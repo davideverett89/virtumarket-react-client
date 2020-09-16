@@ -28,6 +28,11 @@ const ConsumerDashboard = () => {
       .catch((err) => console.error('There was an issue getting all markets:', err));
   }, [isMounted, setMarkets]);
 
+  const marketClick = (e) => {
+    e.preventDefault();
+    console.log('YEP');
+  };
+
   useEffect(() => {
     setIsMounted(true);
     getMarkets();
@@ -41,13 +46,13 @@ const ConsumerDashboard = () => {
         <SearchBar handleSearch={handleSearch} search={search} />
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
             {
-                filteredMarkets.length === 0
-                  ? (
+                filteredMarkets.length > 0 && isMounted
+                  ? filteredMarkets.map((market) => (
+                    <MarketCard key={market.id} market={market} onClick={marketClick} fromConsumer={true} />
+                  ))
+                  : (
                     <h2 className="mx-auto my-5 display-3">No Markets Match Your Search!</h2>
                   )
-                  : filteredMarkets.map((market) => (
-                    <MarketCard key={market.id} market={market} />
-                  ))
             }
         </div>
     </div>
