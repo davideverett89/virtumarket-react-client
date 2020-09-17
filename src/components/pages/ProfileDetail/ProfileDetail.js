@@ -7,7 +7,7 @@ import userData from '../../../helpers/data/userData';
 
 import './ProfileDetail.scss';
 
-const ProfileDetail = ({ match }) => {
+const ProfileDetail = ({ match, history }) => {
   const [user, setUser] = useState({});
   const [merchant, setMerchant] = useState({});
   const [consumer, setConsumer] = useState({});
@@ -37,6 +37,17 @@ const ProfileDetail = ({ match }) => {
     getCurrentUser();
     return () => setIsMounted(false);
   }, [getCurrentUser]);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const { userId } = match.params;
+    userData.deleteUser(userId)
+      .then(() => {
+        sessionStorage.clear();
+        history.push('/');
+      })
+      .catch((err) => console.error('There was an issue deleting this user:', err));
+  };
 
   const editLink = `/accounts/edit/${user.id}`;
 
@@ -71,7 +82,7 @@ const ProfileDetail = ({ match }) => {
             </div>
             <div className="p-3 card-footer d-flex align-items-center justify-content-start">
                 <Link to={editLink} className="mx-2 btn btn-warning">Update</Link>
-                <button className="mx-2 btn btn-danger">Delete</button>
+                <button className="mx-2 btn btn-danger" onClick={handleDelete}>Delete</button>
             </div>
         </div>
         {
