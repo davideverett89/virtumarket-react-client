@@ -14,6 +14,7 @@ import './EditProfile.scss';
 const EditProfile = ({ match, history }) => {
   const [markets, setMarkets] = useState([]);
   const [user, setUser] = useState({
+    id: 0,
     username: '',
     first_name: '',
     last_name: '',
@@ -21,13 +22,19 @@ const EditProfile = ({ match, history }) => {
     date_joined: '',
   });
   const [merchant, setMerchant] = useState({
+    id: 0,
     bio: '',
     profile_image: '',
     booth_image: '',
     company_name: '',
     phone_number: '',
   });
-  const [consumer, setConsumer] = useState({});
+  const [consumer, setConsumer] = useState({
+    id: 0,
+    bio: '',
+    profile_image: '',
+    phone_number: '',
+  });
   const [isMounted, setIsMounted] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
 
@@ -71,14 +78,14 @@ const EditProfile = ({ match, history }) => {
     const { userId } = match.params;
     const updatedUser = {
       username: user.username,
-      bio: user.merchant !== null ? merchant.bio : consumer.bio,
+      bio: merchant.id ? merchant.bio : consumer.bio,
       email: user.email,
       firstName: user.first_name,
       lastName: user.last_name,
-      profileImage: user.merchant !== null ? merchant.profile_image : consumer.profile_image,
-      phoneNumber: user.merchant !== null ? merchant.phone_number : consumer.phone_number,
+      profileImage: merchant.id ? merchant.profile_image : consumer.profile_image,
+      phoneNumber: merchant.id ? merchant.phone_number : consumer.phone_number,
     };
-    if (user.merchant !== null) {
+    if (merchant.id) {
       updatedUser.marketId = parseInt(selectedId, 10);
       updatedUser.companyName = merchant.company_name;
       updatedUser.boothImage = merchant.booth_image;
@@ -112,7 +119,7 @@ const EditProfile = ({ match, history }) => {
         <h1 className="display-4">Edit Profile</h1>
         <form className="col-6 mx-auto mb-3 text-left">
             {
-                user.merchant !== null
+                merchant.id
                   ? (
                 <React.Fragment>
                     <div className="form-group">
@@ -213,10 +220,10 @@ const EditProfile = ({ match, history }) => {
                     type="text"
                     className="form-control"
                     id="profile-image"
-                    data-role-name={`${user.merchant !== null ? 'merchant' : 'consumer'}`}
+                    data-role-name={`${merchant.id ? 'merchant' : 'consumer'}`}
                     data-field-type="role"
                     placeholder="Paste Image URL"
-                    value={(user.merchant !== null ? merchant.profile_image : consumer.profile_image) || ''}
+                    value={(merchant.id ? merchant.profile_image : consumer.profile_image) || ''}
                     onChange={handleFieldChange}
                     required
                 />
@@ -227,10 +234,10 @@ const EditProfile = ({ match, history }) => {
                     type="text"
                     className="form-control"
                     id="phone_number"
-                    data-role-name={`${user.merchant !== null ? 'merchant' : 'consumer'}`}
+                    data-role-name={`${merchant.id ? 'merchant' : 'consumer'}`}
                     data-field-type="role"
                     placeholder="Enter Phone Number"
-                    value={(user.merchant !== null ? merchant.phone_number : consumer.phone_number) || ''}
+                    value={(merchant.id ? merchant.phone_number : consumer.phone_number) || ''}
                     onChange={handleFieldChange}
                     required
                 />
@@ -239,12 +246,12 @@ const EditProfile = ({ match, history }) => {
                 <label htmlFor="bio">Bio:</label>
                 <textarea
                     name="bio"
-                    data-role-name={`${user.merchant !== null ? 'merchant' : 'consumer'}`}
+                    data-role-name={`${merchant.id ? 'merchant' : 'consumer'}`}
                     data-field-type="role"
                     className="form-control"
                     id="bio"
                     placeholder="Tell Us About Yourself..."
-                    value={(user.merchant !== null ? merchant.bio : consumer.bio) || ''}
+                    value={(merchant.id ? merchant.bio : consumer.bio) || ''}
                     onChange={handleFieldChange}
                     required
                 />
