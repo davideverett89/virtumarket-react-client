@@ -72,7 +72,7 @@ const MyNavBar = ({
                     <NavLink className="btn nav-btn" tag={RRNavLink} to='/basket'>Basket</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to='/accounts'>Profile</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${uid}`}>Profile</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn logout-btn" onClick={logMeOut}>Logout</NavLink>
