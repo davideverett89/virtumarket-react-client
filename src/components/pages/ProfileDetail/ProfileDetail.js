@@ -10,6 +10,7 @@ import './ProfileDetail.scss';
 const ProfileDetail = ({ match }) => {
   const [user, setUser] = useState({});
   const [merchant, setMerchant] = useState({});
+  const [consumer, setConsumer] = useState({});
   const [market, setMarket] = useState({});
   const [isMounted, setIsMounted] = useState(false);
 
@@ -20,8 +21,12 @@ const ProfileDetail = ({ match }) => {
         if (isMounted) {
           const currentUser = response.data;
           setUser(currentUser);
-          setMerchant(currentUser.merchant);
-          setMarket(currentUser.merchant.market);
+          if (currentUser.merchant !== null) {
+            setMerchant(currentUser.merchant);
+            setMarket(currentUser.merchant.market);
+          } else {
+            setConsumer(currentUser.consumer);
+          }
         }
       })
       .catch((err) => console.error('There was an issue getting this user:', err));
@@ -41,22 +46,26 @@ const ProfileDetail = ({ match }) => {
         <div className="px-0 col-12 m-auto container card">
             <div className="row card-body">
                 <div className="col-2">
-                    <img className="my-3 card-img-top" src={merchant.profile_image} alt={user.username} />
-                    <p className="lead m-0">Reputation: 4,567</p>
+                    <img className="my-3 card-img-top" src={merchant.id ? merchant.profile_image : consumer.profile_image} alt={user.username} />
+                    <p className="lead m-0">Reputation: {Math.floor(Math.random() * 5000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                 </div>
                 <div className="text-left col-6">
                     <div>
                         <h3>{user.first_name} {user.last_name}</h3>
                         <h4>{user.username}</h4>
-                        <p className="lead">{merchant.bio}</p>
+                        <p className="lead">{merchant.id ? merchant.bio : consumer.bio}</p>
                     </div>
                 </div>
                 <div className="text-left col-4">
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">Email: {user.email}</li>
                         <li className="list-group-item">Date Joined: {user.date_joined}</li>
-                        <li className="list-group-item">Organization: {merchant.company_name}</li>
-                        <li className="list-group-item">Phone Number: {merchant.phone_number}</li>
+                        {
+                          merchant.id
+                            ? (<li className="list-group-item">Organization: {merchant.company_name}</li>)
+                            : (<li className="list-group-item">Favorite Merchant: Dave's Farm Fresh Goods</li>)
+                        }
+                        <li className="list-group-item">Phone Number: {merchant.id ? merchant.phone_number : consumer.phone_number}</li>
                     </ul>
                 </div>
             </div>
@@ -65,10 +74,16 @@ const ProfileDetail = ({ match }) => {
                 <button className="mx-2 btn btn-danger">Delete</button>
             </div>
         </div>
-        <div className="my-3 container card col-12">
-          <h2 className="display-4">Active Market</h2>
-          <MarketCard market={market} />
-        </div>
+        {
+          merchant.id
+            ? (
+            <div className="my-3 container card col-12">
+              <h2 className="display-4">Active Market</h2>
+              <MarketCard market={market} />
+            </div>
+            )
+            : ('')
+        }
     </div>
   );
 };
