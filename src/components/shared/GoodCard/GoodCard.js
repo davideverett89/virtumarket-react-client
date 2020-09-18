@@ -15,6 +15,8 @@ import {
 
 import { Link } from 'react-router-dom';
 
+import UtilityModal from '../UtilityModal/UtilityModal';
+
 import './GoodCard.scss';
 
 const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
@@ -39,14 +41,16 @@ const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
           </Col>
         </Row>
       </CardBody>
-      <CardFooter className="col-12">
+      <CardFooter className="col-12 d-flex flex-row">
         <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
         {
           userIsMerchant
             ? (
             <React.Fragment>
               <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-              <Button className="mx-1 btn btn-danger" onClick={() => handleDelete(good.id)}>Delete</Button>
+              <UtilityModal className={'mx-1'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
+                <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
+              </UtilityModal>
             </React.Fragment>
             ) : (
               ''

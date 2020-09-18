@@ -65,4 +65,11 @@ const patchUser = (userId, updatedUser) => {
   });
 };
 
-export default { getUserById, getSimpleUserRoleById, patchUser };
+const deleteUser = (userId) => axios.delete(`${baseUrl}/users/${userId}`);
+
+export default {
+  getUserById,
+  getSimpleUserRoleById,
+  patchUser,
+  deleteUser,
+};

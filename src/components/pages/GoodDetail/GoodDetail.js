@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
+import UtilityModal from '../../shared/UtilityModal/UtilityModal';
 
 import goodData from '../../../helpers/data/goodData';
 
@@ -43,13 +44,15 @@ const GoodDetail = ({ match, history }) => {
         <h2>Product Details:</h2>
         <p className="lead">${good.price}</p>
         <p className="lead">{good.description}</p>
-        <div className="mb-3">
+        <div className="mb-3 d-flex flex-row justify-content-center align-align-items-center">
           {
             userIsMerchant
               ? (
               <React.Fragment>
                 <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
-                <button className="mx-3 btn btn-danger" onClick={handleDelete}>Delete</button>
+                <UtilityModal className={'mx-3'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
+                  <button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
+                </UtilityModal>
               </React.Fragment>
               )
               : (

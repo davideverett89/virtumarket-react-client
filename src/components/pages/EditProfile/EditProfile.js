@@ -141,11 +141,11 @@ const EditProfile = ({ match, history }) => {
                         <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="booth-image">Booth Image:</label>
+                        <label htmlFor="booth_image">Booth Image:</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="booth-image"
+                            id="booth_image"
                             placeholder="Paste Image URL"
                             data-role-name="merchant"
                             data-field-type="role"
@@ -215,11 +215,11 @@ const EditProfile = ({ match, history }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="profile-image">Profile Image:</label>
+                <label htmlFor="profile_image">Profile Image:</label>
                 <input
                     type="text"
                     className="form-control"
-                    id="profile-image"
+                    id="profile_image"
                     data-role-name={`${merchant.id ? 'merchant' : 'consumer'}`}
                     data-field-type="role"
                     placeholder="Paste Image URL"

@@ -99,12 +99,12 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                     <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="booth-image">Booth Image:</label>
+                    <label htmlFor="booth_image">Booth Image:</label>
                     <input
                       ref={boothImage}
                       type="text"
                       className="form-control"
-                      id="booth-image"
+                      id="booth_image"
                       placeholder="Paste Image URL"
                       required
                     />
@@ -169,12 +169,12 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="profile-image">Profile Image:</label>
+                <label htmlFor="profile_image">Profile Image:</label>
                 <input
                   ref={profileImage}
                   type="text"
                   className="form-control"
-                  id="profile-image"
+                  id="profile_image"
                   placeholder="Paste Image URL"
                   required
                 />

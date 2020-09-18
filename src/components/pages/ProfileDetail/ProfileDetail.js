@@ -71,7 +71,6 @@ const ProfileDetail = ({ match }) => {
             </div>
             <div className="p-3 card-footer d-flex align-items-center justify-content-start">
                 <Link to={editLink} className="mx-2 btn btn-warning">Update</Link>
-                <button className="mx-2 btn btn-danger">Delete</button>
             </div>
         </div>
         {
