@@ -16,6 +16,7 @@ import EditProfile from '../components/pages/EditProfile/EditProfile';
 import OrderHistory from '../components/pages/OrderHistory/OrderHistory';
 import OrderDetail from '../components/pages/OrderDetail/OrderDetail';
 import MarketDetail from '../components/pages/MarketDetail/MarketDetail';
+import FarewellPage from '../components/pages/FarewellPage/FarewellPage';
 
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
@@ -71,7 +72,8 @@ const App = () => {
             <PrivateRoute path='/merchants/orders/:orderId' component={OrderDetail} isAuthed={authed} />
             <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
             <PrivateRoute path='/merchants/:merchantId' component={MerchantDashboard} isAuthed={authed} />
-            <PublicRoute path='/auth' component={Auth} isAuthed={authed} setRoleId={setRoleId} setUid={setUid} />
+            <PublicRoute path='/farewell' component={FarewellPage} isAuthed={authed} />
+            <PublicRoute path='/auth' component={Auth} isAuthed={authed} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>
         </React.Fragment>

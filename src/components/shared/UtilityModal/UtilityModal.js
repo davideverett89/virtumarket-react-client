@@ -7,23 +7,37 @@ import {
   ModalFooter,
 } from 'reactstrap';
 
-const UtilityModal = ({ buttonLabel, className, children }) => {
+const UtilityModal = ({
+  modalTitle,
+  buttonLabel,
+  className,
+  children,
+  isDelete,
+}) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-            {children}
+      <Button className={className} color="danger" onClick={toggle}>{buttonLabel}</Button>
+      <Modal centered={true} isOpen={modal} toggle={toggle} className="UtilityModal">
+        <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
+        <ModalBody className="text-center">
+          {children}
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
-        </ModalFooter>
+        {
+          isDelete
+            ? (
+              ''
+            )
+            : (
+          <ModalFooter className="text-center">
+            <Button color="primary" onClick={toggle}>Do Something</Button>
+            <Button color="secondary" onClick={toggle}>Cancel</Button>
+          </ModalFooter>
+            )
+        }
       </Modal>
     </div>
   );
