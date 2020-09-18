@@ -5,7 +5,7 @@ import apiKeys from '../apiKeys.json';
 const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 
 const getUnitSizes = () => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/unit_sizes`)
+  axios.get(`${baseUrl}/unitsizes`)
     .then((response) => {
       const unitSizes = response.data;
       resolve(unitSizes);

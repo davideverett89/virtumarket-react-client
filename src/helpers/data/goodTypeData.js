@@ -5,7 +5,7 @@ import apiKeys from '../apiKeys.json';
 const baseUrl = apiKeys.virtumarketAPI.apiUrl;
 
 const getGoodTypes = () => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/good_types`)
+  axios.get(`${baseUrl}/goodtypes`)
     .then((response) => {
       const goodTypes = response.data;
       resolve(goodTypes);

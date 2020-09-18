@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 import MarketCard from '../../shared/MarketCard/MarketCard';
+import UtilityModal from '../../shared/UtilityModal/UtilityModal';
 
 import userData from '../../../helpers/data/userData';
 
@@ -12,6 +13,7 @@ const ProfileDetail = ({ match }) => {
   const [merchant, setMerchant] = useState({});
   const [consumer, setConsumer] = useState({});
   const [market, setMarket] = useState({});
+  const [paymentMethods, setPaymentMethods] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
 
   const getCurrentUser = useCallback(() => {
@@ -26,6 +28,7 @@ const ProfileDetail = ({ match }) => {
             setMarket(currentUser.merchant.market);
           } else {
             setConsumer(currentUser.consumer);
+            setPaymentMethods(currentUser.consumer.paymentmethods);
           }
         }
       })
@@ -71,6 +74,30 @@ const ProfileDetail = ({ match }) => {
             </div>
             <div className="p-3 card-footer d-flex align-items-center justify-content-start">
                 <Link to={editLink} className="mx-2 btn btn-warning">Update</Link>
+                {
+                  consumer.id
+                    ? (
+                    <UtilityModal isDelete={false} modalTitle={'Payment Methods'} className={'btn btn-primary'} buttonLabel={'View Payment Types'}>
+                      {
+                        paymentMethods.length === 0
+                          ? (<h3>No Payment Methods On Record</h3>)
+                          : (
+                            paymentMethods.map((paymentMethod) => (
+                            <ul className="mx-2 my-3 border border-black list-group">
+                              <li className="list-group-item">Merchant: {paymentMethod.merchant_name}</li>
+                              <li className="list-group-item">Account Number: {paymentMethod.account_number}</li>
+                              <li className="list-group-item">Exp. Date: {paymentMethod.expiration_date}</li>
+                              <li className="list-group-item"><button className="btn btn-danger">Delete</button></li>
+                            </ul>
+                            ))
+                          )
+                      }
+                    </UtilityModal>
+                    )
+                    : (
+                      ''
+                    )
+                }
             </div>
         </div>
         {
