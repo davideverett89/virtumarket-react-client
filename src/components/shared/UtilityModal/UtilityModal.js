@@ -20,7 +20,7 @@ const UtilityModal = ({
 
   return (
     <div>
-      <Button className={className} color="danger" onClick={toggle}>{buttonLabel}</Button>
+      <Button className={className} onClick={toggle}>{buttonLabel}</Button>
       <Modal centered={true} isOpen={modal} toggle={toggle} className="UtilityModal">
         <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
         <ModalBody className="text-center">
@@ -33,8 +33,7 @@ const UtilityModal = ({
             )
             : (
           <ModalFooter className="text-center">
-            <Button color="primary" onClick={toggle}>Do Something</Button>
-            <Button color="secondary" onClick={toggle}>Cancel</Button>
+            <Button color="success" onClick={toggle}>Add</Button>
           </ModalFooter>
             )
         }
