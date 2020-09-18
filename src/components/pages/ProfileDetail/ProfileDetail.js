@@ -41,6 +41,10 @@ const ProfileDetail = ({ match }) => {
     return () => setIsMounted(false);
   }, [getCurrentUser]);
 
+  const handleAddPaymentMethod = (newPaymentMethod) => {
+    console.log(newPaymentMethod);
+  };
+
   const editLink = `/accounts/edit/${user.id}`;
 
   return (
@@ -77,7 +81,7 @@ const ProfileDetail = ({ match }) => {
                 {
                   consumer.id
                     ? (
-                    <UtilityModal isDelete={false} modalTitle={'Payment Methods'} className={'btn btn-primary'} buttonLabel={'View Payment Types'}>
+                    <UtilityModal isDelete={false} modalTitle={'Payment Methods'} className={'btn btn-primary'} buttonLabel={'View Payment Types'} handleAddPaymentMethod={handleAddPaymentMethod} >
                       {
                         paymentMethods.length === 0
                           ? (<h3>No Payment Methods On Record</h3>)
