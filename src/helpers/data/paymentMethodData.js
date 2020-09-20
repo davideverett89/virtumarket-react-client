@@ -17,4 +17,6 @@ const postPaymentMethod = (newPaymentMethod) => {
   });
 };
 
-export default { postPaymentMethod };
+const deletePaymentMethod = (paymentMethodId) => axios.delete(`${baseUrl}/paymentmethods/${paymentMethodId}`);
+
+export default { postPaymentMethod, deletePaymentMethod };

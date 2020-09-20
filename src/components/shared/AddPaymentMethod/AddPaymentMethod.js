@@ -6,7 +6,7 @@ import paymentMethodData from '../../../helpers/data/paymentMethodData';
 
 import './AddPaymentMethod.scss';
 
-const AddPaymentMethod = ({ toggleAll }) => {
+const AddPaymentMethod = ({ toggleNested, getCurrentUser }) => {
   const merchant = useRef();
   const accountNumber = useRef();
   const date = useRef();
@@ -22,7 +22,8 @@ const AddPaymentMethod = ({ toggleAll }) => {
     };
     paymentMethodData.postPaymentMethod(newPaymentMethod)
       .then(() => {
-        toggleAll();
+        toggleNested();
+        getCurrentUser();
       })
       .catch((err) => console.error('There was an issue adding a new payment method:', err));
   };
