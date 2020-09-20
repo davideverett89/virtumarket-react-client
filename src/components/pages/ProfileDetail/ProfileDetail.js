@@ -7,6 +7,7 @@ import UtilityModal from '../../shared/UtilityModal/UtilityModal';
 import userData from '../../../helpers/data/userData';
 
 import './ProfileDetail.scss';
+import paymentMethodData from '../../../helpers/data/paymentMethodData';
 
 const ProfileDetail = ({ match }) => {
   const [user, setUser] = useState({});
@@ -40,6 +41,14 @@ const ProfileDetail = ({ match }) => {
     getCurrentUser();
     return () => setIsMounted(false);
   }, [getCurrentUser]);
+
+  const handleDeletePaymentMethod = (paymentMethodId) => {
+    paymentMethodData.deletePaymentMethod(paymentMethodId)
+      .then(() => {
+        getCurrentUser();
+      })
+      .catch((err) => console.error('There was an issue deleting this payment method:', err));
+  };
 
   const editLink = `/accounts/edit/${user.id}`;
 
@@ -80,8 +89,9 @@ const ProfileDetail = ({ match }) => {
                     <UtilityModal
                       isDelete={false}
                       modalTitle={'Payment Methods'}
-                      className={'btn btn-primary'}
+                      buttonClassName={'btn btn-success'}
                       buttonLabel={'View Payment Types'}
+                      getCurrentUser={getCurrentUser}
                     >
                       {
                         paymentMethods.length === 0
@@ -92,7 +102,7 @@ const ProfileDetail = ({ match }) => {
                               <li className="list-group-item">Merchant: {paymentMethod.merchant_name}</li>
                               <li className="list-group-item">Account Number: {paymentMethod.account_number}</li>
                               <li className="list-group-item">Exp. Date: {paymentMethod.expiration_date}</li>
-                              <li className="list-group-item"><button className="btn btn-danger">Delete</button></li>
+                              <li className="list-group-item"><button className="btn btn-danger" onClick={() => handleDeletePaymentMethod(paymentMethod.id)}>Delete</button></li>
                             </ul>
                             ))
                           )
