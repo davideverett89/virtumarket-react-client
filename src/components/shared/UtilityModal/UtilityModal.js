@@ -25,6 +25,11 @@ const UtilityModal = ({
     setCloseAll(false);
   };
 
+  const toggleAll = () => {
+    setNestedModal(!nestedModal);
+    setCloseAll(true);
+  };
+
   const toggle = () => setModal(!modal);
 
   return (
@@ -46,7 +51,7 @@ const UtilityModal = ({
             <Modal centered={true} isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
               <ModalHeader toggle={toggleNested}>Add New Payment Method</ModalHeader>
               <ModalBody>
-                <AddPaymentMethod setCloseAll={setCloseAll} />
+                <AddPaymentMethod toggleAll={toggleAll} />
               </ModalBody>
             </Modal>
           </ModalFooter>

@@ -88,7 +88,7 @@ const ProfileDetail = ({ match }) => {
                           ? (<h3>No Payment Methods On Record</h3>)
                           : (
                             paymentMethods.map((paymentMethod) => (
-                            <ul className="mx-2 my-3 border border-black list-group">
+                            <ul key={paymentMethod.id} className="mx-2 my-3 border border-black list-group">
                               <li className="list-group-item">Merchant: {paymentMethod.merchant_name}</li>
                               <li className="list-group-item">Account Number: {paymentMethod.account_number}</li>
                               <li className="list-group-item">Exp. Date: {paymentMethod.expiration_date}</li>
