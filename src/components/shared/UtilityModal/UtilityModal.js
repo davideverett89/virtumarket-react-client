@@ -7,6 +7,8 @@ import {
   ModalFooter,
 } from 'reactstrap';
 
+import AddPaymentMethod from '../AddPaymentMethod/AddPaymentMethod';
+
 const UtilityModal = ({
   modalTitle,
   buttonLabel,
@@ -15,6 +17,18 @@ const UtilityModal = ({
   isDelete,
 }) => {
   const [modal, setModal] = useState(false);
+  const [nestedModal, setNestedModal] = useState(false);
+  const [closeAll, setCloseAll] = useState(false);
+
+  const toggleNested = () => {
+    setNestedModal(!nestedModal);
+    setCloseAll(false);
+  };
+
+  const toggleAll = () => {
+    setNestedModal(!nestedModal);
+    setCloseAll(true);
+  };
 
   const toggle = () => setModal(!modal);
 
@@ -33,7 +47,13 @@ const UtilityModal = ({
             )
             : (
           <ModalFooter className="text-center">
-            <Button color="success" onClick={toggle}>Add</Button>
+            <Button color="success" onClick={toggleNested}>Add</Button>
+            <Modal centered={true} isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
+              <ModalHeader toggle={toggleNested}>Add New Payment Method</ModalHeader>
+              <ModalBody>
+                <AddPaymentMethod toggleAll={toggleAll} />
+              </ModalBody>
+            </Modal>
           </ModalFooter>
             )
         }
