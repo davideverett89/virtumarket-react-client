@@ -32,12 +32,16 @@ const OrderDetail = ({ match }) => {
 
   return (
     <div className="OrderDetail">
-        <h1>Order Detail</h1>
+        <h1 className="display-1 mb-5">Basket Contents</h1>
         <div className="d-flex flex-column justify-content-center align-items-center">
             {
-                goods.map((good) => (
-                    <GoodCard key={good.id} good={good} />
+              basket.id
+                ? goods.map((good) => (
+                  <GoodCard key={good.id} good={good} />
                 ))
+                : (
+                  <h2 className="display-4">Your basket is empty!</h2>
+                )
             }
         </div>
     </div>

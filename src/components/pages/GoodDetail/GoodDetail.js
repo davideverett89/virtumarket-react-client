@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+import moment from 'moment';
+
 import { Link } from 'react-router-dom';
 import UtilityModal from '../../shared/UtilityModal/UtilityModal';
 
 import goodData from '../../../helpers/data/goodData';
 
 import './GoodDetail.scss';
+import goodBasketData from '../../../helpers/data/goodBasketData';
 
 const GoodDetail = ({ match, history }) => {
   const [good, setGood] = useState({});
@@ -35,6 +38,20 @@ const GoodDetail = ({ match, history }) => {
       .catch((err) => console.error('There was an issue deleting this good:', err));
   };
 
+  const handleAddToBasket = (e) => {
+    const { goodId } = match.params;
+    e.preventDefault();
+    const newGoodBasket = {
+      date_added: moment().format('YYYY-MM-DD'),
+      good_id: parseInt(goodId, 10),
+    };
+    goodBasketData.postGoodBasket(newGoodBasket)
+      .then(() => {
+        history.goBack();
+      })
+      .catch((err) => console.error('There was an issue adding this good to the basket:', err));
+  };
+
   const editLink = `/goods/edit/${good.id}`;
 
   return (
@@ -56,7 +73,7 @@ const GoodDetail = ({ match, history }) => {
               </React.Fragment>
               )
               : (
-                ''
+                <button className="btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
               )
           }
         </div>
