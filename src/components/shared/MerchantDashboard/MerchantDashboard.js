@@ -55,7 +55,7 @@ const MerchantDashboard = ({ match, authed }) => {
       <h1 className="mt-3 display-4">{merchant.company_name}</h1>
   </div>
   <div className="col-12 booth container-fluid mb-3 p-0">
-    <div className="px-5 py-3 mb-3 col-12 good-container d-flex flex-column justify-content-center align-items-center">
+    <div className="px-5 py-3 mb-3 col-12 good-container d-flex flex-wrap justify-content-center align-items-start">
         {
           goods.length === 0
             ? (
