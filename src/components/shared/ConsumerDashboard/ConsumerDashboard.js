@@ -11,6 +11,7 @@ const ConsumerDashboard = () => {
   const [markets, setMarkets] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   const [search, setSearch] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('zip_code');
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -34,11 +35,11 @@ const ConsumerDashboard = () => {
     return () => setIsMounted(false);
   }, [isMounted, getMarkets]);
 
-  const filteredMarkets = markets.filter((market) => market.zip_code.toString().indexOf(search) !== -1);
+  const filteredMarkets = markets.filter((market) => market[selectedFilter].toString().indexOf(search) !== -1);
 
   return (
     <div className="ConsumerDashboard">
-        <SearchBar handleSearch={handleSearch} search={search} />
+        <SearchBar handleSearch={handleSearch} search={search} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
             {
                 filteredMarkets.length > 0 && isMounted
