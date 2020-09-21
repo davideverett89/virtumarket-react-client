@@ -69,7 +69,7 @@ const MyNavBar = ({
                     <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/consumers/${roleId}`}>Consumer Home</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to='/basket'>Basket</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/consumers/basket/${roleId}`}>Basket</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${uid}`}>Profile</NavLink>
