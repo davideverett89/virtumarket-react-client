@@ -1,15 +1,5 @@
 import React from 'react';
 import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardHeader,
-  CardFooter,
-  Row,
-  Col,
   Button,
 } from 'reactstrap';
 
@@ -23,41 +13,41 @@ const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
-    <Card className="GoodCard col-9 my-2 p-0">
-      <CardHeader>
-        <CardTitle className="mb-0">
-          <h3 className="mb-0">{good.name}</h3>
-        </CardTitle>
-      </CardHeader>
-      <CardBody className="text-left px-5">
-        <Row className="pl-5">
-          <Col className="pl-5 pt-5" sm="4">
-            <CardSubtitle className="lead good-info">${good.price}</CardSubtitle>
-            <CardText className="lead good-info">{good.description}</CardText>
-            <CardText className="lead good-info">Quantity in Stock: {good.quantity}</CardText>
-          </Col>
-          <Col className="text-center" sm="8">
-            <CardImg className="col-6 m-auto img-fluid mt-3" height="auto" width="100%" src={good.image} alt="Card image cap" />
-          </Col>
-        </Row>
-      </CardBody>
-      <CardFooter className="col-12 d-flex flex-row">
-        <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
-        {
-          userIsMerchant
-            ? (
-            <React.Fragment>
-              <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-              <UtilityModal buttonClassName={'mx-1 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
-                <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
-              </UtilityModal>
-            </React.Fragment>
-            ) : (
-              ''
-            )
-        }
-      </CardFooter>
-    </Card>
+    <div className="GoodCard col-9">
+      <div className="jumbotron text-center hoverable p-4 border border-secondary m-0 good-jumbo">
+          <div className="row">
+              <div className="col-md-4 offset-md-1 mx-3 my-3">
+                  <div className="view overlay">
+                      <img src={good.image} className="col-6 img-fluid good-image" alt={good.name} />
+                  </div>
+              </div>
+              <div className="col-md-7 text-md-left ml-3 mt-3 mb-2">
+                  <h4 className="h4 mb-4">{good.name}</h4>
+                  <p className="font-weight-normal">{good.price}</p>
+                  <p className="font-weight-normal">{good.description}</p>
+                  <p className="font-weight-normal">{good.quantity} in stock.</p>
+              </div>
+          </div>
+          <div className="row">
+              <div className="col-12 d-flex flex-row justify-content-center align-items-center">
+                  <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
+                  {
+                    userIsMerchant
+                      ? (
+                      <React.Fragment>
+                        <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+                        <UtilityModal buttonClassName={'mx-1 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
+                          <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
+                        </UtilityModal>
+                      </React.Fragment>
+                      ) : (
+                        ''
+                      )
+                }
+              </div>
+          </div>
+      </div>
+    </div>
   );
 };
 

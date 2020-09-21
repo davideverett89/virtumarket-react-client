@@ -1,11 +1,21 @@
 import React from 'react';
 
+import SearchFilterDropDown from '../SearchFilterDropDown/SearchFilterDropDown';
+
 import './SearchBar.scss';
 
-const SearchBar = ({ handleSearch, search }) => (
+const SearchBar = ({
+  handleSearch,
+  search,
+  selectedFilter,
+  setSelectedFilter,
+}) => (
     <div className="SearchBar my-5">
         <form className="form-inline d-flex flex-row justify-content-center align-items-center">
-            <label className="mx-3" htmlFor="search">Search Markets By Zip Code: </label>
+            <div className="d-flex flex-row">
+                <label className="mx-1" htmlFor="search">Search Markets By: </label>
+                <SearchFilterDropDown selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+            </div>
             <input
                 id="search"
                 className="form-control col-6"

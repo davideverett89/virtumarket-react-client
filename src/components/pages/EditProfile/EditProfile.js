@@ -159,20 +159,6 @@ const EditProfile = ({ match, history }) => {
                   : ('')
             }
             <div className="form-group">
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    data-role-name="user"
-                    data-field-type="user"
-                    placeholder="Enter New Username"
-                    value={user.username || ''}
-                    onChange={handleFieldChange}
-                    required
-                />
-            </div>
-            <div className="form-group">
                 <label htmlFor="email">Email:</label>
                 <input
                     type="text"

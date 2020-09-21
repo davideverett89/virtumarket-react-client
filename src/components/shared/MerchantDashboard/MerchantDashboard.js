@@ -47,13 +47,15 @@ const MerchantDashboard = ({ match, authed }) => {
 
   return (
 <div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center" >
-  <div className="bg-light border my-3 d-flex flex-row align-items-center justify-content-around">
-    <img className="float-left profile-image img-fluid img-thumbnail col-4 my-3" src={merchant.profile_image} alt={merchant.company_name} />
-    <h1 className="mt-3 display-1">{merchant.company_name}</h1>
-  </div>
-  <div className="col-12 booth container-fluid mb-3 p-0">
-    <img className="col-12 img-fluid booth-image p-0 border border-dark" src={merchant.booth_image} alt={merchant.company_name} />
-    <div className="p-5 mb-3 col-12 good-container d-flex flex-column justify-content-center align-items-center">
+  <img className="col-12 img-fluid booth-image p-0" src={merchant.booth_image} alt={merchant.company_name} />
+  <div className="col-12 booth container-fluid mb-3 p-0 border border-white">
+    <div className="merchant-jumbo col-10 mx-auto jumbotron border border-secondary my-3 d-flex flex-row align-items-center justify-content-center py-3">
+      <div className="col-2">
+        <img id="profile_image" className="profile-image img-thumbnail rounded-circle" src={merchant.profile_image} alt={merchant.company_name} />
+      </div>
+      <h1 className="mt-3 display-2">{merchant.company_name}</h1>
+    </div>
+    <div className="px-5 py-3 mb-3 col-12 good-container d-flex flex-column justify-content-center align-items-center">
         {
           goods.length === 0
             ? (

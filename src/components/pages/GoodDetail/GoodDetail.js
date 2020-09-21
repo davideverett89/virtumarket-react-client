@@ -50,7 +50,7 @@ const GoodDetail = ({ match, history }) => {
               ? (
               <React.Fragment>
                 <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
-                <UtilityModal className={'mx-3'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
+                <UtilityModal buttonClassName={'mx-3 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
                   <button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
                 </UtilityModal>
               </React.Fragment>

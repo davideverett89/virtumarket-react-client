@@ -61,8 +61,8 @@ const AddGood = ({ history }) => {
 
   return (
         <div className="AddGood">
-            <h1 className="mt-3">Add Good</h1>
-            <form className="col-6 m-auto text-left">
+            <h1 className="mt-3 display-4">Add Good</h1>
+            <form className="col-6 mx-auto text-left jumbotron mb-5 border border-secondary good-form">
                 <div className="form-group">
                     <label htmlFor="good-name">Name:</label>
                     <input ref={name} type="text" className="form-control" id="good-name" placeholder="Name" />
