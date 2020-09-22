@@ -39,7 +39,7 @@ const ConsumerDashboard = () => {
 
   return (
     <div className="ConsumerDashboard">
-        <SearchBar handleSearch={handleSearch} search={search} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+        <SearchBar marketDetail={false} handleSearch={handleSearch} search={search} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
             {
                 filteredMarkets.length > 0 && isMounted
