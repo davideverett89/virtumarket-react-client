@@ -17,8 +17,22 @@ const OrderDetail = ({ match }) => {
       .then((response) => {
         if (isMounted) {
           const currentBasket = response.data;
+          currentBasket.total = 0;
+          const condensedGoods = currentBasket.goods.reduce((acc, curr) => {
+            const findMultiple = acc.findIndex((x) => x.id === curr.id);
+            if (findMultiple === -1) {
+              const newObj = { ...curr };
+              newObj.quantity_in_basket = 1;
+              currentBasket.total += parseFloat(newObj.price);
+              acc.push(newObj);
+            } else {
+              acc[findMultiple].quantity_in_basket += 1;
+              currentBasket.total += parseFloat(acc[findMultiple].price);
+            }
+            return acc;
+          }, []);
           setBasket(currentBasket);
-          setGoods(currentBasket.goods);
+          setGoods(condensedGoods);
         }
       })
       .catch((err) => console.error('There was an error getting this consumer\'s current basket:', err));
@@ -33,17 +47,18 @@ const OrderDetail = ({ match }) => {
   return (
     <div className="OrderDetail">
         <h1 className="display-1 mb-5">Basket Contents</h1>
-        <div className="d-flex flex-column justify-content-center align-items-center">
+        <div className="col-12 container-fluid d-flex flex-wrap justify-content-center align-items-start">
             {
               basket.id
                 ? goods.map((good) => (
-                  <GoodCard key={good.id} good={good} />
+                  <GoodCard key={good.id} good={good} isBasket={true} />
                 ))
                 : (
                   <h2 className="display-4">Your basket is empty!</h2>
                 )
             }
         </div>
+          <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : ''}</h3>
     </div>
   );
 };

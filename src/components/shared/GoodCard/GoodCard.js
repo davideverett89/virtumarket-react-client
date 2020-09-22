@@ -16,7 +16,12 @@ import UtilityModal from '../UtilityModal/UtilityModal';
 
 import './GoodCard.scss';
 
-const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
+const GoodCard = ({
+  good,
+  handleDelete,
+  userIsMerchant,
+  isBasket,
+}) => {
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
@@ -27,23 +32,40 @@ const GoodCard = ({ good, handleDelete, userIsMerchant }) => {
           <CardTitle className="font-weight-bold">{good.name}</CardTitle>
           <CardSubtitle>${good.price}/{good.unit_size.name}</CardSubtitle>
           <CardText>{good.description}</CardText>
-        </CardBody>
-        <CardFooter className="d-flex flex-row justify-content-center align-items-center">
-          <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
           {
-            userIsMerchant
+            isBasket
               ? (
-              <React.Fragment>
-                <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-                <UtilityModal buttonClassName={'mx-1 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
-                  <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
-                </UtilityModal>
-              </React.Fragment>
-              ) : (
-                ''
+                <CardText>Quantity In Basket: {good.quantity_in_basket}</CardText>
+              )
+              : (
+              <CardText>Quantity Available: {good.quantity - good.number_on_order}</CardText>
               )
           }
-        </CardFooter>
+        </CardBody>
+        {
+          isBasket
+            ? (
+              ''
+            )
+            : (
+            <CardFooter className="d-flex flex-row justify-content-center align-items-center">
+              <Link to={detailLink} className="mx-1 btn btn-primary">View</Link>
+              {
+                userIsMerchant
+                  ? (
+                  <React.Fragment>
+                    <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+                    <UtilityModal buttonClassName={'mx-1 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
+                      <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
+                    </UtilityModal>
+                  </React.Fragment>
+                  ) : (
+                    ''
+                  )
+              }
+            </CardFooter>
+            )
+        }
       </Card>
     </div>
   );
