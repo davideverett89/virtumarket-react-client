@@ -2,7 +2,7 @@ import React from 'react';
 
 import './SearchFilterDropDown.scss';
 
-const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter }) => (
+const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter, marketDetail }) => (
     <select
         type="dropdown"
         name="searchFilterDropDown"
@@ -11,18 +11,33 @@ const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter }) => (
         value={selectedFilter}
         required
     >
-        <option
-            className="dropdown-item"
-            value="zip_code"
-        >
-            Zip Code
-        </option>
-        <option
-            className="dropdown-item"
-            value="name"
-        >
-            Name
-        </option>
+        {
+            marketDetail
+              ? (
+                <option
+                    className="dropdown-item"
+                    value="name"
+                >
+                    Name
+                </option>
+              )
+              : (
+                <React.Fragment>
+                    <option
+                        className="dropdown-item"
+                        value="zip_code"
+                    >
+                        Zip Code
+                    </option>
+                    <option
+                        className="dropdown-item"
+                        value="name"
+                    >
+                        Name
+                    </option>
+                </React.Fragment>
+              )
+        }
     </select>
 );
 
