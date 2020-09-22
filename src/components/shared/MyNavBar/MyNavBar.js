@@ -31,7 +31,7 @@ const MyNavBar = ({
     setAuthed(false);
   };
   return (
-    <div className="MyNavBar border border-dark">
+    <div className="MyNavBar">
       <Navbar className="navbar-main" color="success" light expand="md">
         <NavbarBrand className="navbar-branding" href="/">
           <h3 className="logo-text text-white mb-0">VirtuMarket App</h3>

@@ -26,7 +26,7 @@ const MarketCard = ({ market, fromConsumer }) => {
                       ? (
                         <div className="row">
                             <div className="col-12">
-                                <Link to={detailLink} className="my-2 col-2 btn btn-primary">Enter</Link>
+                                <Link to={detailLink} className="my-2 col-2 btn btn-success">Enter</Link>
                             </div>
                         </div>
                       )

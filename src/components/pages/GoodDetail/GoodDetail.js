@@ -73,7 +73,16 @@ const GoodDetail = ({ match, history }) => {
               </React.Fragment>
               )
               : (
-                <button className="btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
+                ''
+              )
+          }
+          {
+            good.quantity - good.number_on_order > 0
+              ? (
+              <button className="btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
+              )
+              : (
+                <h3 className="solid-out">Item Is Currently Sold Out</h3>
               )
           }
         </div>

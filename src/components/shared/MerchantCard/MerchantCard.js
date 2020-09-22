@@ -7,7 +7,7 @@ import './MerchantCard.scss';
 const MerchantCard = ({ merchant }) => {
   const detailLink = `/merchants/${merchant.id}`;
   return (
-        <div className="MerchantCard col-12">
+        <div className="MerchantCard col-12 mx-auto">
             <div className="jumbotron text-center hoverable p-4">
                 <div className="row">
                     <div className="col-md-4 offset-md-1 mx-3 my-3">
@@ -23,7 +23,7 @@ const MerchantCard = ({ merchant }) => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <Link to={detailLink} className="my-2 col-2 btn btn-primary">Shop</Link>
+                        <Link to={detailLink} className="my-2 col-2 btn btn-success">Shop</Link>
                     </div>
                 </div>
             </div>

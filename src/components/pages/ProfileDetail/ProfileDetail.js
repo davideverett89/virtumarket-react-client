@@ -55,7 +55,7 @@ const ProfileDetail = ({ match }) => {
   return (
     <div className="ProfileDetail">
         <h1 className="mt-3 display-2">Profile Details</h1>
-        <div className="px-0 col-11 m-auto container card profile-card border border-secondary">
+        <div className="px-0 col-11 m-auto container card profile-card">
             <div className="row card-body">
                 <div className="col-2">
                     <img className="my-3 card-img-top" src={merchant.id ? merchant.profile_image : consumer.profile_image} alt={user.username} />
@@ -118,7 +118,7 @@ const ProfileDetail = ({ match }) => {
         {
           merchant.id
             ? (
-            <div className="my-5 container card col-11 mx-auto active-market border border-secondary">
+            <div className="my-5 container card col-11 mx-auto active-market">
               <h2 className="display-4">Active Market</h2>
               <MarketCard market={market} />
             </div>
