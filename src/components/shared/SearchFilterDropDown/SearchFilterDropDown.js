@@ -14,28 +14,36 @@ const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter, marketDetail 
         {
             marketDetail
               ? (
-                <option
-                    className="dropdown-item"
-                    value="name"
-                >
-                    Name
-                </option>
-              )
-              : (
-                <React.Fragment>
-                    <option
-                        className="dropdown-item"
-                        value="zip_code"
-                    >
-                        Zip Code
-                    </option>
+                  <React.Fragment>
                     <option
                         className="dropdown-item"
                         value="name"
                     >
                         Name
                     </option>
-                </React.Fragment>
+                    <option
+                        className="dropdown-item"
+                        value="good_type"
+                    >
+                        Type
+                    </option>
+                  </React.Fragment>
+              )
+              : (
+                    <React.Fragment>
+                        <option
+                            className="dropdown-item"
+                            value="zip_code"
+                        >
+                            Zip Code
+                        </option>
+                        <option
+                            className="dropdown-item"
+                            value="name"
+                        >
+                            Name
+                        </option>
+                    </React.Fragment>
               )
         }
     </select>

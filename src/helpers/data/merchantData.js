@@ -16,4 +16,16 @@ const getMerchantById = (merchantId) => {
   });
 };
 
-export default { getMerchantById };
+const queryMerchantInventory = (marketId, searchParams, search) => {
+  const token = sessionStorage.getItem('virtumarket_token');
+  return axios({
+    method: 'GET',
+    url: `${baseUrl}/merchants/inventory?${searchParams}=${search}&market=${marketId}`,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  });
+};
+
+export default { getMerchantById, queryMerchantInventory };

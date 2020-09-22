@@ -51,18 +51,6 @@ const patchGood = (goodId, updatedName, updatedImage, updatedPrice, updatedQuant
   });
 };
 
-const queryGoods = (marketId, searchParams, search) => {
-  const token = sessionStorage.getItem('virtumarket_api');
-  return axios({
-    method: 'GET',
-    url: `${baseUrl}/goods/?${searchParams}=${search}?market=${marketId}`,
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  });
-};
-
 export default {
   getGoodById,
   postGood,

@@ -14,7 +14,7 @@ const SearchBar = ({
     <div className="SearchBar my-5">
         <form className="form-inline d-flex flex-row justify-content-center align-items-center">
             <div className="d-flex flex-row">
-                <label className="mx-1" htmlFor="search">Search {marketDetail ? 'Merchants' : 'Markets'} By:</label>
+                <label className="mx-1" htmlFor="search">Search {marketDetail ? 'Merchant Inventory' : 'Markets'} By:</label>
                 <SearchFilterDropDown marketDetail={marketDetail} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
             </div>
             <input
