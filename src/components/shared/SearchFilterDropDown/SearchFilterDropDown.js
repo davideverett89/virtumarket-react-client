@@ -23,7 +23,7 @@ const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter, marketDetail 
                     </option>
                     <option
                         className="dropdown-item"
-                        value="good_type"
+                        value="type"
                     >
                         Type
                     </option>
