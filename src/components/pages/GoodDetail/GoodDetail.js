@@ -52,16 +52,24 @@ const GoodDetail = ({ match, history }) => {
       .catch((err) => console.error('There was an issue adding this good to the basket:', err));
   };
 
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    history.goBack();
+  };
+
   const editLink = `/goods/edit/${good.id}`;
 
   return (
-    <div className="GoodDetail d-flex flex-column justify-content-center align-items-center mb-5">
+    <div className="GoodDetail d-flex flex-column justify-content-center align-items-center mb-5 col-10 mx-auto">
         <h1 className="display-4">{good.name}</h1>
         <img className="m-auto img-fluid col-6" src={good.image} alt={good.name} />
-        <h2>Product Details:</h2>
-        <p className="lead">${good.price}</p>
-        <p className="lead">{good.description}</p>
-        <div className="mb-3 d-flex flex-row justify-content-center align-align-items-center">
+        <ul className="mt-5 list-group-flush p-0 col-6">
+          <li className="list-group-item lead">{good.id ? good.good_type.name : ''}</li>
+          <li className="list-group-item lead">${good.price}/{good.id ? good.unit_size.name : ''}</li>
+          <li className="list-group-item lead">Quantity Available: {good.quantity}</li>
+        </ul>
+        <p className="mb-5 col-6 lead">{good.description}</p>
+        <div className="mb-3 d-flex flex-row justify-content-center align-items-center">
           {
             userIsMerchant
               ? (
@@ -77,12 +85,24 @@ const GoodDetail = ({ match, history }) => {
               )
           }
           {
-            good.quantity - good.number_on_order > 0
+            !userIsMerchant && (good.quantity > 0)
               ? (
-              <button className="btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
+                <React.Fragment>
+                  <button className="mx-3 btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
+                  <button className="mx-3 btn btn-danger" onClick={handleGoBack}>Back</button>
+                </React.Fragment>
               )
               : (
-                <h3 className="solid-out">Item Is Currently Sold Out</h3>
+                ''
+              )
+          }
+          {
+            !userIsMerchant && (good.quantity === 0)
+              ? (
+              <h3>Product Is Sold Out</h3>
+              )
+              : (
+                ''
               )
           }
         </div>
