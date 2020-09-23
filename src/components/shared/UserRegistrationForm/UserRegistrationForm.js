@@ -85,39 +85,6 @@ const UserRegistrationForm = ({ route }) => {
                 <PhotoUploader image={profileImage} setImage={setProfileImage} />
             </div>
             <div className="form-group">
-                <label htmlFor="username">Username:</label>
-                <input
-                  ref={username}
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  placeholder="Enter New Username"
-                  required
-                  />
-            </div>
-            <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  ref={email}
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter New Email"
-                  required
-                  />
-            </div>
-            <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input
-                  ref={password}
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Enter New Password"
-                  required
-                  />
-            </div>
-            <div className="form-group">
                 <label htmlFor="first_name">First Name:</label>
                 <input
                   ref={firstName}
@@ -126,7 +93,7 @@ const UserRegistrationForm = ({ route }) => {
                   id="first_name"
                   placeholder="Enter First Name"
                   required
-                  />
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="last_name">Last Name:</label>
@@ -137,7 +104,40 @@ const UserRegistrationForm = ({ route }) => {
                   id="last_name"
                   placeholder="Enter Last Name"
                   required
-                  />
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="username">Username:</label>
+                <input
+                  ref={username}
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter New Username"
+                  required
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password:</label>
+                <input
+                  ref={password}
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter New Password"
+                  required
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                  ref={email}
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter New Email"
+                  required
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="phone_number">Phone Number:</label>
@@ -148,12 +148,16 @@ const UserRegistrationForm = ({ route }) => {
                   id="phone_number"
                   placeholder="Enter Phone Number"
                   required
-                  />
+                />
             </div>
             {
                 selectedRole === 'merchant'
                   ? (
                 <React.Fragment>
+                  <div className="form-group">
+                    <label htmlFor="booth_image">Booth Image:</label>
+                    <PhotoUploader image={boothImage} setImage={setBoothImage} />
+                  </div>
                   <div className="form-group">
                       <label htmlFor="company_name">Company Name:</label>
                       <input
@@ -168,10 +172,6 @@ const UserRegistrationForm = ({ route }) => {
                   <div className="form-group">
                     <label className="mr-2" htmlFor="market_type">Select Market:</label>
                     <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="booth_image">Booth Image:</label>
-                    <PhotoUploader image={boothImage} setImage={setBoothImage} />
                   </div>
                 </React.Fragment>
                   )
