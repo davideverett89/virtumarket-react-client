@@ -7,25 +7,26 @@ import React, {
 
 import UserRoleDropDown from '../UserRoleDropDown/UserRoleDropDown';
 import DropDown from '../DropDown/DropDown';
+import PhotoUploader from '../PhotoUploader/PhotoUploader';
 
 import useSimpleAuth from '../../../helpers/data/authData';
 import marketData from '../../../helpers/data/marketData';
 
 import './UserRegistrationForm.scss';
 
-const UserRegistrationForm = ({ setAuthed, route }) => {
+const UserRegistrationForm = ({ route }) => {
   const [markets, setMarkets] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedId, setSelectedId] = useState(0);
+  const [profileImage, setProfileImage] = useState('');
+  const [boothImage, setBoothImage] = useState('');
   const username = useRef();
   const email = useRef();
   const password = useRef();
   const firstName = useRef();
   const lastName = useRef();
   const companyName = useRef();
-  const profileImage = useRef();
-  const boothImage = useRef();
   const phoneNumber = useRef();
   const bio = useRef();
   const { register } = useSimpleAuth();
@@ -55,13 +56,13 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
       password: password.current.value,
       first_name: firstName.current.value,
       last_name: lastName.current.value,
-      profile_image: profileImage.current.value,
+      profile_image: profileImage,
       phone_number: phoneNumber.current.value,
     };
     if (selectedRole === 'merchant') {
       newUser.market_id = parseInt(selectedId, 10);
       newUser.company_name = companyName.current.value;
-      newUser.booth_image = boothImage.current.value;
+      newUser.booth_image = boothImage;
     }
     register(newUser, selectedRole)
       .then((res) => {
@@ -74,77 +75,14 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
 
   return (
     <div className="UserRegistrationForm">
-        <form className="col-6 mx-auto mb-3 text-left">
+        <form className="col-6 mx-auto mb-5 registration-form jumbotron text-left">
             <div className="form-group">
                 <label className="mr-2" htmlFor="account_type">Select Account Type:</label>
                 <UserRoleDropDown selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
             </div>
-            {
-                selectedRole === 'merchant'
-                  ? (
-                <React.Fragment>
-                  <div className="form-group">
-                      <label htmlFor="company_name">Company Name:</label>
-                      <input
-                        ref={companyName}
-                        type="text"
-                        className="form-control"
-                        id="company_name"
-                        placeholder="Enter Company Name"
-                        required
-                      />
-                  </div>
-                  <div className="form-group">
-                    <label className="mr-2" htmlFor="market_type">Select Market:</label>
-                    <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="booth_image">Booth Image:</label>
-                    <input
-                      ref={boothImage}
-                      type="text"
-                      className="form-control"
-                      id="booth_image"
-                      placeholder="Paste Image URL"
-                      required
-                    />
-                  </div>
-                </React.Fragment>
-                  )
-                  : ('')
-            }
             <div className="form-group">
-                <label htmlFor="username">Username:</label>
-                <input
-                  ref={username}
-                  type="text"
-                  className="form-control"
-                  id="username"
-                  placeholder="Enter New Username"
-                  required
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  ref={email}
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter New Email"
-                  required
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input
-                  ref={password}
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Enter New Password"
-                  required
-                />
+                <label htmlFor="profile_image">Profile Image:</label>
+                <PhotoUploader image={profileImage} setImage={setProfileImage} />
             </div>
             <div className="form-group">
                 <label htmlFor="first_name">First Name:</label>
@@ -169,13 +107,35 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="profile_image">Profile Image:</label>
+                <label htmlFor="username">Username:</label>
                 <input
-                  ref={profileImage}
+                  ref={username}
                   type="text"
                   className="form-control"
-                  id="profile_image"
-                  placeholder="Paste Image URL"
+                  id="username"
+                  placeholder="Enter New Username"
+                  required
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password:</label>
+                <input
+                  ref={password}
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter New Password"
+                  required
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                  ref={email}
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter New Email"
                   required
                 />
             </div>
@@ -190,6 +150,33 @@ const UserRegistrationForm = ({ setAuthed, route }) => {
                   required
                 />
             </div>
+            {
+                selectedRole === 'merchant'
+                  ? (
+                <React.Fragment>
+                  <div className="form-group">
+                    <label htmlFor="booth_image">Booth Image:</label>
+                    <PhotoUploader image={boothImage} setImage={setBoothImage} />
+                  </div>
+                  <div className="form-group">
+                      <label htmlFor="company_name">Company Name:</label>
+                      <input
+                        ref={companyName}
+                        type="text"
+                        className="form-control"
+                        id="company_name"
+                        placeholder="Enter Company Name"
+                        required
+                      />
+                  </div>
+                  <div className="form-group">
+                    <label className="mr-2" htmlFor="market_type">Select Market:</label>
+                    <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
+                  </div>
+                </React.Fragment>
+                  )
+                  : ('')
+            }
             <div className="form-group">
                 <label htmlFor="bio">Bio:</label>
                 <textarea

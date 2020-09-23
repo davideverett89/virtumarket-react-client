@@ -27,7 +27,7 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
 
   return (
         <div className="UserAuthenticationForm">
-            <form className="col-6 m-auto text-left">
+            <form className="col-6 mx-auto mb-5 jumbotron authentication-form text-left">
                 <div className="form-group">
                     <label htmlFor="username">Username:</label>
                     <input ref={username} type="text" className="form-control" id="username" placeholder="Username" required/>

@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 
 import DropDown from '../../shared/DropDown/DropDown';
+import PhotoUploader from '../../shared/PhotoUploader/PhotoUploader';
 
 import userData from '../../../helpers/data/userData';
 import marketData from '../../../helpers/data/marketData';
@@ -24,17 +25,16 @@ const EditProfile = ({ match, history }) => {
   const [merchant, setMerchant] = useState({
     id: 0,
     bio: '',
-    profile_image: '',
-    booth_image: '',
     company_name: '',
     phone_number: '',
   });
   const [consumer, setConsumer] = useState({
     id: 0,
     bio: '',
-    profile_image: '',
     phone_number: '',
   });
+  const [profileImage, setProfileImage] = useState('');
+  const [boothImage, setBoothImage] = useState('');
   const [isMounted, setIsMounted] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
 
@@ -48,8 +48,11 @@ const EditProfile = ({ match, history }) => {
           if (currentUser.merchant !== null) {
             setMerchant(currentUser.merchant);
             setSelectedId(currentUser.merchant.market_id);
+            setProfileImage(currentUser.merchant.profile_image);
+            setBoothImage(currentUser.merchant.booth_image);
           } else {
             setConsumer(currentUser.consumer);
+            setProfileImage(currentUser.consumer.profile_image);
           }
         }
       })
@@ -117,60 +120,10 @@ const EditProfile = ({ match, history }) => {
   return (
     <div className="EditProfile">
         <h1 className="display-4">Edit Profile</h1>
-        <form className="col-6 mx-auto mb-3 text-left">
-            {
-                merchant.id
-                  ? (
-                <React.Fragment>
-                    <div className="form-group">
-                        <label htmlFor="company_name">Company Name:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="company_name"
-                            placeholder="Enter Company Name"
-                            data-role-name="merchant"
-                            data-field-type="role"
-                            value={merchant.company_name || ''}
-                            onChange={handleFieldChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="mr-2" htmlFor="market_type">Select Market:</label>
-                        <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="booth_image">Booth Image:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="booth_image"
-                            placeholder="Paste Image URL"
-                            data-role-name="merchant"
-                            data-field-type="role"
-                            value={merchant.booth_image || ''}
-                            onChange={handleFieldChange}
-                            required
-                        />
-                    </div>
-                </React.Fragment>
-                  )
-                  : ('')
-            }
+        <form className="col-6 mx-auto mb-5 edit-profile-form jumbotron text-left">
             <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="email"
-                    data-role-name="user"
-                    data-field-type="user"
-                    placeholder="Enter New Email"
-                    value={user.email || ''}
-                    onChange={handleFieldChange}
-                    required
-                />
+                <label htmlFor="profile_image">Profile Image:</label>
+                <PhotoUploader image={profileImage} setImage={setProfileImage} />
             </div>
             <div className="form-group">
                 <label htmlFor="first_name">First Name:</label>
@@ -201,15 +154,15 @@ const EditProfile = ({ match, history }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="profile_image">Profile Image:</label>
+                <label htmlFor="email">Email:</label>
                 <input
                     type="text"
                     className="form-control"
-                    id="profile_image"
-                    data-role-name={`${merchant.id ? 'merchant' : 'consumer'}`}
-                    data-field-type="role"
-                    placeholder="Paste Image URL"
-                    value={(merchant.id ? merchant.profile_image : consumer.profile_image) || ''}
+                    id="email"
+                    data-role-name="user"
+                    data-field-type="user"
+                    placeholder="Enter New Email"
+                    value={user.email || ''}
                     onChange={handleFieldChange}
                     required
                 />
@@ -228,6 +181,36 @@ const EditProfile = ({ match, history }) => {
                     required
                 />
             </div>
+            {
+                merchant.id
+                  ? (
+                <React.Fragment>
+                    <div className="form-group">
+                        <label htmlFor="booth_image">Booth Image:</label>
+                        <PhotoUploader image={boothImage} setImage={setBoothImage} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="company_name">Company Name:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="company_name"
+                            placeholder="Enter Company Name"
+                            data-role-name="merchant"
+                            data-field-type="role"
+                            value={merchant.company_name || ''}
+                            onChange={handleFieldChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className="mr-2" htmlFor="market_type">Select Market:</label>
+                        <DropDown resources={markets} selectedId={selectedId} setSelectedId={setSelectedId} />
+                    </div>
+                </React.Fragment>
+                  )
+                  : ('')
+            }
             <div className="form-group">
                 <label htmlFor="bio">Bio:</label>
                 <textarea

@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 
 import DropDown from '../../shared/DropDown/DropDown';
+import PhotoUploader from '../../shared/PhotoUploader/PhotoUploader';
 
 import goodData from '../../../helpers/data/goodData';
 import unitSizeData from '../../../helpers/data/unitSizeData';
@@ -15,15 +16,14 @@ import './EditGood.scss';
 const EditGood = ({ history, match }) => {
   const [good, setGood] = useState({
     name: '',
-    image: '',
     price: 0,
     quantity: 0,
     description: '',
   });
   const [unitSizes, setUnitSizes] = useState([]);
   const [selectedUnitSizeId, setSelectedUnitSizeId] = useState(0);
+  const [image, setImage] = useState('');
   const name = useRef();
-  const image = useRef();
   const price = useRef();
   const quantity = useRef();
   const description = useRef();
@@ -34,6 +34,7 @@ const EditGood = ({ history, match }) => {
       .then((response) => {
         const singleGood = response.data;
         setGood(singleGood);
+        setImage(singleGood.image);
         setSelectedUnitSizeId(singleGood.unit_size_id);
       })
       .catch((err) => console.error('There was an issue getting this good:', err));
@@ -66,12 +67,12 @@ const EditGood = ({ history, match }) => {
     e.preventDefault();
     const { goodId } = match.params;
     const updatedName = good.name;
-    const updateImage = good.image;
+    const updatedImage = image;
     const updatedPrice = good.price;
     const updatedQuantity = good.quantity;
     const updatedDescription = good.description;
     const updatedUnitSizeId = selectedUnitSizeId;
-    goodData.patchGood(goodId, updatedName, updateImage, updatedPrice, updatedQuantity, updatedDescription, updatedUnitSizeId)
+    goodData.patchGood(goodId, updatedName, updatedImage, updatedPrice, updatedQuantity, updatedDescription, updatedUnitSizeId)
       .then(() => {
         history.push(`/home/${sessionStorage.getItem('userRole')}s/${sessionStorage.getItem('roleId')}`);
       })
@@ -81,7 +82,11 @@ const EditGood = ({ history, match }) => {
   return (
         <div className="EditGood">
             <h1>Edit Good</h1>
-            <form className="col-6 m-auto text-left">
+            <form className="col-6 mx-auto jumbotron mb-5 edit-good-form text-left">
+                <div className="form-group">
+                    <label htmlFor="image">Image:</label>
+                    <PhotoUploader image={image} setImage={setImage} />
+                </div>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
                     <input ref={name}
@@ -90,18 +95,6 @@ const EditGood = ({ history, match }) => {
                       id="name"
                       placeholder="Name"
                       value={good.name || ''}
-                      onChange={handleFieldChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="image">Image:</label>
-                    <input
-                      ref={image}
-                      type="text"
-                      className="form-control"
-                      id="image"
-                      placeholder="Image Url"
-                      value={good.image || ''}
                       onChange={handleFieldChange}
                     />
                 </div>
