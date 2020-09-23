@@ -31,14 +31,13 @@ const GoodCard = ({
         <CardBody>
           <CardTitle className="font-weight-bold">{good.name}</CardTitle>
           <CardSubtitle>${good.price}/{good.unit_size.name}</CardSubtitle>
-          <CardText>{good.description}</CardText>
           {
             isBasket
               ? (
                 <CardText>Quantity In Basket: {good.quantity_in_basket}</CardText>
               )
               : (
-              <CardText>Quantity Available: {good.quantity - good.number_on_order}</CardText>
+                ''
               )
           }
         </CardBody>
