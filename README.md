@@ -19,6 +19,7 @@ VirtuMarket is a full stack project split into two repositories: one that contai
 * reactstrap
 
 ## Feature Wishlist
+* App will be fully responsive and mobile friendly.
 * Consumers will be able to pay for their basket/order by specifying a payment method.  They should then be routed to a confirmation page.
 * Consumers will receive an emailed receipt of their order and the address for curbside pickup.
 * Merchants will receive an email notification when an order has been placed.
