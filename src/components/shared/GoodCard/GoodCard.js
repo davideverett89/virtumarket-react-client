@@ -52,12 +52,17 @@ const GoodCard = ({
               {
                 userIsMerchant
                   ? (
-                  <React.Fragment>
-                    <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
-                    <UtilityModal buttonClassName={'mx-1 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
-                      <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
-                    </UtilityModal>
-                  </React.Fragment>
+                    <React.Fragment>
+                      <Link to={editLink} className="mx-1 btn btn-warning">Update</Link>
+                      <UtilityModal
+                        disabled={good.on_order}
+                        buttonClassName={'mx-1 btn-danger'}
+                        isDelete={true} buttonLabel={'Delete'}
+                        modalTitle={'Are you sure?'}
+                      >
+                        <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>
+                      </UtilityModal>
+                    </React.Fragment>
                   ) : (
                     ''
                   )

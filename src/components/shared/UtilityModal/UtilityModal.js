@@ -16,6 +16,7 @@ const UtilityModal = ({
   children,
   isDelete,
   getCurrentUser,
+  disabled,
 }) => {
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
@@ -30,7 +31,7 @@ const UtilityModal = ({
 
   return (
     <div>
-      <Button className={buttonClassName} onClick={toggle}>{buttonLabel}</Button>
+      <Button disabled={disabled} className={buttonClassName} onClick={toggle}>{buttonLabel}</Button>
       <Modal centered={true} isOpen={modal} toggle={toggle} className="UtilityModal">
         <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
         <ModalBody className="text-center">
