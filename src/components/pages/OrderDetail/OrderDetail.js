@@ -17,22 +17,24 @@ const OrderDetail = ({ match }) => {
       .then((response) => {
         if (isMounted) {
           const currentBasket = response.data;
-          currentBasket.total = 0;
-          const condensedGoods = currentBasket.goods.reduce((acc, curr) => {
-            const findMultiple = acc.findIndex((x) => x.id === curr.id);
-            if (findMultiple === -1) {
-              const newObj = { ...curr };
-              newObj.quantity_in_basket = 1;
-              currentBasket.total += parseFloat(newObj.price);
-              acc.push(newObj);
-            } else {
-              acc[findMultiple].quantity_in_basket += 1;
-              currentBasket.total += parseFloat(acc[findMultiple].price);
-            }
-            return acc;
-          }, []);
-          setBasket(currentBasket);
-          setGoods(condensedGoods);
+          if (currentBasket.id) {
+            currentBasket.total = 0;
+            const condensedGoods = currentBasket.goods.reduce((acc, curr) => {
+              const findMultiple = acc.findIndex((x) => x.id === curr.id);
+              if (findMultiple === -1) {
+                const newObj = { ...curr };
+                newObj.quantity_in_basket = 1;
+                currentBasket.total += parseFloat(newObj.price);
+                acc.push(newObj);
+              } else {
+                acc[findMultiple].quantity_in_basket += 1;
+                currentBasket.total += parseFloat(acc[findMultiple].price);
+              }
+              return acc;
+            }, []);
+            setBasket(currentBasket);
+            setGoods(condensedGoods);
+          }
         }
       })
       .catch((err) => console.error('There was an error getting this consumer\'s current basket:', err));
@@ -58,7 +60,7 @@ const OrderDetail = ({ match }) => {
                 )
             }
         </div>
-          <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : ''}</h3>
+          <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
     </div>
   );
 };
