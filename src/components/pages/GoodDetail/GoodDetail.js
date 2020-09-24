@@ -61,50 +61,58 @@ const GoodDetail = ({ match, history }) => {
 
   return (
     <div className="GoodDetail d-flex flex-column justify-content-center align-items-center mb-5 col-10 mx-auto">
-        <h1 className="display-4">{good.name}</h1>
-        <img className="m-auto img-fluid col-6" src={good.image} alt={good.name} />
-        <ul className="mt-5 list-group-flush p-0 col-6">
-          <li className="list-group-item lead">{good.id ? good.good_type.name : ''}</li>
-          <li className="list-group-item lead">${good.price}/{good.id ? good.unit_size.name : ''}</li>
-          <li className="list-group-item lead">Quantity Available: {good.quantity}</li>
-        </ul>
-        <p className="mb-5 col-6 lead">{good.description}</p>
-        <div className="mb-3 d-flex flex-row justify-content-center align-items-center">
-          {
-            userIsMerchant
-              ? (
-              <React.Fragment>
-                <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
-                <UtilityModal buttonClassName={'mx-3 btn-danger'} isDelete={true} buttonLabel={'Delete'} modalTitle={'Are you sure?'}>
-                  <button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
-                </UtilityModal>
-              </React.Fragment>
-              )
-              : (
-                ''
-              )
-          }
-          {
-            !userIsMerchant && (good.quantity > 0)
-              ? (
+        <div className="mt-5 jumbotron bg-white col-9">
+          <h1 className="display-4">{good.name}</h1>
+          <img className="m-auto img-fluid col-6" src={good.image} alt={good.name} />
+          <ul className="col-6 mx-auto mt-5 list-group-flush p-0 rounded">
+            <li className="list-group-item lead">{good.id ? good.good_type.name : ''}</li>
+            <li className="list-group-item lead">${good.price}/{good.id ? good.unit_size.name : ''}</li>
+            <li className="list-group-item lead">Quantity Available: {good.quantity}</li>
+          </ul>
+          <p className="bg-white mb-5 lead rounded">{good.description}</p>
+          <div className="mb-3 d-flex flex-row justify-content-center align-items-center">
+            {
+              userIsMerchant
+                ? (
                 <React.Fragment>
-                  <button className="mx-3 btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
-                  <button className="mx-3 btn btn-danger" onClick={handleGoBack}>Back</button>
+                  <Link to={editLink} className="mx-3 btn btn-warning">Update</Link>
+                  <UtilityModal
+                    disabled={good.on_order}
+                    buttonClassName={'mx-3 btn-danger'}
+                    isDelete={true}
+                    buttonLabel={good.on_order ? 'Sold' : 'Delete'}
+                    modalTitle={'Are you sure?'}
+                  >
+                    <button className="btn btn-danger" onClick={handleDelete}>Yes, Delete</button>
+                  </UtilityModal>
                 </React.Fragment>
-              )
-              : (
-                ''
-              )
-          }
-          {
-            !userIsMerchant && (good.quantity === 0)
-              ? (
-              <h3>Product Is Sold Out</h3>
-              )
-              : (
-                ''
-              )
-          }
+                )
+                : (
+                  ''
+                )
+            }
+            {
+              !userIsMerchant && (good.quantity > 0)
+                ? (
+                  <React.Fragment>
+                    <button className="mx-3 btn btn-success" onClick={handleAddToBasket}>Add To Basket</button>
+                    <button className="mx-3 btn btn-danger" onClick={handleGoBack}>Back</button>
+                  </React.Fragment>
+                )
+                : (
+                  ''
+                )
+            }
+            {
+              !userIsMerchant && (good.quantity === 0)
+                ? (
+                <h3>Product Is Sold Out</h3>
+                )
+                : (
+                  ''
+                )
+            }
+          </div>
         </div>
     </div>
   );

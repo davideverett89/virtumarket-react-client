@@ -57,7 +57,8 @@ const GoodCard = ({
                       <UtilityModal
                         disabled={good.on_order}
                         buttonClassName={'mx-1 btn-danger'}
-                        isDelete={true} buttonLabel={'Delete'}
+                        isDelete={true}
+                        buttonLabel={good.on_order ? 'Sold' : 'Delete'}
                         modalTitle={'Are you sure?'}
                       >
                         <Button className="btn btn-danger" onClick={() => handleDelete(good.id)}>Yes, Delete</Button>

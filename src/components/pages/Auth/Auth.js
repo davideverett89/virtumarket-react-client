@@ -24,18 +24,18 @@ const Auth = ({
       <h1 className="display-4">Welcome to VirtuMarket!</h1>
         <div className="bs-example m-5">
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
-              <label className={`btn btn-success ${toggle ? 'active' : ''}`}>
-                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(true)} /> Login
+              <label className={`btn btn-success ${toggle ? '' : 'active'}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(false)} /> Login
               </label>
-              <label className={`btn btn-success ${!toggle ? 'active' : ''}`}>
-                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(false)} /> Sign Up
+              <label className={`btn btn-success ${toggle ? 'active' : ''}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(true)} /> Sign Up
               </label>
           </div>
         </div>
         {
             toggle
-              ? (<UserAuthenticationForm route={route} />)
-              : (<UserRegistrationForm route={route} />)
+              ? (<UserRegistrationForm route={route} />)
+              : (<UserAuthenticationForm route={route} />)
         }
     </div>
   );

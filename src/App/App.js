@@ -58,6 +58,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <img className="col-12 img-fluid background-image p-0" src="https://static.wixstatic.com/media/7f0eae_1c9d6673c5d5420c98fd74743ffbc58d~mv2_d_3456_2304_s_2.jpg" alt="background" />
       <BrowserRouter>
         <React.Fragment>
           <MyNavBar authed={authed} setAuthed={setAuthed} roleId={roleId} uid={uid} />
