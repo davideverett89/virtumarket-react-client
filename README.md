@@ -29,7 +29,42 @@ VirtuMarket is a full stack project split into two repositories: one that contai
 * Merchant reputation will be displayed on his or her profile page.
 * A Consumer's most frequently shopped merchant will display on his or her profile page.
 ## Screenshots
-Coming Soon!
+### Authentication
+![VM Authentication](src/images/vm-authentication.png)
+### Registration
+![VM Registration](src/images/vm-registration.png)
+### Merchant Dashboard
+![VM Merchant Dashboard 1](src/images/vm-merchant-dashboard1.png)
+![VM Merchant Dashboard 2](src/images/vm-merchant-dashboard2.png)
+### Consumer Dashboard
+#### Market Search View
+![VM Consumer Market View 1](src/images/vm-consumer-market1.png)
+![VM Consumer Market View 2](src/images/vm-consumer-market2.png)
+#### Merchant Search View
+![VM Consumer Merchant View 1](src/images/vm-merchant-search1.png)
+![VM Consumer Merchant View 2](src/images/vm-merchant-search2.png)
+### Product Detail
+#### Merchant View
+![VM Product Detail](src/images/vm-product-detail.png)
+#### Consumer View
+![VM Product Detail 2](src/images/vm-product-detail2.png)
+![VM Product Detail 3](src/images/vm-product-detail3.png)
+### Create/Edit Product
+![VM Create Product](src/images/vm-create-product.png)
+![VM Edit Product](src/images/vm-edit-product.png)
+### Profile Details
+#### Merchant View
+![VM Merchant Profile 1](src/images/vm-merchant-details.png)
+![VM Merchant Profile 2](src/images/vm-merchant-details2.png)
+#### Consumer View
+![VM Consumer Profile 1](src/images/vm-consumer-details.png)
+### Edit Profile
+![VM Edit Profile](src/images/vm-edit-profile.png)
+### View/Add Payment Methods
+![VM View Payment Methods](src/images/vm-payment-method-view.png)
+![VM Consumer Profile 1](src/images/vm-payment-method-add.png)
+### Consumer Basket View
+![VM Basket View](src/images/vm-consumer-basket.png)
 ## How To Run
 1. You will need to have the VirtuMarket Django REST API running locally in order for this React application to work.  Please follow those setup steps [HERE](https://github.com/davideverett89/virtumarket).
 2. Clone down this repository to a local directory of your choosing.
