@@ -48,7 +48,7 @@ const OrderDetail = ({ match }) => {
 
   return (
     <div className="OrderDetail">
-        <h1 className="display-1 mb-5">Basket Contents</h1>
+        <h1 className="display-2 mb-5">Basket</h1>
         <div className="col-12 container-fluid d-flex flex-wrap justify-content-center align-items-start">
             {
               basket.id
@@ -60,7 +60,7 @@ const OrderDetail = ({ match }) => {
                 )
             }
         </div>
-          <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
+          <h3 className="text-white my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
     </div>
   );
 };
