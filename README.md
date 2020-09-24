@@ -13,7 +13,7 @@ VirtuMarket is a full stack project split into two repositories: one that contai
 * SCSS
 * React
 * React Router DOM
-* Django REST API
+* Django REST API w/Django ORM
 * Cloudinary
 * Bootstrap
 * reactstrap
