@@ -85,13 +85,13 @@ const EditProfile = ({ match, history }) => {
       email: user.email,
       firstName: user.first_name,
       lastName: user.last_name,
-      profileImage: merchant.id ? merchant.profile_image : consumer.profile_image,
+      profileImage,
       phoneNumber: merchant.id ? merchant.phone_number : consumer.phone_number,
     };
     if (merchant.id) {
       updatedUser.marketId = parseInt(selectedId, 10);
       updatedUser.companyName = merchant.company_name;
-      updatedUser.boothImage = merchant.booth_image;
+      updatedUser.boothImage = boothImage;
     }
     userData.patchUser(userId, updatedUser)
       .then(() => {
