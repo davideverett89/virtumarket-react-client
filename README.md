@@ -29,7 +29,7 @@ VirtuMarket is a full stack project split into two repositories: one that contai
 * Merchant reputation will be displayed on his or her profile page.
 * A Consumer's most frequently shopped merchant will display on his or her profile page.
 ## Screenshots
-Coming soon!
+Coming Soon!
 ## How To Run
 1. You will need to have the VirtuMarket Django REST API running locally in order for this React application to work.  Please follow those setup steps [HERE](https://github.com/davideverett89/virtumarket).
 2. Clone down this repository to a local directory of your choosing.
