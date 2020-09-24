@@ -49,21 +49,13 @@ const MarketDetail = ({ match }) => {
     return () => setIsMounted(false);
   }, [getMarket]);
 
-  // let filteredArray = arrayOfElements
-  // .filter((element) =>
-  //   element.subElements.some((subElement) => subElement.surname === 1))
-  // .map(element => {
-  //   let newElt = Object.assign({}, element); // copies element
-  //   return newElt.subElements.filter(subElement => subElement.surname === '1');
-  // });
-
   return (
         <div className="MarketDetail text-center mb-5">
             <img className="col-6 my-3" src={market.image} alt={market.name} />
-            <div className="bio col-10 mx-auto my-5">
+            <div className="bio col-10 mx-auto my-5 jumbotron bg-white">
                 <p className="lead">{market.description}</p>
+                <SearchBar marketDetail={true} handleSearch={handleSearch} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
             </div>
-            <SearchBar marketDetail={true} handleSearch={handleSearch} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
             <div className="merchant-container container-fluid d-flex-flex-column justify-content-center align-items-center">
                 {
                   merchants.length > 0
@@ -71,7 +63,7 @@ const MarketDetail = ({ match }) => {
                         <MerchantCard key={merchant.id} merchant={merchant} />
                     ))
                     : (
-                    <h2 className="display-4">No Merchants Available.</h2>
+                    <h2 className="text-white display-4">No Merchants Available.</h2>
                     )
                 }
             </div>
