@@ -2,7 +2,7 @@
 ## Description
 Virtumarket is a virtual farmer's market app that aims to connect Middle Tennessee shoppers who seek homegrown, locally sourced goods with the merchants and artisans who offer them.  
 
-Merchants can create a profile, select their local marketplace, set up a booth with a unique background, and add the goods they have in stock.  They are also able to view and edit their profile information and change the market in which they wish to be active.
+Merchants can create a profile, select their local marketplace, set up a booth with a unique background, and add the goods they have in stock.  Merhcants are also able to remove goods that haven't sold, or update certain information about a good such as price, description, quantity, etc. They are also able to view and edit their profile information and change the market in which they wish to be active.
 
 Consumers are able to create a profile, and select from a filterable dashboard of local markets.  From there, any market they select will then route them to a filterable selection of merchants from which a consumer can choose to shop.  At this point when they select a merchant, the consumer will be able to browse through any merchant's goods and add them to his or her basket.  Consumers can also update their profile information, view the payment methods they have on file, add or remove payment methods.
 
