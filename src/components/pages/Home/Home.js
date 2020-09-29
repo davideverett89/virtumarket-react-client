@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Route,
   Switch,
@@ -28,5 +30,9 @@ const Home = ({
             </Switch>
         </div>
 );
+
+Home.propTypes = {
+  authed: PropTypes.bool,
+};
 
 export default Home;

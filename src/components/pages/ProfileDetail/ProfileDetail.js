@@ -10,13 +10,23 @@ import './ProfileDetail.scss';
 import paymentMethodData from '../../../helpers/data/paymentMethodData';
 
 const ProfileDetail = ({ match }) => {
+  // Initializing an empty object to state to hold the value of the requested user object.
   const [user, setUser] = useState({});
+  // Initializing an empty object in state to hold the respective values of the merchant object nested within the requested user object.
   const [merchant, setMerchant] = useState({});
+  // Initializing an empty object in state to hold the respective values of the consumer object nested within the requested user object.
   const [consumer, setConsumer] = useState({});
+  // Initializing an empty object in state to hold the value of the request users current market.
   const [market, setMarket] = useState({});
+  // Initializing an empty array in state to hold mutiple objects from the paymentMethods collection.
   const [paymentMethods, setPaymentMethods] = useState([]);
+  // Boolean state variable to determine if component is mounted.
   const [isMounted, setIsMounted] = useState(false);
 
+  // Function that saves the userId from the router url params,
+  // calls the function that makes the API call to get a single user object,
+  // passes in the needed userId,
+  // and sets the response to the respective state variables.
   const getCurrentUser = useCallback(() => {
     const { userId } = match.params;
     userData.getUserById(userId)
@@ -36,12 +46,17 @@ const ProfileDetail = ({ match }) => {
       .catch((err) => console.error('There was an issue getting this user:', err));
   }, [match.params, isMounted]);
 
+  // When the component mounts, sets the respective state variable to true, and calls the functions to request the necessary data.
+  // Sets the repective value back to false upon unmount to prevent data leak.
   useEffect(() => {
     setIsMounted(true);
     getCurrentUser();
     return () => setIsMounted(false);
   }, [getCurrentUser]);
 
+  // Event handler function that accepts a paymentMethodId as an argument
+  // and then calls the function that make a delete request to the /paymentmethods API route,
+  // passes in the needed paymentMethodId, and then calls the current user object again.
   const handleDeletePaymentMethod = (paymentMethodId) => {
     paymentMethodData.deletePaymentMethod(paymentMethodId)
       .then(() => {

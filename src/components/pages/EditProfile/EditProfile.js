@@ -13,7 +13,9 @@ import marketData from '../../../helpers/data/marketData';
 import './EditProfile.scss';
 
 const EditProfile = ({ match, history }) => {
+  // Initializing an empty array in state to hold mutiple objects from the markets collection.
   const [markets, setMarkets] = useState([]);
+  // Initializing an empty object in state to hold the respective values of the requested user object.
   const [user, setUser] = useState({
     id: 0,
     username: '',
@@ -22,22 +24,33 @@ const EditProfile = ({ match, history }) => {
     email: '',
     date_joined: '',
   });
+
+  // Initializing an empty object in state to hold the respective values of the merchant object nested within the requested user object.
   const [merchant, setMerchant] = useState({
     id: 0,
     bio: '',
     company_name: '',
     phone_number: '',
   });
+  // Initializing an empty object in state to hold the respective values of the consumer object nested within the requested user object.
   const [consumer, setConsumer] = useState({
     id: 0,
     bio: '',
     phone_number: '',
   });
+  // Initializing a state string variable to hold the current profileImage url of the incoming merchant or consumer objects
+  // and eventually will hold the image url of the uploaded photo.
   const [profileImage, setProfileImage] = useState('');
+  // Initializing a state string variable to hold the current boothImage url of the incoming merchant object
+  // and eventually will hold the image url of the uploaded photo.
   const [boothImage, setBoothImage] = useState('');
+  // Boolean state variable to determine if component is mounted.
   const [isMounted, setIsMounted] = useState(false);
+  // Initializing a integer state variable to hold the value of the selected market id.
   const [selectedId, setSelectedId] = useState(0);
 
+  // Function that saves the userId passed in to the router url params,
+  // calls the function that makes the API call to get a single user object, and passes in the needed userId.
   const getUser = useCallback(() => {
     const { userId } = match.params;
     userData.getSimpleUserRoleById(userId)
@@ -59,6 +72,7 @@ const EditProfile = ({ match, history }) => {
       .catch((err) => console.error('There was an issue with getting this user to update:', err));
   }, [isMounted, match.params]);
 
+  // Calls the function that request an array of markets from the API and sets them to state.
   const getAllMarkets = useCallback(() => {
     marketData.getMarkets()
       .then((allMarkets) => {
@@ -69,6 +83,8 @@ const EditProfile = ({ match, history }) => {
       .catch((err) => console.error('There was an issue getting all markets:', err));
   }, [isMounted]);
 
+  // When the component mounts, sets the respective state variable to true, and calls the functions to request the necessary data.
+  // Sets the repective value back to false upon unmount to prevent data leak.
   useEffect(() => {
     setIsMounted(true);
     getUser();
@@ -76,6 +92,9 @@ const EditProfile = ({ match, history }) => {
     return () => setIsMounted(false);
   }, [getAllMarkets, getUser]);
 
+  // Event handler function to construct a modified user object from the respective values in state,
+  // and a modified merchant object if applicable, or a modified consumer object if applicable.  Makes the put request to the API,
+  // and passes in the modified object values.
   const handleEditProfile = (e) => {
     e.preventDefault();
     const { userId } = match.params;
@@ -100,6 +119,8 @@ const EditProfile = ({ match, history }) => {
       .catch((err) => console.error('There was an issue updating this user:', err));
   };
 
+  // Event handler function that identifies by id and/or dataset values the form input that triggered a change event,
+  // and set the corresponding key in the state good object to the value of that form input.
   const handleFieldChange = (e) => {
     const userToChange = { ...user };
     const merchantToChange = { ...merchant };

@@ -13,10 +13,8 @@ import GoodDetail from '../components/pages/GoodDetail/GoodDetail';
 import EditGood from '../components/pages/EditGood/EditGood';
 import ProfileDetail from '../components/pages/ProfileDetail/ProfileDetail';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
-import OrderHistory from '../components/pages/OrderHistory/OrderHistory';
-import OrderDetail from '../components/pages/OrderDetail/OrderDetail';
+import BasketDetail from '../components/pages/BasketDetail/BasketDetail';
 import MarketDetail from '../components/pages/MarketDetail/MarketDetail';
-import FarewellPage from '../components/pages/FarewellPage/FarewellPage';
 
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
@@ -70,10 +68,8 @@ const App = () => {
             <PrivateRoute path='/accounts/edit/:userId' component={EditProfile} isAuthed={authed} />
             <PrivateRoute path='/accounts/:userId' component={ProfileDetail} isAuthed={authed} />
             <PrivateRoute path='/markets/:marketId' component={MarketDetail} isAuthed={authed} />
-            <PrivateRoute path='/consumers/basket/:consumerId' component={OrderDetail} isAuthed={authed} />
-            <PrivateRoute path='/merchants/orders' component={OrderHistory} isAuthed={authed} />
+            <PrivateRoute path='/consumers/basket/:consumerId' component={BasketDetail} isAuthed={authed} />
             <PrivateRoute path='/merchants/:merchantId' component={MerchantDashboard} isAuthed={authed} />
-            <PublicRoute path='/farewell' component={FarewellPage} isAuthed={authed} />
             <PublicRoute path='/auth' component={Auth} isAuthed={authed} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>

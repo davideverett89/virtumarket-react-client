@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import moment from 'moment';
 
@@ -11,23 +11,43 @@ import './GoodDetail.scss';
 import goodBasketData from '../../../helpers/data/goodBasketData';
 
 const GoodDetail = ({ match, history }) => {
+  // Initializing an empty object in state to hold the respective values of the requested good object.
   const [good, setGood] = useState({});
+  // Initializing a state boolean variable to false to eventually indicate whether the user has a role of merchant or not.
   const [userIsMerchant, setUserIsMerchant] = useState(false);
+  // Boolean state variable to determine if component is mounted.
+  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
+  // Function that saves the goodId passed in to the router url params,
+  // and then calls the function that requests a single good by id from the API,
+  // passes in the needed goodId, and sets the response to state.
+  const getGood = useCallback(() => {
     const { goodId } = match.params;
     goodData.getGoodById(goodId)
       .then((response) => {
-        const singleGood = response.data;
-        setGood(singleGood);
-        const role = sessionStorage.getItem('userRole');
-        if (role === 'merchant') {
-          setUserIsMerchant(true);
+        if (isMounted) {
+          const singleGood = response.data;
+          setGood(singleGood);
+          const role = sessionStorage.getItem('userRole');
+          if (role === 'merchant') {
+            setUserIsMerchant(true);
+          }
         }
       })
       .catch((err) => console.error('There was an issue getting this good:', err));
-  }, [match.params]);
+  }, [isMounted, match.params]);
 
+  // When the component mounts, sets the respective state variable to true, and calls the functions to request the necessary data.
+  // Sets the repective value back to false upon unmount to prevent data leak.
+  useEffect(() => {
+    setIsMounted(true);
+    getGood();
+    return () => setIsMounted(false);
+  }, [getGood, match.params]);
+
+  // Event handler function that saves the goodId from the router url params,
+  // and then calls the function that makes a delete request to the /goods API route,
+  // passes in the needed goodId, and then redirects the user back to the merchant dashboard.
   const handleDelete = (e) => {
     const { goodId } = match.params;
     e.preventDefault();
@@ -38,6 +58,9 @@ const GoodDetail = ({ match, history }) => {
       .catch((err) => console.error('There was an issue deleting this good:', err));
   };
 
+  // Event handler function that saves the goodId from the router url params,
+  // constructs a new goodBasket object using the current date in YYYY-MM-DD format and the parsed goodId,
+  // then calls the function that makes a post request to the /goodbaskets API route and passes in the new goodBasket object.
   const handleAddToBasket = (e) => {
     const { goodId } = match.params;
     e.preventDefault();
@@ -52,6 +75,7 @@ const GoodDetail = ({ match, history }) => {
       .catch((err) => console.error('There was an issue adding this good to the basket:', err));
   };
 
+  // Event handler function that will invoke the router's .goBack() method to redirect the user back to the dashboard.
   const handleGoBack = (e) => {
     e.preventDefault();
     history.goBack();

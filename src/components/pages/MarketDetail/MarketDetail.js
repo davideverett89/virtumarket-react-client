@@ -9,11 +9,20 @@ import merchantData from '../../../helpers/data/merchantData';
 import './MarketDetail.scss';
 
 const MarketDetail = ({ match }) => {
+  // Initializing an empty object in state to hold the respective values of the requested market object.
   const [market, setMarket] = useState({});
+  // Initializing an empty array in state to hold multiple merchant objects that are nested within the requested market object.
   const [merchants, setMerchants] = useState([]);
+  // Boolean state variable to determine if component is mounted.
   const [isMounted, setIsMounted] = useState(false);
+  // Initialzing a state string variable to hold the value of the property by which markets will be filtered.
   const [selectedFilter, setSelectedFilter] = useState('name');
 
+  // Event handler function that saves the marketId from the router url params,
+  // saves the value of the input field that triggered the event,
+  // and if that value is not an empty string, calls the function that makes a special query request to the API,
+  // and passes in the needed marketId, the property value by which to filter, and the search value to query the property filter by.
+  // If the input field does contain an empty string, it just gets all the markets.
   const handleSearch = (e) => {
     const { marketId } = match.params;
     e.preventDefault();
@@ -29,7 +38,9 @@ const MarketDetail = ({ match }) => {
       getMarket();
     }
   };
-
+  // Function that saves the marketId from the route url params,
+  // then calls the function that requests a single market object from the /markets API route,
+  // passes in the needed marketId, and sets the response to the respective state variables.
   const getMarket = useCallback(() => {
     const { marketId } = match.params;
     marketData.getMarketById(marketId)
@@ -43,6 +54,8 @@ const MarketDetail = ({ match }) => {
       .catch((err) => console.error('There was an issue getting this market:', err));
   }, [isMounted, match.params]);
 
+  // When the component mounts, sets the respective state variable to true, and calls the functions to request the necessary data.
+  // Sets the repective value back to false upon unmount to prevent data leak.
   useEffect(() => {
     setIsMounted(true);
     getMarket();
