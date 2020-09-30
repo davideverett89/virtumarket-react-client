@@ -59,6 +59,7 @@ const useSimpleAuth = () => {
   const logout = () => {
     setIsLoggedIn(false);
     sessionStorage.clear();
+    return isAuthenticated();
   };
 
   return {

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Card,
   CardImg,
@@ -74,6 +76,28 @@ const GoodCard = ({
       </Card>
     </div>
   );
+};
+
+GoodCard.propTypes = {
+  good: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    deleted: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    good_type: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+    merchant_id: PropTypes.number.isRequired,
+    unit_size_id: PropTypes.number.isRequired,
+    on_order: PropTypes.bool.isRequired,
+  }),
+  handleDelete: PropTypes.func.isRequired,
+  userIsMerchant: PropTypes.bool.isRequired,
+  isBasket: PropTypes.bool.isRequired,
 };
 
 export default GoodCard;

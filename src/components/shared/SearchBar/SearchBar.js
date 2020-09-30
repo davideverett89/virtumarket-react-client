@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SearchFilterDropDown from '../SearchFilterDropDown/SearchFilterDropDown';
 
@@ -29,5 +30,13 @@ const SearchBar = ({
         </form>
     </div>
 );
+
+SearchBar.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
+  search: PropTypes.string,
+  selectedFilter: PropTypes.string.isRequired,
+  setSelectedFilter: PropTypes.func.isRequired,
+  marketDetail: PropTypes.bool.isRequired,
+};
 
 export default SearchBar;

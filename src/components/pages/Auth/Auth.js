@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import UserRegistrationForm from '../../shared/UserRegistrationForm/UserRegistrationForm';
 import UserAuthenticationForm from '../../shared/UserAuthenticationForm/UserAuthenticationForm';
@@ -10,8 +11,12 @@ const Auth = ({
   history,
   setUid,
 }) => {
+  // Initializing a boolean state variable to determine if the Authentication Form component
+  // will be rendered, or the Registration Form component.
   const [toggle, setToggle] = useState(false);
 
+  // Handler function to determine next component to route to,
+  // based on whether the user authenticates/registers as a Merchant or Consumer.
   const route = (role, id, uid) => {
     const path = `/home/${role}s/${id}`;
     setRoleId(id);
@@ -39,6 +44,11 @@ const Auth = ({
         }
     </div>
   );
+};
+
+Auth.propTypes = {
+  setRoleId: PropTypes.func.isRequired,
+  setUid: PropTypes.func.isRequired,
 };
 
 export default Auth;

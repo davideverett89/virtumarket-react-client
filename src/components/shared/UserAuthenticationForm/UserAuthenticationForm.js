@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import useSimpleAuth from '../../../helpers/data/authData';
 
 import './UserAuthenticationForm.scss';
 
-const UserAuthenticationForm = ({ setAuthed, route }) => {
+const UserAuthenticationForm = ({ route }) => {
   const username = useRef();
   const password = useRef();
   const { login } = useSimpleAuth();
@@ -16,11 +17,10 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
       password: password.current.value,
     };
     login(loginCredentials)
-      .then((res) => {
-        if (res[0] === true) {
-          route(res[1].user_role, res[1].id, res[1].uid);
+      .then((response) => {
+        if (response[0] === true) {
+          route(response[1].user_role, response[1].id, response[1].uid);
         }
-        return res;
       })
       .catch((err) => console.error('There was an issue logging in:', err));
   };
@@ -40,6 +40,10 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
             </form>
         </div>
   );
+};
+
+UserAuthenticationForm.propTypes = {
+  route: PropTypes.func.isRequired,
 };
 
 export default UserAuthenticationForm;

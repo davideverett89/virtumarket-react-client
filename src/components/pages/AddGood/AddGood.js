@@ -1,4 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 
 import DropDown from '../../shared/DropDown/DropDown';
 import PhotoUploader from '../../shared/PhotoUploader/PhotoUploader';
@@ -10,37 +15,60 @@ import unitSizeData from '../../../helpers/data/unitSizeData';
 import './AddGood.scss';
 
 const AddGood = ({ history }) => {
+  // Boolean state variable to determine if component is mounted.
+  const [isMounted, setIsMounted] = useState(false);
+  // Initializing an empty array in state to hold mutiple objects from the goodTypes collection.
   const [goodTypes, setGoodTypes] = useState([]);
+  // Initializing an empty array in state to hold multiple objects from the unitSizes collection.
   const [unitSizes, setUnitSizes] = useState([]);
+  // Initializing a state integer variable to eventually hold the value of the selected goodType id.
   const [selectedGoodTypeId, setSelectedGoodTypeId] = useState(0);
+  // Initializing a state integer variable to eventually hold the value of the selected unitSize id.
   const [selectedUnitSizeId, setSelectedUnitSizeId] = useState(0);
+  // Initializing a state string variable to eventually hold the image url of the uploaded photo.
   const [image, setImage] = useState('');
+  // Variable to contain the value of the name ref in the form.
   const name = useRef();
+  // Variable to contain the value of the price ref in the form.
   const price = useRef();
+  // Variable to contain the value of the quantity ref in the form.
   const quantity = useRef();
+  // Variable to contain the value of the description ref in the form.
   const description = useRef();
 
-  const getGoodTypes = () => {
+  // Calls the function that requests an array of goodTypes from the API and sets them to state.
+  const getGoodTypes = useCallback(() => {
     goodTypeData.getGoodTypes()
       .then((allGoodTypes) => {
-        setGoodTypes(allGoodTypes);
+        if (isMounted) {
+          setGoodTypes(allGoodTypes);
+        }
       })
       .catch((err) => console.error('There was an issue getting all good types:', err));
-  };
+  }, [isMounted]);
 
-  const getUnitSizes = () => {
+  // Calls the function that request an array of unitSizes from the API and sets them to state.
+  const getUnitSizes = useCallback(() => {
     unitSizeData.getUnitSizes()
       .then((allUnitSizes) => {
-        setUnitSizes(allUnitSizes);
+        if (isMounted) {
+          setUnitSizes(allUnitSizes);
+        }
       })
       .catch((err) => console.error('There was an issue getting all good types:', err));
-  };
+  }, [isMounted]);
 
+  // When the component mounts, calls the functions to set the goodTypes and the unitSizes in state.
   useEffect(() => {
+    setIsMounted(true);
     getGoodTypes();
     getUnitSizes();
-  }, []);
+    return () => setIsMounted(false);
+  }, [getGoodTypes, getUnitSizes]);
 
+  // Event handler function to construct a new good object from the form ref values
+  // and the selected goodType and unitSize ids from state.  Makes the post request to the API,
+  // and passes in the new object.
   const handleAddGood = (e) => {
     e.preventDefault();
     const newGood = {
@@ -130,7 +158,13 @@ const AddGood = ({ history }) => {
                       placeholder="Describe Your Good..."
                     />
                 </div>
-                <button className="btn btn-success" onClick={handleAddGood} disabled={selectedGoodTypeId === 0 || selectedUnitSizeId === 0}>Save</button>
+                <button
+                  className="btn btn-success"
+                  onClick={handleAddGood}
+                  disabled={selectedGoodTypeId === 0 || selectedUnitSizeId === 0}
+                >
+                  Save
+                </button>
             </form>
         </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
@@ -37,6 +38,28 @@ const MarketCard = ({ market, fromConsumer }) => {
             </div>
         </div>
   );
+};
+
+MarketCard.propTypes = {
+  market: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    zip_code: PropTypes.number.isRequired,
+    merchants: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      company_name: PropTypes.string.isRequired,
+      profile_image: PropTypes.string.isRequired,
+      bio: PropTypes.string.isRequired,
+      phone_number: PropTypes.string.isRequired,
+      booth_image: PropTypes.string.isRequired,
+      user_id: PropTypes.number.isRequired,
+      market_id: PropTypes.number.isRequired,
+    })),
+  }),
+  fromConsumer: PropTypes.bool.isRequired,
 };
 
 export default MarketCard;

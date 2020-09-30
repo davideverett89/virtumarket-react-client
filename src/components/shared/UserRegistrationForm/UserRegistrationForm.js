@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import PropTypes from 'prop-types';
 
 import UserRoleDropDown from '../UserRoleDropDown/UserRoleDropDown';
 import DropDown from '../DropDown/DropDown';
@@ -65,9 +66,9 @@ const UserRegistrationForm = ({ route }) => {
       newUser.booth_image = boothImage;
     }
     register(newUser, selectedRole)
-      .then((res) => {
-        if (res[0] === true) {
-          route(res[1].user_role, res[1].id, res[1].uid);
+      .then((response) => {
+        if (response[0] === true) {
+          route(response[1].user_role, response[1].id, response[1].uid);
         }
       })
       .catch((err) => console.error('There was an issue with registering a new user:', err));
@@ -199,6 +200,10 @@ const UserRegistrationForm = ({ route }) => {
         </form>
     </div>
   );
+};
+
+UserRegistrationForm.propTypes = {
+  route: PropTypes.func.isRequired,
 };
 
 export default UserRegistrationForm;

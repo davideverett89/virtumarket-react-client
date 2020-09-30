@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './PhotoUploader.scss';
 
@@ -42,6 +43,11 @@ const PhotoUploader = ({ image, setImage }) => {
         }
     </div>
   );
+};
+
+PhotoUploader.propTypes = {
+  image: PropTypes.string.isRequired,
+  setImage: PropTypes.func.isRequired,
 };
 
 export default PhotoUploader;

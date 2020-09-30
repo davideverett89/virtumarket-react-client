@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Route,
   Switch,
@@ -18,15 +20,19 @@ const Home = ({
               <Route
                 path={`${match.path}/merchants/:merchantId`}
                 component={MerchantDashboard}
-                isAuthed={authed}
+                authed={authed}
               />
               <Route
                 path={`${match.path}/consumers/:consumerId`}
                 component={ConsumerDashboard}
-                isAuthed={authed}
+                authed={authed}
               />
             </Switch>
         </div>
 );
+
+Home.propTypes = {
+  authed: PropTypes.bool,
+};
 
 export default Home;
