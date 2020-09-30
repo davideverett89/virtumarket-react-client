@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
@@ -37,6 +38,17 @@ const MarketCard = ({ market, fromConsumer }) => {
             </div>
         </div>
   );
+};
+
+MarketCard.propTypes = {
+  market: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    zip_code: PropTypes.string.isRequired,
+  }),
+  fromConsumer: PropTypes.bool.isRequired,
 };
 
 export default MarketCard;

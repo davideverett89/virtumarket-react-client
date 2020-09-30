@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
@@ -29,6 +30,19 @@ const MerchantCard = ({ merchant }) => {
             </div>
         </div>
   );
+};
+
+MerchantCard.propTypes = {
+  merchant: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    company_name: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    profile_image: PropTypes.string.isRequired,
+    booth_image: PropTypes.string.isRequired,
+    phone_number: PropTypes.string.isRequired,
+    market_id: PropTypes.number.isRequired,
+    user_id: PropTypes.number.isRequired,
+  }),
 };
 
 export default MerchantCard;

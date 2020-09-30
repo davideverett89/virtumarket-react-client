@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './SearchFilterDropDown.scss';
 
@@ -48,5 +49,11 @@ const SearchFilterDropDown = ({ selectedFilter, setSelectedFilter, marketDetail 
         }
     </select>
 );
+
+SearchFilterDropDown.propTypes = {
+  selectedFilter: PropTypes.string.isRequired,
+  setSelectedFilter: PropTypes.func.isRequired,
+  marketDetail: PropTypes.bool.isRequired,
+};
 
 export default SearchFilterDropDown;

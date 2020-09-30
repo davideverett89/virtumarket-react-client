@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import useSimpleAuth from '../../../helpers/data/authData';
 
 import './UserAuthenticationForm.scss';
 
-const UserAuthenticationForm = ({ setAuthed, route }) => {
+const UserAuthenticationForm = ({ route }) => {
   const username = useRef();
   const password = useRef();
   const { login } = useSimpleAuth();
@@ -40,6 +41,10 @@ const UserAuthenticationForm = ({ setAuthed, route }) => {
             </form>
         </div>
   );
+};
+
+UserAuthenticationForm.propTypes = {
+  route: PropTypes.func.isRequired,
 };
 
 export default UserAuthenticationForm;

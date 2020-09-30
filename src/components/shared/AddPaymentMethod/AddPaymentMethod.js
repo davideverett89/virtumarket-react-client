@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
@@ -7,10 +8,14 @@ import paymentMethodData from '../../../helpers/data/paymentMethodData';
 import './AddPaymentMethod.scss';
 
 const AddPaymentMethod = ({ toggleNested, getCurrentUser }) => {
+  // Variables to contain the ref values on the form inputs.
   const merchant = useRef();
   const accountNumber = useRef();
   const date = useRef();
 
+  // Event handler function that constructs a new paymentMethod object using the values from the ref variables,
+  // then calls the function that makes a post request to the /paymentmethods API route,
+  // and passes in the new paymentMethod object.
   const handleAddPaymentMethod = (e) => {
     e.preventDefault();
     const newPaymentMethod = {
@@ -47,6 +52,11 @@ const AddPaymentMethod = ({ toggleNested, getCurrentUser }) => {
         </form>
     </div>
   );
+};
+
+AddPaymentMethod.propTypes = {
+  toggleNested: PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
 };
 
 export default AddPaymentMethod;

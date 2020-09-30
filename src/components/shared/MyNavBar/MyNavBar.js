@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
@@ -21,10 +22,13 @@ const MyNavBar = ({
   roleId,
   uid,
 }) => {
+  // Boolean state variable to determine if the navbar is collapsing.
   const [isOpen, setIsOpen] = useState(false);
-
+  // Event handler function that sets the isOpen variable to the opposite state.
   const toggle = () => setIsOpen(!isOpen);
+  // Function borrowed from a custom hook to logout the user.
   const { logout } = useSimepleAuth();
+  // Event handler function that calls the logout function from the custom hook.
   const logMeOut = (e) => {
     e.preventDefault();
     logout();
@@ -88,6 +92,13 @@ const MyNavBar = ({
       </Navbar>
     </div>
   );
+};
+
+MyNavBar.propTypes = {
+  authed: PropTypes.bool.isRequired,
+  setAuthed: PropTypes.func.isRequired,
+  roleId: PropTypes.number.isRequired,
+  uid: PropTypes.number.isRequired,
 };
 
 export default MyNavBar;

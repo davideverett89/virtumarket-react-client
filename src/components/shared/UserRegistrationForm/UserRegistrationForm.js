@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import PropTypes from 'prop-types';
 
 import UserRoleDropDown from '../UserRoleDropDown/UserRoleDropDown';
 import DropDown from '../DropDown/DropDown';
@@ -199,6 +200,10 @@ const UserRegistrationForm = ({ route }) => {
         </form>
     </div>
   );
+};
+
+UserRegistrationForm.propTypes = {
+  route: PropTypes.func.isRequired,
 };
 
 export default UserRegistrationForm;

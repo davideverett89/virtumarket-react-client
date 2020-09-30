@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './DropDown.scss';
 
@@ -28,5 +29,11 @@ const DropDown = ({ resources, selectedId, setSelectedId }) => (
         }
       </select>
 );
+
+DropDown.propTypes = {
+  resources: PropTypes.array.isRequired,
+  selectedId: PropTypes.number.isRequired,
+  setSelectedId: PropTypes.func.isRequired,
+};
 
 export default DropDown;
