@@ -65,7 +65,7 @@ const MarketDetail = ({ match }) => {
   return (
         <div className="MarketDetail text-center mb-5">
             <img className="col-6 my-3" src={market.image} alt={market.name} />
-            <div className="bio col-10 mx-auto my-5 jumbotron bg-white">
+            <div className="border border-dark bio pt-5 pb-1 px-4 col-10 mx-auto my-5 jumbotron bg-white">
                 <p className="lead">{market.description}</p>
                 <SearchBar marketDetail={true} handleSearch={handleSearch} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
             </div>

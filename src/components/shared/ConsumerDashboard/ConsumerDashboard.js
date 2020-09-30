@@ -48,7 +48,7 @@ const ConsumerDashboard = () => {
   const filteredMarkets = markets.filter((market) => market[selectedFilter].toString().indexOf(search) !== -1);
 
   return (
-    <div className="ConsumerDashboard">
+    <div className="ConsumerDashboard text-center mb-5">
         <SearchBar marketDetail={false} handleSearch={handleSearch} search={search} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
             {

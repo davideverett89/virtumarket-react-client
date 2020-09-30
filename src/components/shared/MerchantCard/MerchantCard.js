@@ -9,7 +9,7 @@ const MerchantCard = ({ merchant }) => {
   const detailLink = `/merchants/${merchant.id}`;
   return (
         <div className="MerchantCard col-12 mx-auto">
-            <div className="jumbotron text-center hoverable p-4">
+            <div className="merchant-jumbo jumbotron text-center hoverable p-4">
                 <div className="row">
                     <div className="col-md-4 offset-md-1 mx-3 my-3">
                         <div className="view overlay">

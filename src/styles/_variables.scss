@@ -1,3 +1,12 @@
-// $primaryColor: #ffb01b;
 $primaryColor: white;
 $secondaryColor: #187C2E;
+$tertiaryColor: #ffb01b;
+
+@mixin hover-effect {
+    filter: brightness(105%);
+}
+
+@mixin product-hover-effect {
+    filter: brightness(105%);
+    border: 1px solid black;
+}

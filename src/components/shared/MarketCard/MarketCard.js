@@ -8,8 +8,8 @@ import './MarketCard.scss';
 const MarketCard = ({ market, fromConsumer }) => {
   const detailLink = `/markets/${market.id}`;
   return (
-        <div className="MarketCard col-12">
-            <div className="jumbotron text-center hoverable p-4">
+        <div className="MarketCard col-12 mx-auto">
+            <div className="market-jumbo jumbotron text-center hoverable p-4">
                 <div className="row">
                     <div className="col-md-4 offset-md-1 mx-3 my-3">
                         <div className="view overlay">

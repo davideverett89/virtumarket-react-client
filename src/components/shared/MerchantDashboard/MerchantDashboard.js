@@ -61,14 +61,14 @@ const MerchantDashboard = ({ match, authed }) => {
   return (
 <div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center" >
   <img className="col-12 img-fluid booth-image p-0" src={merchant.booth_image} alt={merchant.company_name} />
-  <div className="merchant-jumbo bg-white col-12 mx-auto jumbotron jumbotron-fluid my-3 d-flex flex-row align-items-center justify-content-center">
-      <div className="image-container">
-        <img id="profile_image" className="profile-image img-thumbnail rounded-circle" src={merchant.profile_image} alt={merchant.company_name} />
+  <div className="py-2 merchant-jumbo col-12 mx-auto jumbotron jumbotron-fluid my-3 d-flex flex-row align-items-center justify-content-center">
+      <div className="mr-5 image-container col-2">
+        <img id="profile_image" className="border border-dark profile-image rounded-circle img-fluid" src={merchant.profile_image} alt={merchant.company_name} />
       </div>
-      <h1 className="ml-3 mt-3 display-3">{merchant.company_name}</h1>
+      <h1 className="rounded ml-5 mt-3 display-4 col-6 offset-4 p-2 bg-white border border-dark">{merchant.company_name}</h1>
   </div>
   <div className="col-12 booth container-fluid mb-3 p-0">
-    <div className="px-5 py-3 mb-3 col-12 good-container d-flex flex-wrap justify-content-center align-items-start">
+    <div className="p-3 mb-3 col-12 good-container d-flex flex-wrap justify-content-center align-items-start">
         {
           goods.length === 0
             ? (

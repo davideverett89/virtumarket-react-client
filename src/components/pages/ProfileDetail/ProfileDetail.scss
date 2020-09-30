@@ -1,3 +1,11 @@
+@import '../../../styles/variables';
+
 .ProfileDetail {
     display: block;
+    .profile-card:hover {
+        @include product-hover-effect;
+    }
+    .active-market:hover {
+        border: 1px solid black;
+    }
 }

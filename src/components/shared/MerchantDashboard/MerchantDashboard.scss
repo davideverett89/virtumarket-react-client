@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .MerchantDashboard {
     display: block;
     .booth-image {
@@ -8,11 +10,10 @@
         height: 100vh;
     }
     .merchant-jumbo {
+        background: none;
         .image-container {
             .profile-image {
-                max-width: 610px;
-                max-height: 370px;
-                width: auto;
+                max-width: 100%;
                 height: auto;
             }
         }
@@ -24,7 +25,7 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            background: rgba(255, 255, 255, 0.671);
+            background: rgba(255, 255, 255, 0.445);
         }
     }
 }
