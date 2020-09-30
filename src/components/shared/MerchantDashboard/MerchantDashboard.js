@@ -59,7 +59,7 @@ const MerchantDashboard = ({ match, authed }) => {
   };
 
   return (
-<div className="MerchantDashboard col-12 d-flex flex-column justify-content-center align-items-center" >
+<div className="MerchantDashboard good-container col-12 d-flex flex-column justify-content-center align-items-center" >
   <img className="col-12 img-fluid booth-image p-0" src={merchant.booth_image} alt={merchant.company_name} />
   <div className="py-2 merchant-jumbo col-12 mx-auto jumbotron jumbotron-fluid my-3 d-flex flex-row align-items-center justify-content-center">
       <div className="mr-5 image-container col-2">

@@ -2,6 +2,7 @@
 
 .MerchantDashboard {
     display: block;
+    background: rgba(255, 255, 255, 0.445);
     .booth-image {
         position: fixed;
         top: 0;
@@ -25,7 +26,6 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            background: rgba(255, 255, 255, 0.445);
         }
     }
 }
