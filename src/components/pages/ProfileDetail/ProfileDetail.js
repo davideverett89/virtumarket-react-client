@@ -131,11 +131,11 @@ const ProfileDetail = ({ match }) => {
             </div>
         </div>
         {
-          merchant.id
+          merchant.id && market.id
             ? (
             <div className="my-5 container card col-11 mx-auto active-market">
               <h2 className="display-4">Active Market</h2>
-              <MarketCard market={market} />
+              <MarketCard market={market} fromConsumer={false} />
             </div>
             )
             : ('')

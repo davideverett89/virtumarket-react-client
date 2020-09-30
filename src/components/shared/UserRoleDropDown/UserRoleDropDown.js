@@ -31,7 +31,7 @@ const UserRoleDropDown = ({ selectedRole, setSelectedRole }) => (
 );
 
 UserRoleDropDown.propTypes = {
-  selectedRole: PropTypes.number.isRequired,
+  selectedRole: PropTypes.string.isRequired,
   setSelectedRole: PropTypes.func.isRequired,
 };
 

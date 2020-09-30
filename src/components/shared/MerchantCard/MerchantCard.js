@@ -34,7 +34,7 @@ const MerchantCard = ({ merchant }) => {
 
 MerchantCard.propTypes = {
   merchant: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     company_name: PropTypes.string.isRequired,
     bio: PropTypes.string.isRequired,
     profile_image: PropTypes.string.isRequired,

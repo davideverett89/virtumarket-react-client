@@ -80,14 +80,17 @@ const GoodCard = ({
 
 GoodCard.propTypes = {
   good: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    deleted: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    deleted: PropTypes.string,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
-    good_type_id: PropTypes.number.isRequired,
+    good_type: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
     merchant_id: PropTypes.number.isRequired,
     unit_size_id: PropTypes.number.isRequired,
     on_order: PropTypes.bool.isRequired,

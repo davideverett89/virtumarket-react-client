@@ -19,8 +19,6 @@ import './MyNavBar.scss';
 const MyNavBar = ({
   authed,
   setAuthed,
-  roleId,
-  uid,
 }) => {
   // Boolean state variable to determine if the navbar is collapsing.
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +29,7 @@ const MyNavBar = ({
   // Event handler function that calls the logout function from the custom hook.
   const logMeOut = (e) => {
     e.preventDefault();
-    logout();
-    setAuthed(false);
+    setAuthed(logout());
   };
   return (
     <div className="MyNavBar">
@@ -48,13 +45,13 @@ const MyNavBar = ({
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/merchants/${roleId}`}>Merchant Home</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/merchants/${sessionStorage.getItem('roleId')}`}>Merchant Home</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn" tag={RRNavLink} to='/goods/add'>Add Good</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${uid}`}>Profile</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${sessionStorage.getItem('userId')}`}>Profile</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn logout-btn" onClick={logMeOut}>Logout</NavLink>
@@ -70,13 +67,13 @@ const MyNavBar = ({
               ? (
                 <React.Fragment>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/consumers/${roleId}`}>Consumer Home</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/home/consumers/${sessionStorage.getItem('roleId')}`}>Consumer Home</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/consumers/basket/${roleId}`}>Basket</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/consumers/basket/${sessionStorage.getItem('roleId')}`}>Basket</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
-                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${uid}`}>Profile</NavLink>
+                    <NavLink className="btn nav-btn" tag={RRNavLink} to={`/accounts/${sessionStorage.getItem('userId')}`}>Profile</NavLink>
                   </NavItem>
                   <NavItem className="mx-1">
                     <NavLink className="btn nav-btn logout-btn" onClick={logMeOut}>Logout</NavLink>
@@ -97,8 +94,6 @@ const MyNavBar = ({
 MyNavBar.propTypes = {
   authed: PropTypes.bool.isRequired,
   setAuthed: PropTypes.func.isRequired,
-  roleId: PropTypes.number.isRequired,
-  uid: PropTypes.number.isRequired,
 };
 
 export default MyNavBar;

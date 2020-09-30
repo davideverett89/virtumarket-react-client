@@ -46,7 +46,7 @@ const AddPaymentMethod = ({ toggleNested, getCurrentUser }) => {
             </div>
             <div className="form-group">
                 <label htmlFor="expiration_date">Expiration date:</label>
-                <input ref={date} type="date" id="expiration_date" name="expiration_date" min={moment().format('YYYY-MM-DD')} max="2030-12-31" />
+                <input className="mx-2" ref={date} type="date" id="expiration_date" name="expiration_date" min={moment().format('YYYY-MM-DD')} max="2030-12-31" />
             </div>
             <button className="btn btn-success" onClick={handleAddPaymentMethod}>Save</button>
         </form>

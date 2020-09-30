@@ -20,12 +20,12 @@ const Home = ({
               <Route
                 path={`${match.path}/merchants/:merchantId`}
                 component={MerchantDashboard}
-                isAuthed={authed}
+                authed={authed}
               />
               <Route
                 path={`${match.path}/consumers/:consumerId`}
                 component={ConsumerDashboard}
-                isAuthed={authed}
+                authed={authed}
               />
             </Switch>
         </div>

@@ -33,8 +33,8 @@ const SearchBar = ({
 
 SearchBar.propTypes = {
   handleSearch: PropTypes.func.isRequired,
-  search: PropTypes.string.isRequired,
-  selectedFilter: PropTypes.number.isRequired,
+  search: PropTypes.string,
+  selectedFilter: PropTypes.string.isRequired,
   setSelectedFilter: PropTypes.func.isRequired,
   marketDetail: PropTypes.bool.isRequired,
 };

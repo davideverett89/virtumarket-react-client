@@ -75,7 +75,7 @@ const MerchantDashboard = ({ match, authed }) => {
             <h3 className="middle align-middle display-4">This Booth Is Empty!</h3>
             )
             : goods.map((good) => (
-            <GoodCard key={good.id} good={good} handleDelete={handleDelete} userIsMerchant={userIsMerchant} />
+            <GoodCard key={good.id} good={good} handleDelete={handleDelete} userIsMerchant={userIsMerchant} isBasket={false} />
             ))
         }
     </div>
@@ -85,7 +85,7 @@ const MerchantDashboard = ({ match, authed }) => {
 };
 
 MerchantDashboard.propTypes = {
-  authed: PropTypes.bool.isRequired,
+  authed: PropTypes.bool,
 };
 
 export default MerchantDashboard;
