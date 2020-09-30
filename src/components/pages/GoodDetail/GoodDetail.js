@@ -86,8 +86,8 @@ const GoodDetail = ({ match, history }) => {
   return (
     <div className="GoodDetail d-flex flex-column justify-content-center align-items-center mb-5 col-10 mx-auto">
         <div className="mt-5 jumbotron bg-white col-9">
-          <h1 className="display-4">{good.name}</h1>
-          <img className="m-auto img-fluid col-6" src={good.image} alt={good.name} />
+          <h1 className="display-4 mb-5">{good.name}</h1>
+          <img className="m-auto img-fluid col-4" src={good.image} alt={good.name} />
           <ul className="col-6 mx-auto mt-5 list-group-flush p-0 rounded">
             <li className="list-group-item lead">{good.id ? good.good_type.name : ''}</li>
             <li className="list-group-item lead">${good.price}/{good.id ? good.unit_size.name : ''}</li>

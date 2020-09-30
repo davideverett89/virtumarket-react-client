@@ -1,5 +1,11 @@
+@import '../../../styles/variables';
+
 .MerchantCard {
     display: block;
+}
+
+.merchant-jumbo:hover {
+    @include hover-effect;
 }
 
 .merchant-image {

@@ -90,8 +90,8 @@ const AddGood = ({ history }) => {
 
   return (
         <div className="AddGood">
-            <h1 className="mt-3 display-4">Add Good</h1>
-            <form className="col-6 mx-auto text-left jumbotron mb-5 good-form">
+            <form className="pt-1 col-6 mt-5 mx-auto text-left jumbotron mb-5 good-form">
+                <h1 className="text-center rounded mx-auto display-4 p-2">Add New Good</h1>
                 <div className="form-group">
                     <label htmlFor="good-image">Image:</label>
                     <PhotoUploader

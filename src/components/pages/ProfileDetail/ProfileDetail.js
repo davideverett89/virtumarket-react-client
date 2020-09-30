@@ -68,12 +68,11 @@ const ProfileDetail = ({ match }) => {
   const editLink = `/accounts/edit/${user.id}`;
 
   return (
-    <div className="ProfileDetail">
-        <h1 className="mt-3 display-2">Profile Details</h1>
-        <div className="px-0 col-11 m-auto container card profile-card">
+    <div className={`ProfileDetail ${merchant.id ? '' : 'd-flex flex-column justify-content-center align-items-center'}`}>
+        <div className="my-5 px-0 col-9 mx-auto container card profile-card">
             <div className="row card-body">
                 <div className="col-2">
-                    <img className="my-3 card-img-top" src={merchant.id ? merchant.profile_image : consumer.profile_image} alt={user.username} />
+                    <img className="card-img-top" src={merchant.id ? merchant.profile_image : consumer.profile_image} alt={user.username} />
                     <p className="lead m-0">Reputation: {Math.floor(Math.random() * 5000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
                 </div>
                 <div className="text-left col-6">
@@ -133,7 +132,7 @@ const ProfileDetail = ({ match }) => {
         {
           merchant.id && market.id
             ? (
-            <div className="my-5 container card col-11 mx-auto active-market">
+            <div className="my-5 container card col-9 mx-auto active-market">
               <h2 className="display-4">Active Market</h2>
               <MarketCard market={market} fromConsumer={false} />
             </div>

@@ -27,7 +27,7 @@ const GoodCard = ({
   const detailLink = `/goods/${good.id}`;
   const editLink = `/goods/edit/${good.id}`;
   return (
-    <div className="GoodCard col-3">
+    <div className="GoodCard col-2">
       <Card className="card-main">
         <CardImg className="good-image img-fluid col-6 mx-auto my-3" src={good.image} alt={good.name} />
         <CardBody>

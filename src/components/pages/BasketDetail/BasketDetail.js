@@ -57,8 +57,7 @@ const BasketDetail = ({ match }) => {
   }, [getOrder]);
 
   return (
-    <div className="BasketDetail">
-        <h1 className="display-2 mb-5">Basket</h1>
+    <div className="BasketDetail good-container py-5">
         <div className="col-12 container-fluid d-flex flex-wrap justify-content-center align-items-start">
             {
               basket.id
@@ -66,11 +65,11 @@ const BasketDetail = ({ match }) => {
                   <GoodCard key={good.id} good={good} isBasket={true} />
                 ))
                 : (
-                  <h2 className="display-4">Your basket is empty!</h2>
+                  <h2 className="my-5 display-4">Your basket is empty!</h2>
                 )
             }
         </div>
-          <h3 className="text-white my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
+        <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
     </div>
   );
 };

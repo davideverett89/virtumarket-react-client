@@ -1,5 +1,11 @@
+@import '../../../styles/variables';
+
 .MarketCard {
     display: block;
+}
+
+.market-jumbo:hover {
+    @include hover-effect;
 }
 
 .market-image {
