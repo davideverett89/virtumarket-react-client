@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import GoodCard from '../../shared/GoodCard/GoodCard';
+import UtilityModal from '../../shared/UtilityModal/UtilityModal';
+import PaymentMethodRadios from '../../shared/PaymentMethodRadios/PaymentMethodRadios';
 
 import basketData from '../../../helpers/data/basketData';
 
@@ -70,6 +72,13 @@ const BasketDetail = ({ match }) => {
             }
         </div>
         <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
+        <UtilityModal
+          buttonLabel={'Checkout'}
+          buttonClassName={'btn-success'}
+          isDelete={false}
+        >
+          <PaymentMethodRadios />
+        </UtilityModal>
     </div>
   );
 };
