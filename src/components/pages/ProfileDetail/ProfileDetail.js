@@ -8,6 +8,7 @@ import userData from '../../../helpers/data/userData';
 
 import './ProfileDetail.scss';
 import paymentMethodData from '../../../helpers/data/paymentMethodData';
+import basketData from '../../../helpers/data/basketData';
 
 const ProfileDetail = ({ match }) => {
   // Initializing an empty object to state to hold the value of the requested user object.
@@ -22,6 +23,17 @@ const ProfileDetail = ({ match }) => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   // Boolean state variable to determine if component is mounted.
   const [isMounted, setIsMounted] = useState(false);
+  const [toggle, setToggle] = useState(true);
+  const [baskets, setBaskets] = useState([]);
+
+  const getBasketHistory = (consumerId) => {
+    basketData.getConsumerBasketHistoryByConsumerId(consumerId)
+      .then((response) => {
+        const completedBaskets = response.data;
+        setBaskets(completedBaskets);
+      })
+      .catch((err) => console.error('There was an error getting the basket history for this consumer:', err));
+  };
 
   // Function that saves the userId from the router url params,
   // calls the function that makes the API call to get a single user object,
@@ -40,6 +52,7 @@ const ProfileDetail = ({ match }) => {
           } else {
             setConsumer(currentUser.consumer);
             setPaymentMethods(currentUser.consumer.paymentmethods);
+            getBasketHistory(currentUser.consumer.id);
           }
         }
       })
@@ -69,6 +82,27 @@ const ProfileDetail = ({ match }) => {
 
   return (
     <div className={`ProfileDetail ${merchant.id ? '' : 'd-flex flex-column justify-content-center align-items-center'}`}>
+      {
+        consumer.id
+          ? (
+        <div className="bs-example m-5">
+          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <label className={`btn btn-success ${toggle ? 'active' : ''}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(true)} /> Detail
+              </label>
+              <label className={`btn btn-success ${toggle ? '' : 'active'}`}>
+                  <input type="radio" name="options" autoComplete="off" onClick={() => setToggle(false)} /> History
+              </label>
+          </div>
+        </div>
+          )
+          : (
+            ''
+          )
+      }
+      {
+        toggle
+          ? (
         <div className="my-5 px-0 col-9 mx-auto container card profile-card">
             <div className="row card-body">
                 <div className="col-2">
@@ -129,16 +163,34 @@ const ProfileDetail = ({ match }) => {
                 }
             </div>
         </div>
-        {
-          merchant.id && market.id
-            ? (
-            <div className="my-5 container card col-9 mx-auto active-market">
-              <h2 className="display-4">Active Market</h2>
-              <MarketCard market={market} fromConsumer={false} />
-            </div>
-            )
-            : ('')
-        }
+          )
+          : (
+            <React.Fragment>
+              <h2 className="display-4 text-white">Order History</h2>
+              <div className="col-12 d-flex flex-column justify-content-center align-items-center">
+                {
+                  baskets.map((singleBasket) => (
+                    <ul key={singleBasket.id} className="p-0 list-group basket-card border border-dark bg-white m-1 col-6">
+                      <li className="list-group-item">Order #{singleBasket.id}</li>
+                      <li className="list-group-item">Number of Items: {singleBasket.goods.length}</li>
+                      <li className="list-group-item">Basket Total: ${singleBasket.total !== null ? parseFloat(singleBasket.total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : ''}</li>
+                    </ul>
+                  ))
+                }
+              </div>
+            </React.Fragment>
+          )
+      }
+      {
+        merchant.id && market.id
+          ? (
+          <div className="my-5 container card col-9 mx-auto active-market">
+            <h2 className="display-4">Active Market</h2>
+            <MarketCard market={market} fromConsumer={false} />
+          </div>
+          )
+          : ('')
+      }
     </div>
   );
 };

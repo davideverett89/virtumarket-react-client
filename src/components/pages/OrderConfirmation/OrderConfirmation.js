@@ -16,7 +16,7 @@ const OrderConfirmation = ({ location }) => {
         <p className="lead">Order # {completedBasket.id ? completedBasket.id : ''} has been submitted.</p>
         <p className="lead">Confirmation #: CONF-{Math.floor(Math.random() * 100000)}</p>
         <p className="lead">Number of Items: {completedBasket.id ? completedBasket.goods.length : ''} </p>
-        <p className="lead">Basket Total: ${completedBasket.id ? completedBasket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : ''}</p>
+        <p className="lead">Basket Total: ${completedBasket.id ? parseFloat(completedBasket.total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : ''}</p>
         <Link to="/" className="btn btn-success">Home</Link>
     </div>
   );

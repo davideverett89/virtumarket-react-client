@@ -59,10 +59,9 @@ const BasketDetail = ({ match, history }) => {
   }, [getOrder]);
 
   const handleCompleteBasket = (selectedPaymentMethodId) => {
-    basketData.completeCustomerBasketById(basket.id, selectedPaymentMethodId)
+    basketData.completeCustomerBasketById(basket.id, selectedPaymentMethodId, basket.total)
       .then((response) => {
         const completedBasket = response.data;
-        completedBasket.total = basket.total;
         history.push({
           pathname: '/confirmation',
           state: { basket: completedBasket },

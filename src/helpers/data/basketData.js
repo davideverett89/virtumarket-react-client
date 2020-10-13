@@ -16,7 +16,7 @@ const getBasketByConsumerId = (consumerId) => {
   });
 };
 
-const completeCustomerBasketById = (basketId, selectedPaymentMethodId) => {
+const completeCustomerBasketById = (basketId, selectedPaymentMethodId, basketTotal) => {
   const token = sessionStorage.getItem('virtumarket_token');
   return axios({
     method: 'PATCH',
@@ -27,8 +27,21 @@ const completeCustomerBasketById = (basketId, selectedPaymentMethodId) => {
     },
     data: {
       payment_method_id: selectedPaymentMethodId,
+      total: basketTotal,
     },
   });
 };
 
-export default { getBasketByConsumerId, completeCustomerBasketById };
+const getConsumerBasketHistoryByConsumerId = (consumerId) => {
+  const token = sessionStorage.getItem('virtumarket_token');
+  return axios({
+    method: 'GET',
+    url: `${baseUrl}/baskets?history=${consumerId}`,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Token ${token}`,
+    },
+  });
+};
+
+export default { getBasketByConsumerId, completeCustomerBasketById, getConsumerBasketHistoryByConsumerId };
