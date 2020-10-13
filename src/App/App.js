@@ -15,6 +15,7 @@ import ProfileDetail from '../components/pages/ProfileDetail/ProfileDetail';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
 import BasketDetail from '../components/pages/BasketDetail/BasketDetail';
 import MarketDetail from '../components/pages/MarketDetail/MarketDetail';
+import OrderConfirmation from '../components/pages/OrderConfirmation/OrderConfirmation';
 
 import MerchantDashboard from '../components/shared/MerchantDashboard/MerchantDashboard';
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
@@ -67,6 +68,7 @@ const App = () => {
             <PrivateRoute path='/markets/:marketId' component={MarketDetail} authed={isAuthenticated()} />
             <PrivateRoute path='/consumers/basket/:consumerId' component={BasketDetail} authed={isAuthenticated()} />
             <PrivateRoute path='/merchants/:merchantId' component={MerchantDashboard} authed={isAuthenticated()} />
+            <PrivateRoute path='/confirmation' component={OrderConfirmation} authed={isAuthenticated()} />
             <PublicRoute path='/auth' component={Auth} authed={isAuthenticated()} />
             <Redirect from="*" to={`/home/${userRole}s/${roleId}`}/>
           </Switch>

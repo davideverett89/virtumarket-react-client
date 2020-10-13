@@ -21,9 +21,9 @@ const PaymentMethodRadios = ({ handleCompleteBasket }) => {
         <div className="PayTypeRadios mx-auto">
             {
                 paymentMethods.map((singlePaymentMethod) => (
-                    <div key={singlePaymentMethod.id} className="form-check">
+                    <div key={singlePaymentMethod.id} className="form-check d-flex flex-row justify-content-center align-items-center">
                         <input
-                            className="form-check-input"
+                            className="form-check-input position-relative"
                             type="radio"
                             name="payTypeRadios"
                             id={singlePaymentMethod.id}
@@ -32,14 +32,23 @@ const PaymentMethodRadios = ({ handleCompleteBasket }) => {
                             onChange={paymentMethodSelectionChange}
                         />
                         <label className="form-check-label" htmlFor={singlePaymentMethod.id}>
-                            <p>{singlePaymentMethod.merchant_name}</p>
-                            <p>{singlePaymentMethod.account_number}</p>
-                            <p>Expiration Date: {singlePaymentMethod.expiration_date}</p>
+                            <ul className={`mx-2 my-3 border list-group ${selectedPaymentMethodId === singlePaymentMethod.id ? 'border-dark' : ''}`}>
+                                <li className="list-group-item">{singlePaymentMethod.merchant_name}</li>
+                                <li className="list-group-item">{singlePaymentMethod.account_number}</li>
+                                <li className="list-group-item">Expiration Date: {singlePaymentMethod.expiration_date}</li>
+                            </ul>
                         </label>
                     </div>
                 ))
             }
-            <button className="btn btn-dark m-3" type="button" onClick={() => handleCompleteBasket(selectedPaymentMethodId)}>Done</button>
+            <button
+              disabled={selectedPaymentMethodId === 0}
+              className="btn btn-warning m-3"
+              type="button"
+              onClick={() => handleCompleteBasket(selectedPaymentMethodId)}
+            >
+              Complete Checkout
+            </button>
         </div>
   );
 };

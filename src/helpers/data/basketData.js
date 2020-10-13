@@ -16,4 +16,19 @@ const getBasketByConsumerId = (consumerId) => {
   });
 };
 
-export default { getBasketByConsumerId };
+const completeCustomerBasketById = (basketId, selectedPaymentMethodId) => {
+  const token = sessionStorage.getItem('virtumarket_token');
+  return axios({
+    method: 'PATCH',
+    url: `${baseUrl}/baskets/${basketId}`,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Token ${token}`,
+    },
+    data: {
+      payment_method_id: selectedPaymentMethodId,
+    },
+  });
+};
+
+export default { getBasketByConsumerId, completeCustomerBasketById };
