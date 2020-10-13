@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import GoodCard from '../../shared/GoodCard/GoodCard';
+import UtilityModal from '../../shared/UtilityModal/UtilityModal';
+import PaymentMethodRadios from '../../shared/PaymentMethodRadios/PaymentMethodRadios';
 
 import basketData from '../../../helpers/data/basketData';
 
 import './BasketDetail.scss';
 
-const BasketDetail = ({ match }) => {
+const BasketDetail = ({ match, history }) => {
   // Initializing an empty object to state to hold the value of the requested basket object.
   const [basket, setBasket] = useState({});
   // Initializing an empty array in state to hold multiple objects that could be nested within the requested basket object.
@@ -56,6 +58,19 @@ const BasketDetail = ({ match }) => {
     return () => setIsMounted(false);
   }, [getOrder]);
 
+  const handleCompleteBasket = (selectedPaymentMethodId) => {
+    basketData.completeCustomerBasketById(basket.id, selectedPaymentMethodId)
+      .then((response) => {
+        const completedBasket = response.data;
+        completedBasket.total = basket.total;
+        history.push({
+          pathname: '/confirmation',
+          state: { basket: completedBasket },
+        });
+      })
+      .catch((err) => console.error('There was an error completing this basket:', err));
+  };
+
   return (
     <div className="BasketDetail good-container py-5">
         <div className="col-12 container-fluid d-flex flex-wrap justify-content-center align-items-start">
@@ -70,6 +85,15 @@ const BasketDetail = ({ match }) => {
             }
         </div>
         <h3 className="my-5 basket-total">Basket Total: ${basket.id ? basket.total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0.00'}</h3>
+        <UtilityModal
+          disabled={goods.length === 0}
+          buttonLabel={'Checkout'}
+          buttonClassName={'btn-success'}
+          isDelete={false}
+          isPaymentMethodRadio={true}
+        >
+          <PaymentMethodRadios handleCompleteBasket={handleCompleteBasket} />
+        </UtilityModal>
     </div>
   );
 };

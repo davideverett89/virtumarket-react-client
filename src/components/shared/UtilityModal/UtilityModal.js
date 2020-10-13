@@ -15,6 +15,7 @@ const UtilityModal = ({
   buttonClassName,
   children,
   isDelete,
+  isPaymentMethodRadio,
   getCurrentUser,
   disabled,
 }) => {
@@ -38,7 +39,7 @@ const UtilityModal = ({
           {children}
         </ModalBody>
         {
-          isDelete
+          isDelete || isPaymentMethodRadio
             ? (
               ''
             )
